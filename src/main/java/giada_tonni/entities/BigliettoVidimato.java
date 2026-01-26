@@ -23,18 +23,19 @@ public class BigliettoVidimato {
     @JoinColumn(name = "mezzo_id", nullable = false)
     private Mezzo mezzo;
 
-
-    @Column(name = "id_biglietto", nullable = false)
-    private UUID idBiglietto;
+    @OneToOne
+    @JoinColumn(name = "id_biglietto", nullable = false)
+    private Biglietto biglietto;
 
     // costruttore vuoto
-    public BigliettoVidimato() {}
+    public BigliettoVidimato() {
+    }
 
     // costruttore
-    public BigliettoVidimato(LocalDate dataTimbratura, Mezzo mezzo, UUID idBiglietto) {
+    public BigliettoVidimato(LocalDate dataTimbratura, Mezzo mezzo, Biglietto idBiglietto) {
         this.dataTimbratura = dataTimbratura;
         this.mezzo = mezzo;
-        this.idBiglietto = idBiglietto;
+        this.biglietto = biglietto;
     }
 
     public UUID getId() {
@@ -57,12 +58,12 @@ public class BigliettoVidimato {
         this.mezzo = mezzo;
     }
 
-    public UUID getIdBiglietto() {
-        return idBiglietto;
+    public Biglietto getIdBiglietto() {
+        return biglietto;
     }
 
-    public void setIdBiglietto(UUID idBiglietto) {
-        this.idBiglietto = idBiglietto;
+    public void setIdBiglietto(Biglietto biglietto) {
+        this.biglietto = biglietto;
     }
 
     @Override
@@ -71,7 +72,7 @@ public class BigliettoVidimato {
                 "id=" + id +
                 ", dataTimbratura=" + dataTimbratura +
                 ", mezzo=" + (mezzo != null ? mezzo.getId() : null) +
-                ", idBiglietto=" + idBiglietto +
+                ", biglietto=" + biglietto +
                 '}';
     }
 }

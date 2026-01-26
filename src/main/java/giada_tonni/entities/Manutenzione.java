@@ -3,15 +3,16 @@ package giada_tonni.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Table(name = "manutenzioni")
 public class Manutenzione {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @GeneratedValue
+    @Column(name = "manutenzione_id")
+    private UUID manutenzioneId;
 
     @ManyToOne
     @JoinColumn(name = "id_mezzo", nullable = false)
@@ -27,7 +28,8 @@ public class Manutenzione {
     private LocalDate dataFine;
 
     // costruttore vuoto
-    public Manutenzione() {}
+    public Manutenzione() {
+    }
 
     // costruttore
     public Manutenzione(Mezzo mezzo, String causa, LocalDate dataInizio, LocalDate dataFine) {
@@ -37,8 +39,8 @@ public class Manutenzione {
         this.dataFine = dataFine;
     }
 
-    public Long getId() {
-        return id;
+    public UUID getId() {
+        return manutenzioneId;
     }
 
     public Mezzo getMezzo() {
@@ -76,7 +78,7 @@ public class Manutenzione {
     @Override
     public String toString() {
         return "Manutenzione{" +
-                "id=" + id +
+                "manutenzioneId=" + manutenzioneId +
                 ", mezzo=" + (mezzo != null ? mezzo.getId() : null) +
                 ", causa='" + causa + '\'' +
                 ", dataInizio=" + dataInizio +

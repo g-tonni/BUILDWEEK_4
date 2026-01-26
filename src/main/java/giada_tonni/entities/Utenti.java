@@ -3,27 +3,29 @@ package giada_tonni.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name="utenti")
+@Table(name = "utenti")
 public class Utenti {
     @Id
     @GeneratedValue
-    @Column(name="id_utente")
+    @Column(name = "id_utente")
     private UUID id;
 
+    @Column(name = "nome", nullable = false)
     private String nome;
+
+    @Column(name = "cognome", nullable = false)
     private String cognome;
 
-    @Column(name="data_di_nascita")
+    @Column(name = "data_di_nascita", nullable = false)
     private LocalDate dataNascita;
 
-    public  Utenti(){
+    public Utenti() {
     }
 
-    public Utenti(String nome, String cognome, LocalDate dataNascita){
+    public Utenti(String nome, String cognome, LocalDate dataNascita) {
         this.nome = nome;
         this.cognome = cognome;
         this.dataNascita = dataNascita;

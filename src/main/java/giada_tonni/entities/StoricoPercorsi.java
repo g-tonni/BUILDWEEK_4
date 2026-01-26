@@ -14,15 +14,15 @@ public class StoricoPercorsi {
     @Column(name = "storico_percorso_id")
     private UUID storicoPercorsoId;
 
-    @Column(name = "tempo_percorso_effettivo")
+    @Column(name = "tempo_percorso_effettivo", nullable = false)
     private long tempoEffettivo;
 
     @ManyToOne
-    @JoinColumn(name = "tratta_id")
+    @JoinColumn(name = "tratta_id", nullable = false)
     private Tratta tratta;
 
     @ManyToOne
-    @JoinColumn(name = "mezzo_id")
+    @JoinColumn(name = "mezzo_id", nullable = false)
     private Mezzo mezzo;
 
     public StoricoPercorsi() {

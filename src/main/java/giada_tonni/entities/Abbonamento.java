@@ -1,16 +1,17 @@
 package giada_tonni.entities;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Entity
 @Table(name = "abbonamenti")
 @PrimaryKeyJoinColumn(name = "codice_univoco")
 public class Abbonamento extends TitoloViaggio {
 
-    @Column(name = "id_tessera", nullable = false)
-    private UUID idTessera;
+    @ManyToOne
+    @JoinColumn(name = "id_tessera", nullable = false)
+    private TesseraUtente tesseraUtente;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "validita", nullable = false)
@@ -22,20 +23,16 @@ public class Abbonamento extends TitoloViaggio {
     public Abbonamento() {
     }
 
-    public Abbonamento(LocalDate dataAcquisto, UUID idTessera,
+    public Abbonamento(LocalDate dataAcquisto, TesseraUtente tesseraUtente,
                        Validita validita, LocalDate scadenza) {
         super(dataAcquisto);
-        this.idTessera = idTessera;
+        this.tesseraUtente = tesseraUtente;
         this.validita = validita;
         this.scadenza = scadenza;
     }
 
-    public UUID getIdTessera() {
-        return idTessera;
-    }
-
-    public void setIdTessera(UUID idTessera) {
-        this.idTessera = idTessera;
+    public TesseraUtente getIdTessera() {
+        return tesseraUtente;
     }
 
     public Validita getValidita() {
@@ -58,7 +55,7 @@ public class Abbonamento extends TitoloViaggio {
     public String toString() {
         return "Abbonamento{" +
                 "scadenza=" + scadenza +
-                ", idTessera=" + idTessera +
+                ", idTessera=" + tesseraUtente +
                 '}';
     }
 }

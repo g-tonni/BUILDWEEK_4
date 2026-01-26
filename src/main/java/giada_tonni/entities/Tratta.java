@@ -14,13 +14,13 @@ public class Tratta {
     @Column(name = "tratta_id")
     private UUID trattaId;
 
-    @Column(name = "partenza")
+    @Column(name = "partenza", nullable = false)
     private String partenza;
 
-    @Column(name = "capolinea")
+    @Column(name = "capolinea", nullable = false)
     private String capolinea;
 
-    @Column(name = "tempo_percorso_previsto")
+    @Column(name = "tempo_percorso_previsto", nullable = false)
     private long tempoPrevisto;
 
     public Tratta() {
