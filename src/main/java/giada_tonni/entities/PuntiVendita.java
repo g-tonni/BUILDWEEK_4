@@ -11,7 +11,7 @@ public abstract class PuntiVendita {
     //ATTRIBUTI
     @Id
     @GeneratedValue
-    private UUID id;
+    private UUID idPuntoVendita;
 
     @Column(name = "locazione", nullable = false)
     private String locazione;
@@ -27,7 +27,7 @@ public abstract class PuntiVendita {
     //GETTER E SETTER
 
     public UUID getId() {
-        return id;
+        return idPuntoVendita;
     }
 
 
