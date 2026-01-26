@@ -25,9 +25,7 @@ public abstract class PuntiVendita {
     }
 
     //GETTER E SETTER
-
-
-    public UUID getIdPuntoVendita() {
+    public UUID getId() {
         return idPuntoVendita;
     }
 
