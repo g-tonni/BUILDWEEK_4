@@ -20,9 +20,6 @@ public class Utenti {
     @Column(name="data_di_nascita")
     private LocalDate dataNascita;
 
-    @OneToMany(mappedBy = "utente")
-    private List<TesseraUtente> tessere;
-
     public  Utenti(){
     }
 
@@ -60,10 +57,6 @@ public class Utenti {
         this.dataNascita = dataNascita;
     }
 
-    public List<TesseraUtente> getTessere() {
-        return tessere;
-    }
-
     @Override
     public String toString() {
         return "Utenti{" +
@@ -71,7 +64,6 @@ public class Utenti {
                 ", nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
                 ", dataNascita=" + dataNascita +
-                ", tessere=" + tessere +
                 '}';
     }
 }
