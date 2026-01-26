@@ -7,10 +7,20 @@
                 http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 
     <persistence-unit name="buildweek4pu">
-        <!--<class>giada_tonni.entities.Animal</class>-->
-<class>giada_tonni.entities.TitoloViaggio</class>
+        <class>giada_tonni.entities.TitoloViaggio</class>
         <class>giada_tonni.entities.Abbonamento</class>
         <class>giada_tonni.entities.Biglietto</class>
+        <class>giada_tonni.entities.BigliettoVidimato</class>
+        <class>giada_tonni.entities.DistributoriAutomatici</class>
+        <class>giada_tonni.entities.Manutenzione</class>
+        <class>giada_tonni.entities.Mezzo</class>
+        <class>giada_tonni.entities.Negozi</class>
+        <class>giada_tonni.entities.PuntiVendita</class>
+        <class>giada_tonni.entities.StoricoPercorsi</class>
+        <class>giada_tonni.entities.StoricoVendite</class>
+        <class>giada_tonni.entities.TesseraUtente</class>
+        <class>giada_tonni.entities.Tratta</class>
+        <class>giada_tonni.entities.Utenti</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url"
                       value="jdbc:postgresql://localhost:5432/buildweek4"/>

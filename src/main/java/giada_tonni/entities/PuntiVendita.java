@@ -25,11 +25,9 @@ public abstract class PuntiVendita {
     }
 
     //GETTER E SETTER
-
     public UUID getId() {
         return idPuntoVendita;
     }
-
 
     public String getLocazione() {
         return locazione;
