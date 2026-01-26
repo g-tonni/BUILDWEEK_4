@@ -6,23 +6,23 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Table(name="tessere_utente")
+@Table(name = "tessere_utente")
 public class TesseraUtente {
     @Id
     @GeneratedValue
     private UUID id;
 
-    @Column(name="numero_tessera",nullable = false,unique = true)
+    @Column(name = "numero_tessera", nullable = false, unique = true)
     private Long numeroTessera;
 
-    @Column(name="data_emissione",nullable = false)
+    @Column(name = "data_emissione", nullable = false)
     private LocalDate dataEmissione;
 
-    @Column(name="data_scadenza",nullable = false)
+    @Column(name = "data_scadenza", nullable = false)
     private LocalDate dataScadenza;
 
     @ManyToOne
-    @JoinColumn(name="id_utente",nullable = false)
+    @JoinColumn(name = "id_utente", nullable = false)
     private Utenti utente;
 
     public TesseraUtente() {
@@ -31,7 +31,7 @@ public class TesseraUtente {
     public TesseraUtente(Long numeroTessera, LocalDate dataEmissione, LocalDate dataScadenza) {
         this.numeroTessera = numeroTessera;
         this.dataEmissione = dataEmissione;
-        this.dataScadenza = dataEmissione.plusDays(1);
+        this.dataScadenza = dataEmissione.plusYears(1);
     }
 
     public UUID getId() {
