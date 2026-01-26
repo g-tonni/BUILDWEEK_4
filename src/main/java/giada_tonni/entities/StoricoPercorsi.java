@@ -18,9 +18,11 @@ public class StoricoPercorsi {
     private long tempoEffettivo;
 
     @ManyToOne
+    @JoinColumn(name = "tratta_id")
     private Tratta tratta;
 
     @ManyToOne
+    @JoinColumn(name = "mezzo_id")
     private Mezzo mezzo;
 
     public StoricoPercorsi() {
