@@ -12,7 +12,7 @@ public class Application {
 
         EntityManager entityManager = emf.createEntityManager();
 
-        System.out.println("Hello World!");
+        System.out.println("Ciao");
 
         entityManager.close();
         emf.close();
