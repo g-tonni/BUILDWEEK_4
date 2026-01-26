@@ -8,7 +8,9 @@
 
     <persistence-unit name="buildweek4pu">
         <!--<class>giada_tonni.entities.Animal</class>-->
-
+<class>giada_tonni.entities.TitoloViaggio</class>
+        <class>giada_tonni.entities.Abbonamento</class>
+        <class>giada_tonni.entities.Biglietto</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url"
                       value="jdbc:postgresql://localhost:5432/buildweek4"/>
