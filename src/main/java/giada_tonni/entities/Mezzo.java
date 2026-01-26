@@ -36,4 +36,36 @@ public abstract class Mezzo {
         this.stato = stato;
     }
 
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public long getCapienza() {
+        return capienza;
+    }
+
+    public void setCapienza(long capienza) {
+        this.capienza = capienza;
+    }
+
+    public StatoMezzo getStato() {
+        return stato;
+    }
+
+    public void setStato(StatoMezzo stato) {
+        this.stato = stato;
+    }
+
+    @Override
+    public String toString() {
+        return "Mezzo{" +
+                "id=" + id +
+                ", capienza=" + capienza +
+                ", stato=" + stato +
+                '}';
+    }
 }
