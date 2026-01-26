@@ -77,7 +77,6 @@ public class TesseraUtente {
                 ", numeroTessera=" + numeroTessera +
                 ", dataEmissione=" + dataEmissione +
                 ", dataScadenza=" + dataScadenza +
-                ", utente=" + utente +
                 '}';
     }
 }
