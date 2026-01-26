@@ -10,7 +10,7 @@ import java.util.UUID;
 @Table(name="mezzi")
 @Inheritance(strategy = InheritanceType.JOINED)
 
-public abstract class Mezzo {
+public class Mezzo {
     @Id
     @GeneratedValue
     @UuidGenerator
