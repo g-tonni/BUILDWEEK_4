@@ -7,17 +7,17 @@ import org.hibernate.annotations.UuidGenerator;
 import java.util.UUID;
 
 @Entity
-@Table(name="mezzi")
+@Table(name = "mezzi")
 @Inheritance(strategy = InheritanceType.JOINED)
 
-public abstract class Mezzo {
+public class Mezzo {
     @Id
     @GeneratedValue
     @UuidGenerator
-    @Column(name="id", nullable = false)
+    @Column(name = "id", nullable = false)
     protected UUID id;
 
-    @Column(name="capienza", nullable = false)
+    @Column(name = "capienza", nullable = false)
     protected long capienza;
 
 
@@ -28,10 +28,11 @@ public abstract class Mezzo {
 
     //COSTRUTTORE + vuoto
 
-    protected Mezzo(){}
+    protected Mezzo() {
+    }
 
 
-    protected Mezzo(long capienza, StatoMezzo stato){
+    protected Mezzo(long capienza, StatoMezzo stato) {
         this.capienza = capienza;
         this.stato = stato;
     }
