@@ -21,8 +21,8 @@ public class TesseraUtente {
     @Column(name="data_scadenza",nullable = false)
     private LocalDate dataScadenza;
 
-    @OneToOne
-    @JoinColumn(name="id_utente",nullable = false,unique = true)
+    @ManyToOne
+    @JoinColumn(name="id_utente",nullable = false)
     private Utenti utente;
 
     public TesseraUtente() {
@@ -36,6 +36,10 @@ public class TesseraUtente {
 
     public UUID getId() {
         return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public Long getNumeroTessera() {
@@ -64,10 +68,6 @@ public class TesseraUtente {
 
     public Utenti getUtente() {
         return utente;
-    }
-
-    public void setUtente(Utenti utente) {
-        this.utente = utente;
     }
 
     @Override

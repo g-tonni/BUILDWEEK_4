@@ -3,6 +3,7 @@ package giada_tonni.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -19,12 +20,12 @@ public class Utenti {
     @Column(name="data_di_nascita")
     private LocalDate dataNascita;
 
-    @OneToOne(mappedBy = "utente")
-    private TesseraUtente tessera;
+    @OneToMany(mappedBy = "utente")
+    private List<TesseraUtente> tessere;
 
     public  Utenti(){
     }
-    
+
     public Utenti(String nome, String cognome, LocalDate dataNascita){
         this.nome = nome;
         this.cognome = cognome;
@@ -59,12 +60,8 @@ public class Utenti {
         this.dataNascita = dataNascita;
     }
 
-    public TesseraUtente getTessera() {
-        return tessera;
-    }
-
-    public void setTessera(TesseraUtente tessera) {
-        this.tessera = tessera;
+    public List<TesseraUtente> getTessere() {
+        return tessere;
     }
 
     @Override
@@ -74,7 +71,7 @@ public class Utenti {
                 ", nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
                 ", dataNascita=" + dataNascita +
-//                ", tessera=" + tessera +
+                ", tessere=" + tessere +
                 '}';
     }
 }
