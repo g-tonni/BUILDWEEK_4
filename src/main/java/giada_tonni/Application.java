@@ -42,16 +42,16 @@ public class Application {
         DistributoriAutomatici distributore4 = new DistributoriAutomatici(StatoDistributori.FUORI_SERVIZIO, "Università La Sapienza");
         DistributoriAutomatici distributore5 = new DistributoriAutomatici(StatoDistributori.ATTIVO, "Aeroporto Fiumicino - Terminal 1");
 
-        /*puntoVenditaDAO.savePuntiVendita(negozio1);
+        /*puntoVenditaDAO.savePuntiVendita(negozio1);*/
         puntoVenditaDAO.savePuntiVendita(negozio2);
         puntoVenditaDAO.savePuntiVendita(negozio3);
         puntoVenditaDAO.savePuntiVendita(negozio4);
         puntoVenditaDAO.savePuntiVendita(negozio5);
-        puntoVenditaDAO.savePuntiVendita(distributore1);
+//        puntoVenditaDAO.savePuntiVendita(distributore1);
         puntoVenditaDAO.savePuntiVendita(distributore2);
         puntoVenditaDAO.savePuntiVendita(distributore3);
         puntoVenditaDAO.savePuntiVendita(distributore4);
-        puntoVenditaDAO.savePuntiVendita(distributore5);*/
+        puntoVenditaDAO.savePuntiVendita(distributore5);
 
         // *********************************** MEZZI
 
