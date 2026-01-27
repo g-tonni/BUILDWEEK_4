@@ -26,7 +26,7 @@ public class PuntiVenditaDAO {
 
     public PuntiVendita findPuntoVenditaById(String idPuntoVendita) {
         try {
-            return entityManager.createQuery("SELECT p FROM PuntiVendita p WHERE p.idPuntiVendita= :idPuntoVendita", PuntiVendita.class)
+            return entityManager.createQuery("SELECT p FROM PuntiVendita p WHERE p.idPuntoVendita= :idPuntoVendita", PuntiVendita.class)
                     .setParameter("idPuntoVendita", UUID.fromString(idPuntoVendita))
                     .getSingleResult();
         } catch (NoResultException exception) {

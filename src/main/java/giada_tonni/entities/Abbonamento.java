@@ -25,7 +25,7 @@ public class Abbonamento extends TitoloViaggio {
     }
 
     public Abbonamento(LocalDate dataAcquisto, PuntiVendita puntoVendita,
-                       TesseraUtente idTessera, Validita validita, LocalDate scadenza) {
+                       TesseraUtente idTessera, Validita validita) {
         super(dataAcquisto, puntoVendita);
         this.idTessera = idTessera;
         this.validita = validita;
