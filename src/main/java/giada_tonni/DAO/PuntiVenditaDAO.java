@@ -4,7 +4,10 @@ import giada_tonni.entities.PuntiVendita;
 import giada_tonni.exceptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
+
+import java.util.UUID;
 
 public class PuntiVenditaDAO {
     private final EntityManager entityManager;
@@ -24,10 +27,10 @@ public class PuntiVenditaDAO {
     public PuntiVendita findPuntoVenditaById(String idPuntoVendita) {
         try {
             return entityManager.createQuery("SELECT p FROM PuntiVendita p WHERE p.idPuntiVendita= :idPuntoVendita", PuntiVendita.class)
-                    .setParameter("idPuntoVendita", idPuntoVendita)
+                    .setParameter("idPuntoVendita", UUID.fromString(idPuntoVendita))
                     .getSingleResult();
-        } catch (NotFoundException exception) {
-            return null;
+        } catch (NoResultException exception) {
+            throw new NotFoundException("Punto vendita non trovato.");
         }
     }
 
@@ -36,7 +39,7 @@ public class PuntiVenditaDAO {
         transaction.begin();
 
         Query query = entityManager.createQuery("DELETE FROM PuntiVendita p WHERE p.idPuntiVendita= :idPuntiVendita");
-        query.setParameter("idPuntiVendita", idPuntoVendita);
+        query.setParameter("idPuntiVendita", UUID.fromString(idPuntoVendita));
 
         int deleted = query.executeUpdate();
         transaction.commit();
