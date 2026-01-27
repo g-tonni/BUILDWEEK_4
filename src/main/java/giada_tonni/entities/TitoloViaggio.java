@@ -25,8 +25,9 @@ public abstract class TitoloViaggio {
     protected TitoloViaggio() {
     }
 
-    protected TitoloViaggio(LocalDate dataAcquisto) {
+    protected TitoloViaggio(LocalDate dataAcquisto, PuntiVendita puntoVendita) {
         this.dataAcquisto = dataAcquisto;
+        this.puntoVendita = puntoVendita;
     }
 
     public UUID getCodiceUnivoco() {

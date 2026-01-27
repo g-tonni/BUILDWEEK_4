@@ -1,6 +1,7 @@
 package giada_tonni.entities;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -9,8 +10,9 @@ import java.util.UUID;
 @PrimaryKeyJoinColumn(name = "codice_univoco")
 public class Biglietto extends TitoloViaggio {
 
-    @Column(name = "mezzo_id", nullable = false)
-    private UUID mezzoId;
+    @ManyToOne
+    @JoinColumn(name = "mezzo_id", nullable = false)
+    private Mezzo mezzoId;
 
     @Column(name = "data_timbratura")
     private LocalDate dataTimbratura;
@@ -18,7 +20,8 @@ public class Biglietto extends TitoloViaggio {
     public Biglietto() {
     }
 
-    public Biglietto(LocalDate dataAcquisto, UUID rivenditoreId, UUID mezzoId) {
+    public Biglietto(LocalDate dataAcquisto, PuntiVendita rivenditoreId, Mezzo
+            mezzoId) {
         super(dataAcquisto, rivenditoreId);
         this.mezzoId = mezzoId;
     }
@@ -41,12 +44,8 @@ public class Biglietto extends TitoloViaggio {
         this.dataTimbratura = dataTimbratura;
     }
 
-    public UUID getMezzoId() {
+    public Mezzo getMezzoId() {
         return mezzoId;
-    }
-
-    public void setMezzoId(UUID mezzoId) {
-        this.mezzoId = mezzoId;
     }
 
     @Override

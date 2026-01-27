@@ -1,6 +1,7 @@
 package giada_tonni.entities;
 
 import jakarta.persistence.*;
+
 import java.util.UUID;
 import java.time.LocalDate;
 
@@ -9,8 +10,9 @@ import java.time.LocalDate;
 @PrimaryKeyJoinColumn(name = "id")
 public class Abbonamento extends TitoloViaggio {
 
-    @Column(name = "id_tessera", nullable = false)
-    private UUID idTessera;
+    @ManyToOne
+    @JoinColumn(name = "id_tessera", nullable = false)
+    private TesseraUtente idTessera;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "validita", nullable = false)
@@ -22,9 +24,9 @@ public class Abbonamento extends TitoloViaggio {
     public Abbonamento() {
     }
 
-    public Abbonamento(LocalDate dataAcquisto, UUID rivenditoreId,
-                       UUID idTessera, Validita validita, LocalDate scadenza) {
-        super(dataAcquisto, rivenditoreId);
+    public Abbonamento(LocalDate dataAcquisto, PuntiVendita puntoVendita,
+                       TesseraUtente idTessera, Validita validita, LocalDate scadenza) {
+        super(dataAcquisto, puntoVendita);
         this.idTessera = idTessera;
         this.validita = validita;
         this.scadenza = scadenza;
@@ -33,13 +35,10 @@ public class Abbonamento extends TitoloViaggio {
     //GETTER AND SETTER
 
 
-    public UUID getIdTessera() {
+    public TesseraUtente getIdTessera() {
         return idTessera;
     }
 
-    public void setIdTessera(UUID idTessera) {
-        this.idTessera = idTessera;
-    }
 
     public LocalDate getScadenza() {
         return scadenza;
