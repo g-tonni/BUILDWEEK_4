@@ -1,48 +1,47 @@
 package giada_tonni.DAO;
 
-import giada_tonni.entities.Tratta;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
+import giada_tonni.entities.*;
+import giada_tonni.exceptions.NotFoundException;
+import jakarta.persistence.*;
+
 
 import java.util.UUID;
 
 public class TrattaDAO {
 
-    private final EntityManager entityManager;
+    private final EntityManager em;
 
-    public TrattaDAO(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    public TrattaDAO(EntityManager em) {
+        this.em = em;
     }
 
     // SAVE
     public void save(Tratta newTratta) {
-        EntityTransaction transaction = entityManager.getTransaction();
+        EntityTransaction transaction = em.getTransaction();
 
         transaction.begin();
-        entityManager.persist(newTratta);
+        em.persist(newTratta);
         transaction.commit();
 
-        System.out.println("la tratta è stata salvata con id: " +
-                newTratta.getTrattaId());
+        System.out.println("Tratta salvata con id: " + newTratta.getTrattaId());
     }
 
     // FIND BY ID
-    public Tratta findById(UUID trattaId) {
-        Tratta found = entityManager.find(Tratta.class, trattaId);
-        if (found == null)
-            throw new RuntimeException("tratta con id " + trattaId + " non trovata");
+    public Tratta findById(String trattaId) {
+        Tratta found = em.find(Tratta.class, UUID.fromString(trattaId));
+        if (found == null) throw new NotFoundException(trattaId);
         return found;
     }
 
     // DELETE
-    public void findByIdAndDelete(UUID trattaId) {
+    public void findByIdAndDelete(String trattaId) {
         Tratta found = this.findById(trattaId);
 
-        EntityTransaction transaction = entityManager.getTransaction();
+        EntityTransaction transaction = em.getTransaction();
         transaction.begin();
-        entityManager.remove(found);
+        em.remove(found);
         transaction.commit();
 
-        System.out.println("la tratta con id " + trattaId + " è stata eliminata");
+        System.out.println("Tratta con id " + trattaId + " eliminata");
     }
 }
