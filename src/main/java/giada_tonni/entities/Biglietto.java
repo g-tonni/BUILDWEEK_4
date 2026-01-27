@@ -11,7 +11,7 @@ import java.util.UUID;
 public class Biglietto extends TitoloViaggio {
 
     @ManyToOne
-    @JoinColumn(name = "mezzo_id", nullable = false)
+    @JoinColumn(name = "mezzo_id")
     private Mezzo mezzoId;
 
     @Column(name = "data_timbratura")
