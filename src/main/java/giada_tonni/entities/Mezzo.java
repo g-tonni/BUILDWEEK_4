@@ -27,7 +27,7 @@ public class Mezzo {
     protected Mezzo() {}
 
     // COSTRUTTORE
-    protected Mezzo(long capienza, TipoMezzo tipo) {
+    public Mezzo(long capienza, TipoMezzo tipo) {
         this.capienza = capienza;
         this.tipo = tipo;
     }
