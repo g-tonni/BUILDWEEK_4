@@ -25,7 +25,8 @@ public class BigliettiVidimatiDao {
 
     public BigliettoVidimato findBigliettoVidimatoById(String bigliettoVidimatoId) throws NotFoundException {
         BigliettoVidimato found = entityManager.find(BigliettoVidimato.class, UUID.fromString(bigliettoVidimatoId));
-        if (found == null) throw new NotFoundException(bigliettoVidimatoId);
+        if (found == null)
+            throw new NotFoundException("Il Biglietto Vidimato con id " + bigliettoVidimatoId + " non è stato trovato");
         return found;
     }
 
