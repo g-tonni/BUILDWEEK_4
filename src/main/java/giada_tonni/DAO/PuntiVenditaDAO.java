@@ -21,7 +21,7 @@ public class PuntiVenditaDAO {
         System.out.println("Il punto vendita: " + newPuntoVendita.getIdPuntoVendita() + " è stato salvato correttamente.");
     }
 
-    public PuntiVendita findPuntoVenditaById(UUID idPuntoVendita) {
+    public PuntiVendita findPuntoVenditaById(String idPuntoVendita) {
         try {
             return entityManager.createQuery("SELECT p FROM PuntiVendita p WHERE p.idPuntiVendita= :idPuntoVendita", PuntiVendita.class)
                     .setParameter("idPuntoVendita", idPuntoVendita)
@@ -31,7 +31,7 @@ public class PuntiVenditaDAO {
         }
     }
 
-    public void deletePuntoVenditaById(UUID idPuntoVendita) {
+    public void deletePuntoVenditaById(String idPuntoVendita) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 

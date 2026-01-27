@@ -24,7 +24,7 @@ public class StoricoPercorsiDAO {
         System.out.println("Percorso: " + newStoricoPercorsi.getStoricoPercorsoId() + " è stato salvato correttamente.");
     }
 
-    public StoricoPercorsi findStoricoPercorsiById(UUID storicoPercorsiId) {
+    public StoricoPercorsi findStoricoPercorsiById(String storicoPercorsiId) {
         try {
             return entityManager.createQuery("SELECT s FROM StoricoPercorsi s WHERE s.StoricoPercorsi= :storicoPercorsiId", StoricoPercorsi.class)
                     .setParameter("storicoPercorsiId", storicoPercorsiId)
@@ -34,7 +34,7 @@ public class StoricoPercorsiDAO {
         }
     }
 
-    public void deletesoricoPercorsiById(UUID storicoPercorsiId) {
+    public void deletesoricoPercorsiById(String storicoPercorsiId) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 
