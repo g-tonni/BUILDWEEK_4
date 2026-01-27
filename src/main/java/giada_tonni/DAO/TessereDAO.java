@@ -25,7 +25,7 @@ public class TessereDAO {
 
         transaction.commit();
 
-        System.out.println("L'utente " + newTessera.getNumeroTessera() + " è stata salvata correttamente!");
+        System.out.println("La Tessera con numero: " + newTessera.getId() + " è stata salvata correttamente!");
     }
 
 // findById
@@ -38,16 +38,16 @@ public class TessereDAO {
     }
 
 
-    //    remove
-    public void deleteTesseraById(String tesseraId) {
-        TesseraUtente found = this.findTesseraById(tesseraId);
-
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        em.remove(found);
-        transaction.commit();
-
-        System.out.println("La Tessera Utente è stato eliminata correttamente!");
-    }
+//      remove
+//    public void deleteTesseraById(String tesseraId) {
+//        TesseraUtente found = this.findTesseraById(tesseraId);
+//
+//        EntityTransaction transaction = em.getTransaction();
+//        transaction.begin();
+//        em.remove(found);
+//        transaction.commit();
+//
+//        System.out.println("La Tessera Utente è stato eliminata correttamente!");
+//    }
 
 }

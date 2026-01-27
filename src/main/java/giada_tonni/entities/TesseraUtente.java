@@ -10,10 +10,8 @@ import java.util.UUID;
 public class TesseraUtente {
     @Id
     @GeneratedValue
+    @Column(name = "numero_tessera")
     private UUID id;
-
-    @Column(name = "numero_tessera", nullable = false, unique = true)
-    private Long numeroTessera;
 
     @Column(name = "data_emissione", nullable = false)
     private LocalDate dataEmissione;
@@ -28,26 +26,13 @@ public class TesseraUtente {
     public TesseraUtente() {
     }
 
-    public TesseraUtente(Long numeroTessera, LocalDate dataEmissione, LocalDate dataScadenza) {
-        this.numeroTessera = numeroTessera;
+    public TesseraUtente(LocalDate dataEmissione, LocalDate dataScadenza) {
         this.dataEmissione = dataEmissione;
         this.dataScadenza = dataEmissione.plusYears(1);
     }
 
     public UUID getId() {
         return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public Long getNumeroTessera() {
-        return numeroTessera;
-    }
-
-    public void setNumeroTessera(Long numeroTessera) {
-        this.numeroTessera = numeroTessera;
     }
 
     public LocalDate getDataEmissione() {
@@ -74,7 +59,6 @@ public class TesseraUtente {
     public String toString() {
         return "TesseraUtente{" +
                 "id=" + id +
-                ", numeroTessera=" + numeroTessera +
                 ", dataEmissione=" + dataEmissione +
                 ", dataScadenza=" + dataScadenza +
                 '}';
