@@ -24,7 +24,8 @@ public class Mezzo {
     protected TipoMezzo tipo;
 
     // COSTRUTTORE vuoto
-    protected Mezzo() {}
+    public Mezzo() {
+    }
 
     // COSTRUTTORE
     public Mezzo(long capienza, TipoMezzo tipo) {
