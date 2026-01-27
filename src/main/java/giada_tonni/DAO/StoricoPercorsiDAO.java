@@ -1,10 +1,10 @@
 package giada_tonni.DAO;
 
-import giada_tonni.entities.PuntiVendita;
 import giada_tonni.entities.StoricoPercorsi;
 import giada_tonni.exceptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 
 import java.util.UUID;
@@ -26,20 +26,20 @@ public class StoricoPercorsiDAO {
 
     public StoricoPercorsi findStoricoPercorsiById(String storicoPercorsiId) {
         try {
-            return entityManager.createQuery("SELECT s FROM StoricoPercorsi s WHERE s.StoricoPercorsi= :storicoPercorsiId", StoricoPercorsi.class)
-                    .setParameter("storicoPercorsiId", storicoPercorsiId)
+            return entityManager.createQuery("SELECT s FROM StoricoPercorsi s WHERE s.storicoPercorsoId = :storicoPercorsiId", StoricoPercorsi.class)
+                    .setParameter("storicoPercorsiId", UUID.fromString(storicoPercorsiId))
                     .getSingleResult();
-        } catch (NotFoundException exception) {
-            return null;
+        } catch (NoResultException exception) {
+            throw new NotFoundException("Percorso non trovato.");
         }
     }
 
-    public void deletesoricoPercorsiById(String storicoPercorsiId) {
+    public void deleteStoricoPercorsiById(String storicoPercorsiId) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 
-        Query query = entityManager.createQuery("DELETE FROM StoricoPercorsi s WHERE s.StoricoPercorsi= :storicoPercorsiId");
-        query.setParameter("storicoPercorsiId", storicoPercorsiId);
+        Query query = entityManager.createQuery("DELETE FROM StoricoPercorsi s WHERE s.storicoPercorsoId= :storicoPercorsiId");
+        query.setParameter("storicoPercorsiId", UUID.fromString(storicoPercorsiId));
 
         int deleted = query.executeUpdate();
         transaction.commit();
@@ -48,7 +48,7 @@ public class StoricoPercorsiDAO {
         } else {
 
             System.out.println("Nessun percorso con id: " + storicoPercorsiId + " trovato.");
-            throw new NotFoundException(storicoPercorsiId);
+            throw new NotFoundException("Lo Storico Percorsi con id " + storicoPercorsiId + " non è stato trovato");
         }
     }
 }
