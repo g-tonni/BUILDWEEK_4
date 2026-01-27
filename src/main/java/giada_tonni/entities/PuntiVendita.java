@@ -7,19 +7,18 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "punti_vendita")
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipo_punto_vendita")
 public abstract class PuntiVendita {
+    @OneToMany(mappedBy = "puntoVendita")
+    protected List<TitoloViaggio> titoloViaggioList = new ArrayList<>();
     //ATTRIBUTI
     @Id
     @GeneratedValue
     private UUID idPuntoVendita;
-
     @Column(name = "locazione", nullable = false)
     private String locazione;
-
-    @OneToMany(mappedBy = "puntoVendita")
-    protected List<TitoloViaggio> titoloViaggioList = new ArrayList<>();
 
     //COSTRUTTORI
     public PuntiVendita() {

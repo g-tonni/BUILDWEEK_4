@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "distibutori_automatici")
+@DiscriminatorValue("Distributore")
 public class DistributoriAutomatici extends PuntiVendita {
     //ATTRIBUTI
     @Enumerated(EnumType.STRING)

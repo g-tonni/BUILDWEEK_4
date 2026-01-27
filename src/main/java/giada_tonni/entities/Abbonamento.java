@@ -2,11 +2,11 @@ package giada_tonni.entities;
 
 import jakarta.persistence.*;
 
-import java.util.UUID;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "abbonamenti")
+@DiscriminatorValue("Abbonamento")
 @PrimaryKeyJoinColumn(name = "id")
 public class Abbonamento extends TitoloViaggio {
 

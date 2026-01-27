@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "negozi")
+@DiscriminatorValue("Negozio")
 public class Negozi extends PuntiVendita {
     //ATTRIBUTI
     @Column(name = "titolo", nullable = false)

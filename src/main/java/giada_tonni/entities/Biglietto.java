@@ -3,10 +3,10 @@ package giada_tonni.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Entity
 @Table(name = "biglietti")
+@DiscriminatorValue("Biglietto")
 @PrimaryKeyJoinColumn(name = "codice_univoco")
 public class Biglietto extends TitoloViaggio {
 
