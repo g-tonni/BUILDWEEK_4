@@ -2,11 +2,11 @@ package giada_tonni.entities;
 
 import jakarta.persistence.*;
 
-import java.util.UUID;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "abbonamenti")
+@DiscriminatorValue("Abbonamento")
 @PrimaryKeyJoinColumn(name = "id")
 public class Abbonamento extends TitoloViaggio {
 
@@ -29,7 +29,8 @@ public class Abbonamento extends TitoloViaggio {
         super(dataAcquisto, puntoVendita);
         this.idTessera = idTessera;
         this.validita = validita;
-        this.scadenza = scadenza;
+        if (validita.equals(Validita.SETTIMANALE)) this.scadenza = dataAcquisto.plusWeeks(1);
+        else this.scadenza = dataAcquisto.plusMonths(1);
     }
 
     //GETTER AND SETTER

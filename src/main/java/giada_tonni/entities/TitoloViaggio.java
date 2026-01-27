@@ -2,12 +2,13 @@ package giada_tonni.entities;
 
 import jakarta.persistence.*;
 
-import java.util.UUID;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Table(name = "titoli_viaggio")
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipo_titolo_viaggio")
 public abstract class TitoloViaggio {
     @Id
     @GeneratedValue
