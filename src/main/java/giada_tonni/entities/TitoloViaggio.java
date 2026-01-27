@@ -17,20 +17,12 @@ public abstract class TitoloViaggio {
     @Column(name = "data_acquisto", nullable = false)
     protected LocalDate dataAcquisto;
 
-    @Column(name = "rivenditore_id", nullable = false)
-    protected UUID rivenditoreId;
-
     protected TitoloViaggio() {
     }
 
-    protected TitoloViaggio(LocalDate dataAcquisto, UUID rivenditoreId) {
+    protected TitoloViaggio(LocalDate dataAcquisto) {
         this.dataAcquisto = dataAcquisto;
-        this.rivenditoreId = rivenditoreId;
     }
-
-
-
-    //GETTER AND SETTER
 
     public UUID getCodiceUnivoco() {
         return codiceUnivoco;
@@ -48,20 +40,12 @@ public abstract class TitoloViaggio {
         this.dataAcquisto = dataAcquisto;
     }
 
-    public UUID getRivenditoreId() {
-        return rivenditoreId;
-    }
-
-    public void setRivenditoreId(UUID rivenditoreId) {
-        this.rivenditoreId = rivenditoreId;
-    }
 
     @Override
     public String toString() {
         return "TitoloViaggio{" +
                 "codiceUnivoco=" + codiceUnivoco +
                 ", dataAcquisto=" + dataAcquisto +
-                ", rivenditoreId=" + rivenditoreId +
                 '}';
     }
 }
