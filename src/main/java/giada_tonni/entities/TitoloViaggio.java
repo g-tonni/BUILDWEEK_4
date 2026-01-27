@@ -1,6 +1,7 @@
 package giada_tonni.entities;
 
 import jakarta.persistence.*;
+
 import java.util.UUID;
 import java.time.LocalDate;
 
@@ -16,6 +17,10 @@ public abstract class TitoloViaggio {
 
     @Column(name = "data_acquisto", nullable = false)
     protected LocalDate dataAcquisto;
+
+    @ManyToOne
+    @JoinColumn(name = "punto_vendita_id")
+    protected PuntiVendita puntoVendita;
 
     protected TitoloViaggio() {
     }
@@ -40,12 +45,20 @@ public abstract class TitoloViaggio {
         this.dataAcquisto = dataAcquisto;
     }
 
+    public PuntiVendita getPuntoVendita() {
+        return puntoVendita;
+    }
+
+    public void setPuntoVendita(PuntiVendita puntoVendita) {
+        this.puntoVendita = puntoVendita;
+    }
 
     @Override
     public String toString() {
         return "TitoloViaggio{" +
                 "codiceUnivoco=" + codiceUnivoco +
                 ", dataAcquisto=" + dataAcquisto +
+                ", puntoVendita=" + puntoVendita +
                 '}';
     }
 }
