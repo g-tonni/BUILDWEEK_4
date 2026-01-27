@@ -21,9 +21,10 @@ public class Biglietto extends TitoloViaggio {
     }
 
     public Biglietto(LocalDate dataAcquisto, PuntiVendita rivenditoreId, Mezzo
-            mezzoId) {
+            mezzoId, LocalDate dataTimbratura) {
         super(dataAcquisto, rivenditoreId);
         this.mezzoId = mezzoId;
+        this.dataTimbratura = dataTimbratura;
     }
 
     public boolean isValido() {
@@ -36,6 +37,7 @@ public class Biglietto extends TitoloViaggio {
 
     // GETTER AND SETTER
 
+
     public LocalDate getDataTimbratura() {
         return dataTimbratura;
     }
@@ -46,6 +48,10 @@ public class Biglietto extends TitoloViaggio {
 
     public Mezzo getMezzoId() {
         return mezzoId;
+    }
+
+    public void setMezzoId(Mezzo mezzoId) {
+        this.mezzoId = mezzoId;
     }
 
     @Override

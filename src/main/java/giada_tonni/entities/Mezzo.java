@@ -24,10 +24,11 @@ public class Mezzo {
     protected TipoMezzo tipo;
 
     // COSTRUTTORE vuoto
-    protected Mezzo() {}
+    public Mezzo() {
+    }
 
     // COSTRUTTORE
-    protected Mezzo(long capienza, TipoMezzo tipo) {
+    public Mezzo(long capienza, TipoMezzo tipo) {
         this.capienza = capienza;
         this.tipo = tipo;
     }

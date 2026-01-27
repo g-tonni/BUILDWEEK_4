@@ -18,12 +18,12 @@ public class Main1 {
         System.out.println("Ciao dal main 1");
         PuntiVenditaDAO puntoVendita = new PuntiVenditaDAO(entityManager);
 
-        //creazione e salvataggio punti vendita
+        // creazione e salvataggio punti vendita
         PuntiVendita negozio1 = new Negozi("Tabaccheria", "Piazza Garibaldi 10");
         PuntiVendita distributore1 = new DistributoriAutomatici(StatoDistributori.ATTIVO, "stazione Termini");
 
         //  puntoVendita.savePuntiVendita(negozio1);
-        // puntoVendita.savePuntiVendita(distributore1);
+        //  puntoVendita.savePuntiVendita(distributore1);
         entityManager.close();
         emf.close();
 
