@@ -26,7 +26,7 @@ public class StoricoPercorsiDAO {
 
     public StoricoPercorsi findStoricoPercorsiById(String storicoPercorsiId) {
         try {
-            return entityManager.createQuery("SELECT s FROM StoricoPercorsi s WHERE s.StoricoPercorsi= :storicoPercorsiId", StoricoPercorsi.class)
+            return entityManager.createQuery("SELECT s FROM StoricoPercorsi s WHERE s.storicoPercorsoId = :storicoPercorsiId", StoricoPercorsi.class)
                     .setParameter("storicoPercorsiId", storicoPercorsiId)
                     .getSingleResult();
         } catch (NotFoundException exception) {
