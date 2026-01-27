@@ -28,7 +28,8 @@ public class Abbonamento extends TitoloViaggio {
         super(dataAcquisto);
         this.tesseraUtente = tesseraUtente;
         this.validita = validita;
-        this.scadenza = scadenza;
+        if (validita.equals(Validita.SETTIMANALE)) this.scadenza = dataAcquisto.plusWeeks(1);
+        else this.scadenza = dataAcquisto.plusMonths(1);
     }
 
     public TesseraUtente getIdTessera() {
