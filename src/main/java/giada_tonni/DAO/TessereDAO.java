@@ -30,8 +30,8 @@ public class TessereDAO {
 
 // findById
 
-    public TesseraUtente findTesseraById(UUID tesseraId) {
-        TesseraUtente found = em.find(TesseraUtente.class, tesseraId);
+    public TesseraUtente findTesseraById(String tesseraId) {
+        TesseraUtente found = em.find(TesseraUtente.class,UUID.fromString(tesseraId));
         if (found == null)
             throw new NotFoundException("Tessera con id : " + tesseraId + " non trovata!");
         return found;
@@ -39,12 +39,15 @@ public class TessereDAO {
 
 
     //    remove
-    public void deleteTesseraById(UUID tesseraId) {
-        TesseraUtente found = em.find(TesseraUtente.class, tesseraId);
-        if (found == null) {
-            throw new NotFoundException("Tessera con id : " + tesseraId + " non trovata!");
-        }
+    public void deleteTesseraById(String tesseraId) {
+        TesseraUtente found = this.findTesseraById(tesseraId);
+
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
         em.remove(found);
+        transaction.commit();
+
+        System.out.println("La Tessera Utente è stato eliminata correttamente!");
     }
 
 }
