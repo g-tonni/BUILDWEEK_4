@@ -33,7 +33,7 @@ public class TessereDAO {
     public TesseraUtente findTesseraById(UUID tesseraId) {
         TesseraUtente found = em.find(TesseraUtente.class, tesseraId);
         if (found == null)
-            throw new NotFoundException(tesseraId);
+            throw new NotFoundException("Tessera con id : " + tesseraId + " non trovata!");
         return found;
     }
 
@@ -42,7 +42,7 @@ public class TessereDAO {
     public void deleteTesseraById(UUID tesseraId) {
         TesseraUtente found = em.find(TesseraUtente.class, tesseraId);
         if (found == null) {
-            throw new NotFoundException(tesseraId);
+            throw new NotFoundException("Tessera con id : " + tesseraId + " non trovata!");
         }
         em.remove(found);
     }

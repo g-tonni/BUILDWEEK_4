@@ -31,7 +31,7 @@ public void saveUtente (Utenti newUtente) {
     public Utenti findUtenteById(UUID utenteId) {
         Utenti found = em.find(Utenti.class, utenteId);
         if (found == null)
-            throw new NotFoundException(utenteId);
+            throw new NotFoundException("L'utente con id " + utenteId + " non trovato!");
         return found;
     }
 
@@ -40,7 +40,7 @@ public void saveUtente (Utenti newUtente) {
     public void deleteUtenteById(UUID utenteId) {
         Utenti found = em.find(Utenti.class, utenteId);
         if (found == null) {
-            throw new NotFoundException(utenteId);
+            throw new NotFoundException("L'utente con id  " + utenteId + "non trovato!");
         }
         em.remove(found);
     }
