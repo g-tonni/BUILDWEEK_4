@@ -8,6 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipo_punto_vendita")
 @Table(name = "punti_vendita")
 public abstract class PuntiVendita {
     //ATTRIBUTI

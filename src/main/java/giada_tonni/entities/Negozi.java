@@ -3,6 +3,7 @@ package giada_tonni.entities;
 import jakarta.persistence.*;
 
 @Entity
+@DiscriminatorValue("negozio")
 @Table(name = "negozi")
 public class Negozi extends PuntiVendita {
     //ATTRIBUTI
