@@ -22,18 +22,24 @@ public class ManutenzioneDAO {
         entityManager.persist(newManutenzione);
         transaction.commit();
 
-        System.out.println("il mezzo in manutenzione è salvato: " + newManutenzione.getId());
+        System.out.println("Il mezzo in manutenzione è salvato: " + newManutenzione.getId());
     }
 
     // FIND BY ID
-    public Manutenzione findById(UUID manutenzioneId) {
-        Manutenzione found = entityManager.find(Manutenzione.class, manutenzioneId);
-        if (found == null) throw new RuntimeException("il mezzo in Manutenzione con id " + manutenzioneId + " non è stato trovato");
+    public Manutenzione findById(String manutenzioneId) {
+        UUID id = UUID.fromString(manutenzioneId);
+
+        Manutenzione found = entityManager.find(Manutenzione.class, id);
+        if (found == null)
+            throw new RuntimeException(
+                    "Il mezzo in manutenzione con id " + manutenzioneId + " non è stato trovato"
+            );
+
         return found;
     }
 
     // DELETE
-    public void findByIdAndDelete(UUID manutenzioneId) {
+    public void findByIdAndDelete(String manutenzioneId) {
         Manutenzione found = this.findById(manutenzioneId);
 
         EntityTransaction transaction = entityManager.getTransaction();
@@ -41,6 +47,6 @@ public class ManutenzioneDAO {
         entityManager.remove(found);
         transaction.commit();
 
-        System.out.println("il mezzo in manutenzione con " + manutenzioneId + " è stato deletato");
+        System.out.println("Il mezzo in manutenzione con id " + manutenzioneId + " è stato cancellato");
     }
 }
