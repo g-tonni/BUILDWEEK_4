@@ -14,20 +14,20 @@ public class Mezzo {
     @GeneratedValue
     @UuidGenerator
     @Column(name = "id", nullable = false)
-    protected UUID id;
+    private UUID id;
 
     @Column(name = "capienza", nullable = false)
-    protected long capienza;
+    private long capienza;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo", nullable = false)
-    protected TipoMezzo tipo;
+    private TipoMezzo tipo;
 
     // COSTRUTTORE vuoto
-    protected Mezzo() {}
+    private Mezzo() {}
 
     // COSTRUTTORE
-    protected Mezzo(long capienza, TipoMezzo tipo) {
+    public Mezzo(long capienza, TipoMezzo tipo) {
         this.capienza = capienza;
         this.tipo = tipo;
     }
