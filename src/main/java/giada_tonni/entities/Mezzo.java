@@ -26,15 +26,20 @@ public class Mezzo {
     protected StatoMezzo stato;
 
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo", nullable = false)
+    protected TipoMezzo tipo;
+
     //COSTRUTTORE + vuoto
 
     protected Mezzo() {
     }
 
 
-    protected Mezzo(long capienza, StatoMezzo stato) {
+    protected Mezzo(long capienza, StatoMezzo stato, TipoMezzo tipo) {
         this.capienza = capienza;
         this.stato = stato;
+        this.tipo = tipo;
     }
 
     public UUID getId() {
@@ -61,12 +66,21 @@ public class Mezzo {
         this.stato = stato;
     }
 
+    public TipoMezzo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoMezzo tipo) {
+        this.tipo = tipo;
+    }
+
     @Override
     public String toString() {
         return "Mezzo{" +
                 "id=" + id +
                 ", capienza=" + capienza +
                 ", stato=" + stato +
+                ", tipo=" + tipo +
                 '}';
     }
 }
