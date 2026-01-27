@@ -2,6 +2,7 @@ package giada_tonni;
 
 import giada_tonni.DAO.*;
 import giada_tonni.entities.*;
+import giada_tonni.exceptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -23,6 +24,8 @@ public class Application {
         TessereDAO tessereDAO = new TessereDAO(entityManager);
         TitoloViaggioDAO titoloViaggioDAO = new TitoloViaggioDAO(entityManager);
         ManutenzioneDAO manutenzioneDAO = new ManutenzioneDAO(entityManager);
+        TrattaDAO trattaDAO = new TrattaDAO(entityManager);
+        StoricoPercorsiDAO storicoPercorsiDAO = new StoricoPercorsiDAO(entityManager);
 
         // *********************************** PUNTI VENDITA
         Negozi negozio1 = new Negozi("Tabaccheria", "Piazza Garibaldi 10");
@@ -94,7 +97,7 @@ public class Application {
             System.out.println(ex.getMessage());
         }*/
 
-        // *********************************** ABBONAMENTI E BIGLIETTI
+        // *********************************** ABBONAMENTI, BIGLIETTI E MANUTENZIONI
 
         /*try {
 
@@ -155,10 +158,64 @@ public class Application {
             manutenzioneDAO.save(manutenzione4);
             manutenzioneDAO.save(manutenzione5);
 
-
         } catch (NotFoundException ex) {
             System.out.println(ex.getMessage());
         }*/
+
+        // *********************************** TRATTE
+
+        Tratta tratta1 = new Tratta("Roma Tiburtina", "Monte Rotondo", 30);
+        Tratta tratta2 = new Tratta("Roma Termini", "Fiumicino Aeroporto", 45);
+        Tratta tratta3 = new Tratta("Roma Ostiense", "Pomezia", 40);
+        Tratta tratta4 = new Tratta("Roma Tiburtina", "Guidonia", 25);
+        Tratta tratta5 = new Tratta("Roma Termini", "Civitavecchia", 70);
+
+        /*trattaDAO.save(tratta1);
+        trattaDAO.save(tratta2);
+        trattaDAO.save(tratta3);
+        trattaDAO.save(tratta4);
+        trattaDAO.save(tratta5);*/
+
+        try {
+
+            Mezzo mezzoTrovato1 = mezzoDAO.findMezzoById("8fb0c1dc-513f-417e-b55a-500b508eeb4e");
+            Mezzo mezzoTrovato2 = mezzoDAO.findMezzoById("b20bb331-58b9-471c-b080-ef5bdb4d48c3");
+            Mezzo mezzoTrovato3 = mezzoDAO.findMezzoById("d80a47f2-8b97-4d2d-a471-e492bb96095a");
+            Mezzo mezzoTrovato4 = mezzoDAO.findMezzoById("e3be4909-f576-4cc7-ace6-f150581369c8");
+            Mezzo mezzoTrovato5 = mezzoDAO.findMezzoById("f2fa7b13-86b1-43a3-87c6-e503e419197f");
+
+            Tratta trattaTrovata1 = trattaDAO.findById("0aa26faf-97bf-4521-b0f4-962ed62294f1");
+            Tratta trattaTrovata2 = trattaDAO.findById("ca209083-7038-4243-a6ca-73b62ed1841e");
+            Tratta trattaTrovata3 = trattaDAO.findById("d6d0e58b-5027-4e71-9a02-57ba17662755");
+            Tratta trattaTrovata4 = trattaDAO.findById("d8e233dc-fb64-478f-8881-4b6266fb0005");
+            Tratta trattaTrovata5 = trattaDAO.findById("eb71739e-1bc4-4b94-a550-4e759acc9b1e");
+
+            StoricoPercorsi storico1 = new StoricoPercorsi(40, trattaTrovata1, mezzoTrovato1);
+            StoricoPercorsi storico2 = new StoricoPercorsi(35, trattaTrovata1, mezzoTrovato1);
+            StoricoPercorsi storico3 = new StoricoPercorsi(50, trattaTrovata2, mezzoTrovato2);
+            StoricoPercorsi storico4 = new StoricoPercorsi(45, trattaTrovata2, mezzoTrovato2);
+            StoricoPercorsi storico5 = new StoricoPercorsi(30, trattaTrovata3, mezzoTrovato3);
+            StoricoPercorsi storico6 = new StoricoPercorsi(28, trattaTrovata3, mezzoTrovato3);
+            StoricoPercorsi storico7 = new StoricoPercorsi(55, trattaTrovata4, mezzoTrovato4);
+            StoricoPercorsi storico8 = new StoricoPercorsi(52, trattaTrovata4, mezzoTrovato4);
+            StoricoPercorsi storico9 = new StoricoPercorsi(60, trattaTrovata5, mezzoTrovato5);
+            StoricoPercorsi storico10 = new StoricoPercorsi(58, trattaTrovata5, mezzoTrovato5);
+
+            /*storicoPercorsiDAO.saveStoricoPercorsi(storico1);
+            storicoPercorsiDAO.saveStoricoPercorsi(storico2);
+            storicoPercorsiDAO.saveStoricoPercorsi(storico3);
+            storicoPercorsiDAO.saveStoricoPercorsi(storico4);
+            storicoPercorsiDAO.saveStoricoPercorsi(storico5);
+            storicoPercorsiDAO.saveStoricoPercorsi(storico6);
+            storicoPercorsiDAO.saveStoricoPercorsi(storico7);
+            storicoPercorsiDAO.saveStoricoPercorsi(storico8);
+            storicoPercorsiDAO.saveStoricoPercorsi(storico9);
+            storicoPercorsiDAO.saveStoricoPercorsi(storico10);*/
+
+        } catch (NotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
+
 
         entityManager.close();
         emf.close();
