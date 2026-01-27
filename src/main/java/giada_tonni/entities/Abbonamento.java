@@ -2,16 +2,17 @@ package giada_tonni.entities;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "abbonamenti")
-@PrimaryKeyJoinColumn(name = "codice_univoco")
+@PrimaryKeyJoinColumn(name = "id")
 public class Abbonamento extends TitoloViaggio {
 
     @ManyToOne
     @JoinColumn(name = "id_tessera", nullable = false)
-    private TesseraUtente tesseraUtente;
+    private TesseraUtente idTessera;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "validita", nullable = false)
@@ -23,17 +24,29 @@ public class Abbonamento extends TitoloViaggio {
     public Abbonamento() {
     }
 
-    public Abbonamento(LocalDate dataAcquisto, TesseraUtente tesseraUtente,
-                       Validita validita, LocalDate scadenza) {
-        super(dataAcquisto);
-        this.tesseraUtente = tesseraUtente;
+    public Abbonamento(LocalDate dataAcquisto, PuntiVendita puntoVendita,
+                       TesseraUtente idTessera, Validita validita, LocalDate scadenza) {
+        super(dataAcquisto, puntoVendita);
+        this.idTessera = idTessera;
         this.validita = validita;
         if (validita.equals(Validita.SETTIMANALE)) this.scadenza = dataAcquisto.plusWeeks(1);
         else this.scadenza = dataAcquisto.plusMonths(1);
     }
 
+    //GETTER AND SETTER
+
+
     public TesseraUtente getIdTessera() {
-        return tesseraUtente;
+        return idTessera;
+    }
+
+
+    public LocalDate getScadenza() {
+        return scadenza;
+    }
+
+    public void setScadenza(LocalDate scadenza) {
+        this.scadenza = scadenza;
     }
 
     public Validita getValidita() {
@@ -44,19 +57,12 @@ public class Abbonamento extends TitoloViaggio {
         this.validita = validita;
     }
 
-    public LocalDate getScadenza() {
-        return scadenza;
-    }
-
-    public void setScadenza(LocalDate scadenza) {
-        this.scadenza = scadenza;
-    }
-
     @Override
     public String toString() {
         return "Abbonamento{" +
-                "scadenza=" + scadenza +
-                ", idTessera=" + tesseraUtente +
+                "idTessera=" + idTessera +
+                ", validita=" + validita +
+                ", scadenza=" + scadenza +
                 '}';
     }
 }
