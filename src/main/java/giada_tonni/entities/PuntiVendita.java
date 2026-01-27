@@ -2,6 +2,8 @@ package giada_tonni.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -16,6 +18,9 @@ public abstract class PuntiVendita {
     @Column(name = "locazione", nullable = false)
     private String locazione;
 
+    @OneToMany(mappedBy = "puntoVendita")
+    protected List<TitoloViaggio> titoloViaggioList = new ArrayList<>();
+
     //COSTRUTTORI
     public PuntiVendita() {
     }
@@ -24,11 +29,21 @@ public abstract class PuntiVendita {
         this.locazione = locazione;
     }
 
+
     //GETTER E SETTER
 
 
     public UUID getIdPuntoVendita() {
         return idPuntoVendita;
+    }
+
+
+    public List<TitoloViaggio> getTitoloViaggioList() {
+        return titoloViaggioList;
+    }
+
+    public void setTitoloViaggioList(List<TitoloViaggio> titoloViaggioList) {
+        this.titoloViaggioList = titoloViaggioList;
     }
 
     public String getLocazione() {
@@ -37,5 +52,14 @@ public abstract class PuntiVendita {
 
     public void setLocazione(String locazione) {
         this.locazione = locazione;
+    }
+
+    @Override
+    public String toString() {
+        return "PuntiVendita{" +
+                "idPuntoVendita=" + idPuntoVendita +
+                ", locazione='" + locazione + '\'' +
+                ", titoloViaggioList=" + titoloViaggioList +
+                '}';
     }
 }
