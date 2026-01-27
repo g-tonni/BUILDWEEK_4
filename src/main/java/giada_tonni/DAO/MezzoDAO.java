@@ -38,7 +38,7 @@ public class MezzoDAO {
 
     // DELETE
     public void findMezzoByIdAndDelete(String mezzoId) {
-        Mezzo found = this.findById(mezzoId);
+        Mezzo found = this.findMezzoById(mezzoId);
 
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
