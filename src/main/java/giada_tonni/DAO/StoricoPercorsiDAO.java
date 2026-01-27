@@ -1,13 +1,10 @@
 package giada_tonni.DAO;
 
-import giada_tonni.entities.PuntiVendita;
 import giada_tonni.entities.StoricoPercorsi;
 import giada_tonni.exceptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
-
-import java.util.UUID;
 
 public class StoricoPercorsiDAO {
     private final EntityManager entityManager;
@@ -48,7 +45,7 @@ public class StoricoPercorsiDAO {
         } else {
 
             System.out.println("Nessun percorso con id: " + storicoPercorsiId + " trovato.");
-            throw new NotFoundException(storicoPercorsiId);
+            throw new NotFoundException("Lo Storico Percorsi con id " + storicoPercorsiId + " non è stato trovato");
         }
     }
 }

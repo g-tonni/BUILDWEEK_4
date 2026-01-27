@@ -22,19 +22,23 @@ public class MezzoDAO {
         entityManager.persist(newMezzo);
         transaction.commit();
 
-        System.out.println("il Mezzo è inserito correttamente nel DB: " + newMezzo.getId());
+        System.out.println("Il Mezzo è inserito correttamente nel DB: " + newMezzo.getId());
     }
 
     // FIND BY ID
-    public Mezzo findById(UUID mezzoId) {
-        Mezzo found = entityManager.find(Mezzo.class, mezzoId);
-        if (found == null) throw new RuntimeException("Mezzo con id " + mezzoId + " non trovato");
+    public Mezzo findMezzoById(String mezzoId) {
+        UUID id = UUID.fromString(mezzoId);
+
+        Mezzo found = entityManager.find(Mezzo.class, id);
+        if (found == null)
+            throw new RuntimeException("Mezzo con id " + mezzoId + " non trovato");
+
         return found;
     }
 
     // DELETE
-    public void findByIdAndDelete(UUID mezzoId) {
-        Mezzo found = this.findById(mezzoId);
+    public void findMezzoByIdAndDelete(String mezzoId) {
+        Mezzo found = this.findMezzoById(mezzoId);
 
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
