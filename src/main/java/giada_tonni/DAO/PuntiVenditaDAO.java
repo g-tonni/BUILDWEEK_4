@@ -2,9 +2,9 @@ package giada_tonni.DAO;
 
 import giada_tonni.entities.PuntiVendita;
 import giada_tonni.exceptions.NotFoundException;
-import jakarta.persistence.*;
-
-import java.util.UUID;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Query;
 
 public class PuntiVenditaDAO {
     private final EntityManager entityManager;
@@ -45,7 +45,7 @@ public class PuntiVenditaDAO {
         } else {
 
             System.out.println("Nessun punto vendita con id: " + idPuntoVendita + " trovato.");
-            throw new NotFoundException(idPuntoVendita);
+            throw new NotFoundException("Il Punto Vendita con id " + idPuntoVendita + " non è stato trovato");
         }
     }
 }

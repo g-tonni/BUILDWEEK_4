@@ -25,7 +25,8 @@ public class StoricoVenditeDao {
 
     public StoricoVendite findStoricoVenditeById(String storicoVenditeId) throws NotFoundException {
         StoricoVendite found = entityManager.find(StoricoVendite.class, UUID.fromString(storicoVenditeId));
-        if (found == null) throw new NotFoundException(storicoVenditeId);
+        if (found == null)
+            throw new NotFoundException("Lo Storico Vendite con id " + storicoVenditeId + " non è stato trovato");
         return found;
     }
 
