@@ -26,7 +26,7 @@ public class ManutenzioneDAO {
     }
 
     // FIND BY ID
-    public Manutenzione findById(String manutenzioneId) {
+    public Manutenzione findManutenzioneById(String manutenzioneId) {
         UUID id = UUID.fromString(manutenzioneId);
 
         Manutenzione found = entityManager.find(Manutenzione.class, id);
@@ -39,8 +39,8 @@ public class ManutenzioneDAO {
     }
 
     // DELETE
-    public void findByIdAndDelete(String manutenzioneId) {
-        Manutenzione found = this.findById(manutenzioneId);
+    public void findManutenzioneByIdAndDelete(String manutenzioneId) {
+        Manutenzione found = this.findManutenzioneById(manutenzioneId);
 
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();

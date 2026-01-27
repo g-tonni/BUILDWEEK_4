@@ -26,7 +26,7 @@ public class MezzoDAO {
     }
 
     // FIND BY ID
-    public Mezzo findById(String mezzoId) {
+    public Mezzo findMezzoById(String mezzoId) {
         UUID id = UUID.fromString(mezzoId);
 
         Mezzo found = entityManager.find(Mezzo.class, id);
@@ -37,7 +37,7 @@ public class MezzoDAO {
     }
 
     // DELETE
-    public void findByIdAndDelete(String mezzoId) {
+    public void findMezzoByIdAndDelete(String mezzoId) {
         Mezzo found = this.findById(mezzoId);
 
         EntityTransaction transaction = entityManager.getTransaction();
