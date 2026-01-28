@@ -1,10 +1,11 @@
 package giada_tonni.DAO;
 
-import giada_tonni.entities.*;
+import giada_tonni.entities.Abbonamento;
+import giada_tonni.entities.Biglietto;
+import giada_tonni.entities.Mezzo;
+import giada_tonni.entities.TitoloViaggio;
 import giada_tonni.exceptions.NotFoundException;
 import jakarta.persistence.*;
-
-
 
 import java.time.LocalDate;
 import java.util.List;
@@ -40,8 +41,8 @@ public class TitoloViaggioDAO {
 
         throw new NotFoundException(titoloId);
     }
-    //METODO per CONTROLLARE VALIDITA' ABBONAMENTO
 
+    //METODO per CONTROLLARE VALIDITA' ABBONAMENTO
     public boolean checkIfSubscriptionIsValid(String idTessera, String idAbbonamento) {
 
         try {
@@ -61,17 +62,14 @@ public class TitoloViaggioDAO {
         }
 
 
-
-
     }
 
 
     // TRACCIA TITOLI EMESSI
-
     public List<TitoloViaggio> tracciaTitoliEmessi(String idPuntoVendita, LocalDate dataInizio, LocalDate dataFine) {
         return em.createQuery(
-                "SELECT t FROM TitoloViaggio t WHERE t.puntoVendita.idPuntoVendita = :idPuntoVendita AND t.dataAcquisto > :dataInizio AND t.dataAcquisto< :dataFine ORDER BY t.dataAcquisto ", TitoloViaggio.class
-        )
+                        "SELECT t FROM TitoloViaggio t WHERE t.puntoVendita.idPuntoVendita = :idPuntoVendita AND t.dataAcquisto >= :dataInizio AND t.dataAcquisto <= :dataFine ORDER BY t.dataAcquisto ", TitoloViaggio.class
+                )
 
                 .setParameter("idPuntoVendita", UUID.fromString(idPuntoVendita))
                 .setParameter("dataInizio", dataInizio)
@@ -80,19 +78,46 @@ public class TitoloViaggioDAO {
     }
 
 
-     // NUMERO BIGLIETTI VIDIMATI DATO UN MEZZO
-
-    public long bigliettiVidimatiMezzo (String mezzoID )
-    {return em.createQuery(
-            "SELECT COUNT(b) FROM Biglietto b WHERE b.mezzoId.id = :mezzoId AND b.dataTimbratura IS NOT NULL", Long.class
-    )
-            .setParameter("mezzoId", UUID.fromString(mezzoID))
-            .getSingleResult();
+    // NUMERO BIGLIETTI VIDIMATI DATO UN MEZZO
+    public long bigliettiVidimatiMezzo(String mezzoID) {
+        return em.createQuery(
+                        "SELECT COUNT(b) FROM Biglietto b WHERE b.mezzoId.id = :mezzoId AND b.dataTimbratura IS NOT NULL", Long.class
+                )
+                .setParameter("mezzoId", UUID.fromString(mezzoID))
+                .getSingleResult();
 
     }
 
 
+    // VIDIMARE BIGLIETTO
+    public void timbraBiglietto(String mezzoId, String bigliettoId) {
+        try {
+            LocalDate oggi = LocalDate.now();
+            EntityTransaction transaction = em.getTransaction();
+            transaction.begin();
 
+            Mezzo mezzoTrovato = em.find(Mezzo.class, UUID.fromString(mezzoId));
+
+            Query query = em.createQuery("UPDATE Biglietto b SET b.dataTimbratura = :oggi, b.mezzoId = :mezzoId WHERE b.codiceUnivoco = :bigliettoId")
+                    .setParameter("mezzoId", mezzoTrovato)
+                    .setParameter("oggi", oggi)
+                    .setParameter("bigliettoId", UUID.fromString(bigliettoId));
+            query.executeUpdate();
+
+            transaction.commit();
+            System.out.println("Biglietto vidimato");
+        } catch (NotFoundException ex) {
+            throw new NotFoundException("Biglietto non timbrato");
+        }
+    }
+
+    // NUMERO BILIETTI VIDIMATI DATO UN PERIODO
+    public long numeroBigliettiTimbratiPeriodo(LocalDate dataInizio, LocalDate dataFine) {
+        return em.createQuery("SELECT COUNT(b) FROM Biglietto b WHERE b.dataTimbratura IS NOT NULL AND b.dataTimbratura >= :dataInizio AND b.dataTimbratura <= :dataFine", Long.class)
+                .setParameter("dataInizio", dataInizio)
+                .setParameter("dataFine", dataFine)
+                .getSingleResult();
+    }
 
     // DELETE
     public void findByIdAndDelete(String titoloId) {

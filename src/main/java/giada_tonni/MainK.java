@@ -4,7 +4,6 @@ package giada_tonni;
 import giada_tonni.DAO.*;
 import giada_tonni.entities.*;
 import giada_tonni.exceptions.NotFoundException;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -132,11 +131,11 @@ public class MainK {
             Abbonamento abbonamento4 = new Abbonamento(LocalDate.now(), puntiVenditaTrovato4, tesseraTrovata1, Validita.MENSILE);
             Abbonamento abbonamento5 = new Abbonamento(LocalDate.now(), puntiVenditaTrovato5, tesseraTrovata2, Validita.SETTIMANALE);
 
-            Biglietto biglietto1 = new Biglietto(LocalDate.of(2026, 1, 1), puntiVenditaTrovato6, mezzoTrovato1, LocalDate.of(2026, 1, 2));
+            /*Biglietto biglietto1 = new Biglietto(LocalDate.of(2026, 1, 1), puntiVenditaTrovato6, mezzoTrovato1, LocalDate.of(2026, 1, 2));
             Biglietto biglietto2 = new Biglietto(LocalDate.of(2024, 1, 1), puntiVenditaTrovato7, mezzoTrovato2, LocalDate.of(2026, 1, 2));
             Biglietto biglietto3 = new Biglietto(LocalDate.of(2026, 2, 1), puntiVenditaTrovato8, null, null);
             Biglietto biglietto4 = new Biglietto(LocalDate.of(2023, 5, 2), puntiVenditaTrovato9, null, null);
-            Biglietto biglietto5 = new Biglietto(LocalDate.of(2026, 1, 4), puntiVenditaTrovato10, mezzoTrovato3, LocalDate.now());
+            Biglietto biglietto5 = new Biglietto(LocalDate.of(2026, 1, 4), puntiVenditaTrovato10, mezzoTrovato3, LocalDate.now());*/
 
             Manutenzione manutenzione1 = new Manutenzione(mezzoTrovato1, "Motore", LocalDate.of(2023, 2, 4), LocalDate.of(2023, 3, 3));
             Manutenzione manutenzione2 = new Manutenzione(mezzoTrovato2, "Freni", LocalDate.of(2023, 4, 10), LocalDate.of(2023, 4, 18));
@@ -225,7 +224,7 @@ public class MainK {
 
         storicoPercorsiDAO.findPercorsiByMezzoId("7e3d2c18-5f4a-4340-884b-536879d62fc").forEach(storicoPercorsi -> System.out.println(storicoPercorsi));
 
-        System.out.println(storicoPercorsiDAO.getMediaTrattaByMezzoId("7e3d2c18-5f4a-4340-884b-536879d62f8c","e7be991a-1298-4502-aa3b-0ddc16a8438b"));
+        System.out.println(storicoPercorsiDAO.getMediaTrattaByMezzoId("7e3d2c18-5f4a-4340-884b-536879d62f8c", "e7be991a-1298-4502-aa3b-0ddc16a8438b"));
 
         entityManager.close();
         emf.close();

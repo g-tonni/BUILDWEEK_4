@@ -2,9 +2,6 @@ package giada_tonni;
 
 
 import giada_tonni.DAO.*;
-import giada_tonni.entities.*;
-import giada_tonni.exceptions.NotFoundException;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -224,6 +221,9 @@ PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502
             System.out.println(ex.getMessage());
         }*/
 
+        titoloViaggioDAO.timbraBiglietto("8fb0c1dc-513f-417e-b55a-500b508eeb4e", "8c9e86a5-0d72-48f5-b418-7322a5ed4708");
+        long numBigliettiPeriodo = titoloViaggioDAO.numeroBigliettiTimbratiPeriodo(LocalDate.of(2024, 1, 1), LocalDate.now());
+        System.out.println(numBigliettiPeriodo);
 
         entityManager.close();
         emf.close();
