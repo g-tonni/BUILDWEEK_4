@@ -115,16 +115,16 @@ public class Main2 {
             TesseraUtente tesseraTrovata2 = tessereDAO.findTesseraById("2d593347-09a8-4cff-ba56-3139790b8483");
             TesseraUtente tesseraTrovata3 = tessereDAO.findTesseraById("5ad127b9-46e6-4e1f-982e-d805e034cb2c");
 
-            */PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502b6-a3d8-4e7a-b283-d17da62766f9");
-            PuntiVendita puntiVenditaTrovato2 = puntoVenditaDAO.findPuntoVenditaById("3bf3a1a8-4931-4dc7-b4b7-96b051037f08");
-            PuntiVendita puntiVenditaTrovato3 = puntoVenditaDAO.findPuntoVenditaById("3d8c198f-a606-4e22-aced-79d60ac3ac74");
-            PuntiVendita puntiVenditaTrovato4 = puntoVenditaDAO.findPuntoVenditaById("57367e7f-60f2-4b5c-94ec-b8480fc35279");
-            PuntiVendita puntiVenditaTrovato5 = puntoVenditaDAO.findPuntoVenditaById("81fcec6d-00c9-4e9d-9f98-2e9bc0cb8213");
-            PuntiVendita puntiVenditaTrovato6 = puntoVenditaDAO.findPuntoVenditaById("9e34409f-4daa-4cf6-9973-1e4c2c155c0b");
-            PuntiVendita puntiVenditaTrovato7 = puntoVenditaDAO.findPuntoVenditaById("b3fa4e58-06a4-4fdc-a4a7-f976dde81d5a");
-            PuntiVendita puntiVenditaTrovato8 = puntoVenditaDAO.findPuntoVenditaById("cafb0c13-a8b2-4b12-b8bb-34c6ee542a1d");
-            PuntiVendita puntiVenditaTrovato9 = puntoVenditaDAO.findPuntoVenditaById("cd38d081-9369-44cf-aa19-c6959fe4c53f");
-            PuntiVendita puntiVenditaTrovato10 = puntoVenditaDAO.findPuntoVenditaById("fc893026-4536-4741-853f-e4aaa9890bb8"); /*
+            */PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("023d460a-6753-41d0-8fe0-36414f91b077");
+        PuntiVendita puntiVenditaTrovato2 = puntoVenditaDAO.findPuntoVenditaById("18f1eb3c-f19b-4717-a46b-744ef3b75a44");
+        PuntiVendita puntiVenditaTrovato3 = puntoVenditaDAO.findPuntoVenditaById("1d0a6b98-4fee-4d05-99dc-e557ae0d7237");
+        PuntiVendita puntiVenditaTrovato4 = puntoVenditaDAO.findPuntoVenditaById("32503268-29f3-4485-9d82-0bf0ef3e5d43");
+        PuntiVendita puntiVenditaTrovato5 = puntoVenditaDAO.findPuntoVenditaById("7d09af9d-e10e-4542-a4bc-666349e940d3");
+        PuntiVendita puntiVenditaTrovato6 = puntoVenditaDAO.findPuntoVenditaById("80e8849c-7c0c-47be-ba8f-f759ea5734a6");
+        PuntiVendita puntiVenditaTrovato7 = puntoVenditaDAO.findPuntoVenditaById("909ec2e8-a070-46e1-a75c-cc35bbc9551a");
+        PuntiVendita puntiVenditaTrovato8 = puntoVenditaDAO.findPuntoVenditaById("a4199762-1798-43bf-82e2-98793b5613ce");
+        PuntiVendita puntiVenditaTrovato9 = puntoVenditaDAO.findPuntoVenditaById("bc36c343-8b8b-4365-9134-30d7e37d2e57");
+        PuntiVendita puntiVenditaTrovato10 = puntoVenditaDAO.findPuntoVenditaById("c7cb7ff6-9582-4c41-abe9-4882dc8fb4a0"); /*
 
             Abbonamento abbonamento1 = new Abbonamento(LocalDate.of(2026, 1, 1), puntiVenditaTrovato1, tesseraTrovata1, Validita.SETTIMANALE);
             Abbonamento abbonamento2 = new Abbonamento(LocalDate.of(2025, 1, 1), puntiVenditaTrovato2, tesseraTrovata2, Validita.SETTIMANALE);
@@ -141,10 +141,11 @@ public class Main2 {
         Biglietto biglietto6 = new Biglietto(LocalDate.of(2026, 1, 1), puntiVenditaTrovato6, mezzoTrovato1, LocalDate.of(2026, 1, 2));
         Biglietto biglietto7 = new Biglietto(LocalDate.of(2026, 1, 1), puntiVenditaTrovato3, mezzoTrovato1, LocalDate.of(2026, 1, 2));
         Biglietto biglietto8 = new Biglietto(LocalDate.of(2026, 1, 1), puntiVenditaTrovato2, mezzoTrovato1, LocalDate.of(2026, 1, 2));
-
+        Biglietto biglietto9 = new Biglietto(LocalDate.of(2026, 1, 1), puntiVenditaTrovato2, mezzoTrovato1, LocalDate.of(2026, 1, 2));
         titoloViaggioDAO.save(biglietto6);
         titoloViaggioDAO.save(biglietto7);
         titoloViaggioDAO.save(biglietto8);
+        titoloViaggioDAO.save(biglietto9);
         /*
 
 
