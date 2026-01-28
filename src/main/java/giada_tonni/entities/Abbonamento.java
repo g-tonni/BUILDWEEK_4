@@ -37,6 +37,18 @@ public class Abbonamento extends TitoloViaggio {
         else this.scadenza = dataAcquisto.plusMonths(1);
     }
 
+    public Abbonamento(PuntiVendita puntoVendita,
+                       TesseraUtente idTessera, Validita validita) {
+        super(puntoVendita);
+//
+        if (idTessera.getDataScadenza().isBefore(LocalDate.now())) throw new TesseraScadutaException();
+        else this.idTessera = idTessera;
+
+        this.validita = validita;
+        if (validita.equals(Validita.SETTIMANALE)) this.scadenza = dataAcquisto.plusWeeks(1);
+        else this.scadenza = dataAcquisto.plusMonths(1);
+    }
+
     //GETTER AND SETTER
 
 

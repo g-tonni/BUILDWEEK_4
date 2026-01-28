@@ -32,6 +32,12 @@ public class TesseraUtente {
         this.utente = utente;
     }
 
+    public TesseraUtente(Utenti utente) {
+        this.dataEmissione = LocalDate.now();
+        this.dataScadenza = dataEmissione.plusYears(1);
+        this.utente = utente;
+    }
+
     public UUID getId() {
         return id;
     }
