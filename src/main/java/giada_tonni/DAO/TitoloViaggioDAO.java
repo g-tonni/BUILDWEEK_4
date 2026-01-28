@@ -80,6 +80,18 @@ public class TitoloViaggioDAO {
     }
 
 
+     // NUMERO BIGLIETTI VIDIMATI DATO UN MEZZO
+
+    public long bigliettiVidimatiMezzo (String mezzoID )
+    {return em.createQuery(
+            "SELECT COUNT(b) FROM Biglietto b WHERE b.mezzoId.id = :mezzoId AND b.dataTimbratura IS NOT NULL", Long.class
+    )
+            .setParameter("mezzoId", UUID.fromString(mezzoID))
+            .getSingleResult();
+
+    }
+
+
 
 
     // DELETE

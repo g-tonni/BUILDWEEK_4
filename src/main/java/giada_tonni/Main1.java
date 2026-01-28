@@ -230,10 +230,12 @@ public class Main1 {
         System.out.println(isValid);*/
 
         //Niccolò esempio
-        List<TitoloViaggio>titoliViaggiEmessi = titoloViaggioDAO.tracciaTitoliEmessi("023d460a-6753-41d0-8fe0-36414f91b077", LocalDate.of(2024,1,1),LocalDate.now());
+        //List<TitoloViaggio>titoliViaggiEmessi = titoloViaggioDAO.tracciaTitoliEmessi("023d460a-6753-41d0-8fe0-36414f91b077", LocalDate.of(2024,1,1),LocalDate.now());
 
-        System.out.println(titoliViaggiEmessi);
+        //System.out.println(titoliViaggiEmessi);
 
+        long totBigliettiVidimati = titoloViaggioDAO.bigliettiVidimatiMezzo("9586c0e6-6ef0-4a1a-84cd-28c5baba14cc");
+        System.out.println(totBigliettiVidimati);
 
         entityManager.close();
         emf.close();
