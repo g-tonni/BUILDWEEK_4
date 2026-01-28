@@ -30,7 +30,7 @@ public class TitoloViaggioDAO {
     }
 
     // FIND BY ID
-    public TitoloViaggio findById(String titoloId) {
+    public TitoloViaggio findById(String titoloId) throws NotFoundException {
         UUID id = UUID.fromString(titoloId);
 
         Biglietto b = em.find(Biglietto.class, id);
@@ -43,7 +43,7 @@ public class TitoloViaggioDAO {
     }
 
     //METODO per CONTROLLARE VALIDITA' ABBONAMENTO
-    public boolean checkIfSubscriptionIsValid(String idTessera, String idAbbonamento) {
+    public boolean checkIfSubscriptionIsValid(String idTessera, String idAbbonamento) throws NotFoundException {
 
         try {
             TypedQuery<Abbonamento> query = em.createQuery(
@@ -59,9 +59,9 @@ public class TitoloViaggioDAO {
 
         } catch (NoResultException exception) {
             throw new NotFoundException("Abbonamento non trovato.");
+        } catch (IllegalArgumentException ex) {
+            throw new NotFoundException("Abbonamento non trovato.");
         }
-
-
     }
 
 
@@ -79,13 +79,18 @@ public class TitoloViaggioDAO {
 
 
     // NUMERO BIGLIETTI VIDIMATI DATO UN MEZZO
-    public long bigliettiVidimatiMezzo(String mezzoID) {
-        return em.createQuery(
-                        "SELECT COUNT(b) FROM Biglietto b WHERE b.mezzoId.id = :mezzoId AND b.dataTimbratura IS NOT NULL", Long.class
-                )
-                .setParameter("mezzoId", UUID.fromString(mezzoID))
-                .getSingleResult();
-
+    public long bigliettiVidimatiMezzo(String mezzoID) throws NotFoundException {
+        try {
+            long numero = em.createQuery(
+                            "SELECT COUNT(b) FROM Biglietto b WHERE b.mezzoId.id = :mezzoId AND b.dataTimbratura IS NOT NULL", Long.class
+                    )
+                    .setParameter("mezzoId", UUID.fromString(mezzoID))
+                    .getSingleResult();
+            if (numero == 0) throw new NotFoundException("Id inserito non valido");
+            return numero;
+        } catch (IllegalArgumentException ex) {
+            throw new NotFoundException("Id mezzo non valido");
+        }
     }
 
 
