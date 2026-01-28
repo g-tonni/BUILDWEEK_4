@@ -1,16 +1,18 @@
 package giada_tonni;
 
+
 import giada_tonni.DAO.*;
 import giada_tonni.entities.*;
 import giada_tonni.exceptions.NotFoundException;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
-import java.util.List;
 
-public class Main1 {
+public class MainK {
+
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("buildweek4pu");
 
     public static void main(String[] args) {
@@ -58,7 +60,7 @@ public class Main1 {
         Mezzo mezzo3 = new Mezzo(200, TipoMezzo.TRAM);
         Mezzo mezzo4 = new Mezzo(60, TipoMezzo.TRAM);
         Mezzo mezzo5 = new Mezzo(75, TipoMezzo.AUTOBUS);
-//
+
 //        mezzoDAO.save(mezzo1);
 //        mezzoDAO.save(mezzo2);
 //        mezzoDAO.save(mezzo3);
@@ -81,69 +83,60 @@ public class Main1 {
 
         // *********************************** TESSERE
 
-        try {
-            Utenti utenteTrovato1 = utentiDAO.findUtenteById("0800dede-85d9-4ded-ad48-b43d0c16e173");
-            Utenti utenteTrovato2 = utentiDAO.findUtenteById("786e3404-9842-437f-89ae-5151f205ff38");
-            Utenti utenteTrovato3 = utentiDAO.findUtenteById("ae3878ef-c9a2-40fb-9e23-d15a0c3d39b7");
-
-
-            TesseraUtente tessera1 = new TesseraUtente(LocalDate.of(2025, 4, 1), utenteTrovato1);
-            TesseraUtente tessera2 = new TesseraUtente(LocalDate.of(2024, 12, 1), utenteTrovato2);
-            TesseraUtente tessera3 = new TesseraUtente(LocalDate.of(2023, 7, 1), utenteTrovato3);
-
+//        try {
+//            Utenti utenteTrovato1 = utentiDAO.findUtenteById("04181913-f050-4d15-ae4f-2feb93cbd945");
+//            Utenti utenteTrovato2 = utentiDAO.findUtenteById("440cbb15-111d-40d7-8a17-dd488ab6fb71");
+//            Utenti utenteTrovato3 = utentiDAO.findUtenteById("5c6aa819-b6e2-44c7-b3b5-3ebd3d7913a3");
+//
+//            TesseraUtente tessera1 = new TesseraUtente(LocalDate.of(2025, 4, 1), utenteTrovato1);
+//            TesseraUtente tessera2 = new TesseraUtente(LocalDate.of(2024, 12, 1), utenteTrovato2);
+//            TesseraUtente tessera3 = new TesseraUtente(LocalDate.of(2023, 7, 1), utenteTrovato3);
+//
 //            tessereDAO.saveTessera(tessera1);
 //            tessereDAO.saveTessera(tessera2);
-//            tessereDAO.saveTessera(tessera3);
-
-        } catch (NotFoundException ex) {
-            System.out.println(ex.getMessage());
-        }
+//           tessereDAO.saveTessera(tessera3);
+//
+//        } catch (NotFoundException ex) {
+//            System.out.println(ex.getMessage());
+//        }
 
         // *********************************** ABBONAMENTI, BIGLIETTI E MANUTENZIONI
 
         try {
 
-            Mezzo mezzoTrovato1 = mezzoDAO.findMezzoById("002235fa-4404-4a36-9e7e-22f688652a80");
-            Mezzo mezzoTrovato2 = mezzoDAO.findMezzoById("5d738645-44ec-4c51-ae3a-593083bf8b1c");
-            Mezzo mezzoTrovato3 = mezzoDAO.findMezzoById("746b25c8-7977-4ec4-8e53-6b0c51002177");
-            Mezzo mezzoTrovato4 = mezzoDAO.findMezzoById("af8c3e86-dd1c-47a1-b27f-f4a028029904");
-            Mezzo mezzoTrovato5 = mezzoDAO.findMezzoById("f4461536-00f1-4342-bd14-309218ec99a4");
+            Mezzo mezzoTrovato1 = mezzoDAO.findMezzoById("00dbc6df-ca26-40de-a2ab-0af2e462aaff");
+            Mezzo mezzoTrovato2 = mezzoDAO.findMezzoById("098779bb-d032-4adb-817e-8bd6a617f6c3");
+            Mezzo mezzoTrovato3 = mezzoDAO.findMezzoById("2c50d14e-3c36-4ac2-a4c5-9bb379434a1a");
+            Mezzo mezzoTrovato4 = mezzoDAO.findMezzoById("7e3d2c18-5f4a-4340-884b-536879d62f8c");
+            Mezzo mezzoTrovato5 = mezzoDAO.findMezzoById("8dffc9cb-9d02-4d59-a26e-54a30d8124e6");
 
-//
-//            TesseraUtente tesseraTrovata1 = tessereDAO.findTesseraById("2fc6f395-a71d-4f22-98ca-0322dbf9aff5");
-//            TesseraUtente tesseraTrovata2 = tessereDAO.findTesseraById("495b8508-8dd9-4f26-93f8-113ec0363023");
-//            TesseraUtente tesseraTrovata3 = tessereDAO.findTesseraById("dacc58e8-3579-4de4-8524-88df4447da0c");
+            TesseraUtente tesseraTrovata1 = tessereDAO.findTesseraById("061f4e9c-5c1f-4817-b3ab-cf216cea7849");
+            TesseraUtente tesseraTrovata2 = tessereDAO.findTesseraById("6bf05096-eb20-4a24-b4dd-d725a7aed8c7");
+            TesseraUtente tesseraTrovata3 = tessereDAO.findTesseraById("f93954d8-0b35-43d3-a3b9-e370e88c6ddd");
 
-
-            PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("4e37fed0-3639-4c6f-964b-4848be862c83");
-            PuntiVendita puntiVenditaTrovato2 = puntoVenditaDAO.findPuntoVenditaById("5a5a121f-4e61-4361-a296-4333882fb44f");
-            PuntiVendita puntiVenditaTrovato3 = puntoVenditaDAO.findPuntoVenditaById("730db7ee-7e21-4641-8e99-692ac87ed489");
-            PuntiVendita puntiVenditaTrovato4 = puntoVenditaDAO.findPuntoVenditaById("7ba73ecd-cd02-4ce8-978e-3da26b1c92f2");
-            PuntiVendita puntiVenditaTrovato5 = puntoVenditaDAO.findPuntoVenditaById("94cf2121-777e-4d19-add3-485ea6c69461");
-            PuntiVendita puntiVenditaTrovato6 = puntoVenditaDAO.findPuntoVenditaById("aa6e11c8-580f-455d-82d8-a34042f31002");
-            PuntiVendita puntiVenditaTrovato7 = puntoVenditaDAO.findPuntoVenditaById("c0bc0294-3b66-4c77-a192-f9de9447e065");
-            PuntiVendita puntiVenditaTrovato8 = puntoVenditaDAO.findPuntoVenditaById("c237f2da-64e5-40ba-8797-bed89208f91f");
-            PuntiVendita puntiVenditaTrovato9 = puntoVenditaDAO.findPuntoVenditaById("ed898e3e-bece-4c7c-8583-ae8279ee4908");
-            PuntiVendita puntiVenditaTrovato10 = puntoVenditaDAO.findPuntoVenditaById("fe7334b4-b361-4811-b12d-2c6697228c89");
+            PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("03ec6866-a22c-4821-b7af-c7de2edb457d");
+            PuntiVendita puntiVenditaTrovato2 = puntoVenditaDAO.findPuntoVenditaById("14e98ab2-ed01-4688-8600-0819c02b3786");
+            PuntiVendita puntiVenditaTrovato3 = puntoVenditaDAO.findPuntoVenditaById("251a4ec8-414e-45ef-a0ef-5655e8ecd3df");
+            PuntiVendita puntiVenditaTrovato4 = puntoVenditaDAO.findPuntoVenditaById("6876efe5-61d0-401a-90f2-81e7cec6aadc");
+            PuntiVendita puntiVenditaTrovato5 = puntoVenditaDAO.findPuntoVenditaById("85ac4e58-8eba-4069-a57c-e3b310328307");
+            PuntiVendita puntiVenditaTrovato6 = puntoVenditaDAO.findPuntoVenditaById("9f9ab176-5454-44db-947a-5ca57253f316");
+            PuntiVendita puntiVenditaTrovato7 = puntoVenditaDAO.findPuntoVenditaById("aa34b174-687a-4658-ac0f-80706c6cb132");
+            PuntiVendita puntiVenditaTrovato8 = puntoVenditaDAO.findPuntoVenditaById("ab5d61f5-bf2c-45cc-b3b6-35aa6d72d02f");
+            PuntiVendita puntiVenditaTrovato9 = puntoVenditaDAO.findPuntoVenditaById("cb4c8cd5-c68d-45e7-ba37-88fa4917cfc4");
+            PuntiVendita puntiVenditaTrovato10 = puntoVenditaDAO.findPuntoVenditaById("e341bc7d-5907-4416-9b78-0ef886e48983");
 
 
-//            Abbonamento abbonamento1 = new Abbonamento(LocalDate.of(2026, 1, 1), puntiVenditaTrovato1, tesseraTrovata1, Validita.SETTIMANALE);
-//            Abbonamento abbonamento2 = new Abbonamento(LocalDate.of(2025, 1, 1), puntiVenditaTrovato2, tesseraTrovata2, Validita.SETTIMANALE);
-//            Abbonamento abbonamento3 = new Abbonamento(LocalDate.of(2024, 2, 1), puntiVenditaTrovato3, tesseraTrovata3, Validita.MENSILE);
-//            Abbonamento abbonamento4 = new Abbonamento(LocalDate.now(), puntiVenditaTrovato4, tesseraTrovata1, Validita.MENSILE);
-//            Abbonamento abbonamento5 = new Abbonamento(LocalDate.now(), puntiVenditaTrovato5, tesseraTrovata2, Validita.SETTIMANALE);
+            Abbonamento abbonamento1 = new Abbonamento(LocalDate.of(2026, 1, 1), puntiVenditaTrovato1, tesseraTrovata1, Validita.SETTIMANALE);
+            Abbonamento abbonamento2 = new Abbonamento(LocalDate.of(2025, 1, 1), puntiVenditaTrovato2, tesseraTrovata2, Validita.SETTIMANALE);
+            Abbonamento abbonamento3 = new Abbonamento(LocalDate.of(2024, 2, 1), puntiVenditaTrovato3, tesseraTrovata3, Validita.MENSILE);
+            Abbonamento abbonamento4 = new Abbonamento(LocalDate.now(), puntiVenditaTrovato4, tesseraTrovata1, Validita.MENSILE);
+            Abbonamento abbonamento5 = new Abbonamento(LocalDate.now(), puntiVenditaTrovato5, tesseraTrovata2, Validita.SETTIMANALE);
 
-//            Biglietto biglietto1 = new Biglietto(LocalDate.of(2026, 1, 1), puntiVenditaTrovato6, mezzoTrovato1, LocalDate.of(2026, 1, 2));
-//            Biglietto biglietto2 = new Biglietto(LocalDate.of(2024, 1, 1), puntiVenditaTrovato7, mezzoTrovato2, LocalDate.of(2026, 1, 2));
-//            Biglietto biglietto3 = new Biglietto(LocalDate.of(2026, 2, 1), puntiVenditaTrovato8, null, null);
-//            Biglietto biglietto4 = new Biglietto(LocalDate.of(2023, 5, 2), puntiVenditaTrovato9, null, null);
-//            Biglietto biglietto5 = new Biglietto(LocalDate.of(2026, 1, 4), puntiVenditaTrovato10, mezzoTrovato3, LocalDate.now());
-//            Biglietto biglietto6 = new Biglietto(LocalDate.of(2026, 1, 5), puntiVenditaTrovato1, mezzoTrovato1, LocalDate.of(2026, 1, 6));
-//            Biglietto biglietto7 = new Biglietto(LocalDate.of(2026, 1, 7), puntiVenditaTrovato1, mezzoTrovato2, LocalDate.of(2026, 1, 8));
-//            Biglietto biglietto8 = new Biglietto(LocalDate.of(2026, 1, 9), puntiVenditaTrovato3, mezzoTrovato3, LocalDate.of(2026, 1, 10));
-//            Biglietto biglietto9 = new Biglietto(LocalDate.of(2026, 1, 9), puntiVenditaTrovato3, mezzoTrovato1, LocalDate.of(2026, 1, 10));
-//            Biglietto biglietto10 = new Biglietto(LocalDate.of(2026, 1, 9), puntiVenditaTrovato3, mezzoTrovato1, null);
-            Biglietto biglietto11 = new Biglietto(LocalDate.of(2026, 1, 3), puntiVenditaTrovato6);
+            Biglietto biglietto1 = new Biglietto(LocalDate.of(2026, 1, 1), puntiVenditaTrovato6, mezzoTrovato1, LocalDate.of(2026, 1, 2));
+            Biglietto biglietto2 = new Biglietto(LocalDate.of(2024, 1, 1), puntiVenditaTrovato7, mezzoTrovato2, LocalDate.of(2026, 1, 2));
+            Biglietto biglietto3 = new Biglietto(LocalDate.of(2026, 2, 1), puntiVenditaTrovato8, null, null);
+            Biglietto biglietto4 = new Biglietto(LocalDate.of(2023, 5, 2), puntiVenditaTrovato9, null, null);
+            Biglietto biglietto5 = new Biglietto(LocalDate.of(2026, 1, 4), puntiVenditaTrovato10, mezzoTrovato3, LocalDate.now());
 
             Manutenzione manutenzione1 = new Manutenzione(mezzoTrovato1, "Motore", LocalDate.of(2023, 2, 4), LocalDate.of(2023, 3, 3));
             Manutenzione manutenzione2 = new Manutenzione(mezzoTrovato2, "Freni", LocalDate.of(2023, 4, 10), LocalDate.of(2023, 4, 18));
@@ -162,12 +155,7 @@ public class Main1 {
 //            titoloViaggioDAO.save(biglietto3);
 //            titoloViaggioDAO.save(biglietto4);
 //            titoloViaggioDAO.save(biglietto5);
-//            titoloViaggioDAO.save(biglietto6);
-//            titoloViaggioDAO.save(biglietto7);
-//            titoloViaggioDAO.save(biglietto8);
-//            titoloViaggioDAO.save(biglietto9);
-//            titoloViaggioDAO.save(biglietto10);
-
+//
 //            manutenzioneDAO.save(manutenzione1);
 //            manutenzioneDAO.save(manutenzione2);
 //            manutenzioneDAO.save(manutenzione3);
@@ -194,18 +182,18 @@ public class Main1 {
 
         try {
 
-            Mezzo mezzoTrovato1 = mezzoDAO.findMezzoById("002235fa-4404-4a36-9e7e-22f688652a80");
-            Mezzo mezzoTrovato2 = mezzoDAO.findMezzoById("5d738645-44ec-4c51-ae3a-593083bf8b1c");
-            Mezzo mezzoTrovato3 = mezzoDAO.findMezzoById("746b25c8-7977-4ec4-8e53-6b0c51002177");
-            Mezzo mezzoTrovato4 = mezzoDAO.findMezzoById("af8c3e86-dd1c-47a1-b27f-f4a028029904");
-            Mezzo mezzoTrovato5 = mezzoDAO.findMezzoById("f4461536-00f1-4342-bd14-309218ec99a4");
+            Mezzo mezzoTrovato1 = mezzoDAO.findMezzoById("00dbc6df-ca26-40de-a2ab-0af2e462aaff");
+            Mezzo mezzoTrovato2 = mezzoDAO.findMezzoById("098779bb-d032-4adb-817e-8bd6a617f6c3");
+            Mezzo mezzoTrovato3 = mezzoDAO.findMezzoById("2c50d14e-3c36-4ac2-a4c5-9bb379434a1a");
+            Mezzo mezzoTrovato4 = mezzoDAO.findMezzoById("7e3d2c18-5f4a-4340-884b-536879d62f8c");
+            Mezzo mezzoTrovato5 = mezzoDAO.findMezzoById("8dffc9cb-9d02-4d59-a26e-54a30d8124e6");
 
 
-            Tratta trattaTrovata1 = trattaDAO.findById("24a724ab-e4ab-41e7-b17f-7d366effe9bb");
-            Tratta trattaTrovata2 = trattaDAO.findById("6c7c9f26-8d38-4d17-939f-d5c9020e463d");
-            Tratta trattaTrovata3 = trattaDAO.findById("6e1a5862-8238-48f1-bfe9-bf87638718b5");
-            Tratta trattaTrovata4 = trattaDAO.findById("deba4fdf-7bcf-475c-9589-7d12dc4c55c6");
-            Tratta trattaTrovata5 = trattaDAO.findById("fecb07ba-3813-43ae-a3d3-042093449f00");
+            Tratta trattaTrovata1 = trattaDAO.findById("657afc13-3735-474b-a025-70b743ccad24");
+            Tratta trattaTrovata2 = trattaDAO.findById("a20d5bc2-3f9c-49f6-9c90-bc91ef6e71d8");
+            Tratta trattaTrovata3 = trattaDAO.findById("b5cf0553-6772-48e0-9d90-ffe6485148c1");
+            Tratta trattaTrovata4 = trattaDAO.findById("e7be991a-1298-4502-aa3b-0ddc16a8438b");
+            Tratta trattaTrovata5 = trattaDAO.findById("f3290fba-6503-4267-a103-e0afddd14c13");
 
 
             StoricoPercorsi storico1 = new StoricoPercorsi(40, trattaTrovata1, mezzoTrovato1);
@@ -234,20 +222,10 @@ public class Main1 {
             System.out.println(ex.getMessage());
         }
 
-        //checkIfSubscriptionIsValid
 
-        /*boolean isNotValid = titoloViaggioDAO.checkIfSubscriptionIsValid("dacc58e8-3579-4de4-8524-88df4447da0c", "b166d6df-b34c-4864-8ce7-a7a814a77fff");
-        System.out.println(isNotValid);
-        boolean isValid = titoloViaggioDAO.checkIfSubscriptionIsValid("2fc6f395-a71d-4f22-98ca-0322dbf9aff5", "2c9d3509-46cd-4201-9127-e278905c135f");
-        System.out.println(isValid);*/
+        storicoPercorsiDAO.findPercorsiByMezzoId("7e3d2c18-5f4a-4340-884b-536879d62fc").forEach(storicoPercorsi -> System.out.println(storicoPercorsi));
 
-        //Niccolò esempio
-        //List<TitoloViaggio>titoliViaggiEmessi = titoloViaggioDAO.tracciaTitoliEmessi("023d460a-6753-41d0-8fe0-36414f91b077", LocalDate.of(2024,1,1),LocalDate.now());
-
-        //System.out.println(titoliViaggiEmessi);
-
-        long totBigliettiVidimati = titoloViaggioDAO.bigliettiVidimatiMezzo("002235fa-4404-4a36-9e7e-22f688652a80");
-        System.out.println(totBigliettiVidimati);
+        System.out.println(storicoPercorsiDAO.getMediaTrattaByMezzoId("7e3d2c18-5f4a-4340-884b-536879d62f8c","e7be991a-1298-4502-aa3b-0ddc16a8438b"));
 
         entityManager.close();
         emf.close();
