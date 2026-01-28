@@ -1,13 +1,12 @@
 package giada_tonni;
 
 import giada_tonni.DAO.*;
-import giada_tonni.entities.DistributoriAutomatici;
-import giada_tonni.entities.Negozi;
-import giada_tonni.entities.PuntiVendita;
-import giada_tonni.entities.StatoDistributori;
+import giada_tonni.entities.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+
+import java.time.LocalDate;
 
 public class Main1 {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("buildweek4pu");
@@ -132,7 +131,7 @@ public class Main1 {
             Abbonamento abbonamento4 = new Abbonamento(LocalDate.now(), puntiVenditaTrovato4, tesseraTrovata1, Validita.MENSILE);
             Abbonamento abbonamento5 = new Abbonamento(LocalDate.now(), puntiVenditaTrovato5, tesseraTrovata2, Validita.SETTIMANALE);
 
-            Biglietto biglietto1 = new Biglietto(LocalDate.of(2026, 1, 1), puntiVenditaTrovato6, mezzoTrovato1, LocalDate.of(2026, 1, 2));
+          /*  Biglietto biglietto1 = new Biglietto(LocalDate.of(2026, 1, 1), puntiVenditaTrovato6, mezzoTrovato1, LocalDate.of(2026, 1, 2));
             Biglietto biglietto2 = new Biglietto(LocalDate.of(2024, 1, 1), puntiVenditaTrovato7, mezzoTrovato2, LocalDate.of(2026, 1, 2));
             Biglietto biglietto3 = new Biglietto(LocalDate.of(2026, 2, 1), puntiVenditaTrovato8, null, null);
             Biglietto biglietto4 = new Biglietto(LocalDate.of(2023, 5, 2), puntiVenditaTrovato9, null, null);
@@ -221,6 +220,13 @@ public class Main1 {
         } catch (NotFoundException ex) {
             System.out.println(ex.getMessage());
         }*/
+
+        //checkIfSubscriptionIsValid
+
+        boolean isNotValid = titoloViaggioDAO.checkIfSubscriptionIsValid("dacc58e8-3579-4de4-8524-88df4447da0c", "b166d6df-b34c-4864-8ce7-a7a814a77fff");
+        System.out.println(isNotValid);
+        boolean isValid = titoloViaggioDAO.checkIfSubscriptionIsValid("2fc6f395-a71d-4f22-98ca-0322dbf9aff5", "2c9d3509-46cd-4201-9127-e278905c135f");
+        System.out.println(isValid);
 
 
         entityManager.close();
