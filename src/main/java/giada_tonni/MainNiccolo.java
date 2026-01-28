@@ -11,7 +11,7 @@ import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
 
-public class Application {
+public class MainNiccolo {
 
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("buildweek4pu");
 
@@ -31,7 +31,7 @@ public class Application {
         StoricoPercorsiDAO storicoPercorsiDAO = new StoricoPercorsiDAO(entityManager);
 
         // *********************************** PUNTI VENDITA
-       /* Negozi negozio1 = new Negozi("Tabaccheria", "Piazza Garibaldi 10");
+        Negozi negozio1 = new Negozi("Tabaccheria", "Piazza Garibaldi 10");
         Negozi negozio2 = new Negozi("Edicola", "Via Nazionale 45");
         Negozi negozio3 = new Negozi("Cartoleria", "Corso Vittorio Emanuele 12");
         Negozi negozio4 = new Negozi("Minimarket", "Via del Corso 88");
@@ -55,11 +55,11 @@ public class Application {
 
         // *********************************** MEZZI
 
-        /*Mezzo mezzo1 = new Mezzo(80, TipoMezzo.AUTOBUS);
+        Mezzo mezzo1 = new Mezzo(80, TipoMezzo.AUTOBUS);
         Mezzo mezzo2 = new Mezzo(120, TipoMezzo.AUTOBUS);
         Mezzo mezzo3 = new Mezzo(200, TipoMezzo.TRAM);
         Mezzo mezzo4 = new Mezzo(60, TipoMezzo.TRAM);
-        Mezzo mezzo5 = new Mezzo(75, TipoMezzo.AUTOBUS);/*
+        Mezzo mezzo5 = new Mezzo(75, TipoMezzo.AUTOBUS);
 
         /*mezzoDAO.save(mezzo1);
         mezzoDAO.save(mezzo2);
@@ -69,7 +69,7 @@ public class Application {
 
         // *********************************** UTENTI
 
-       /* Utenti utente1 = new Utenti("Luca", "Bianchi", LocalDate.of(1995, 3, 12));
+        Utenti utente1 = new Utenti("Luca", "Bianchi", LocalDate.of(1995, 3, 12));
         Utenti utente2 = new Utenti("Martina", "Rossi", LocalDate.of(1998, 11, 5));
         Utenti utente3 = new Utenti("Alessandro", "Ferrari", LocalDate.of(2001, 6, 24));
         Utenti utente4 = new Utenti("Giulia", "Conti", LocalDate.of(1993, 9, 18));
@@ -167,7 +167,7 @@ public class Application {
 
         // *********************************** TRATTE
 
-       /* Tratta tratta1 = new Tratta("Roma Tiburtina", "Monte Rotondo", 30);
+        Tratta tratta1 = new Tratta("Roma Tiburtina", "Monte Rotondo", 30);
         Tratta tratta2 = new Tratta("Roma Termini", "Fiumicino Aeroporto", 45);
         Tratta tratta3 = new Tratta("Roma Ostiense", "Pomezia", 40);
         Tratta tratta4 = new Tratta("Roma Tiburtina", "Guidonia", 25);
