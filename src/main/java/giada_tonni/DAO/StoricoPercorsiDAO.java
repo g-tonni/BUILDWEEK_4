@@ -2,11 +2,9 @@ package giada_tonni.DAO;
 
 import giada_tonni.entities.StoricoPercorsi;
 import giada_tonni.exceptions.NotFoundException;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.Query;
+import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 public class StoricoPercorsiDAO {
@@ -51,4 +49,12 @@ public class StoricoPercorsiDAO {
             throw new NotFoundException("Lo Storico Percorsi con id " + storicoPercorsiId + " non è stato trovato");
         }
     }
+
+    public List<StoricoPercorsi> findPercorsiByMezzoId(String mezzoId) {
+        UUID mezzoUuid = UUID.fromString(mezzoId);
+        TypedQuery<StoricoPercorsi> query = entityManager.createQuery("SELECT p FROM StoricoPercorsi p WHERE p.mezzo.id = :mezzoId", StoricoPercorsi.class);
+        query.setParameter("mezzoId", mezzoUuid);
+        return query.getResultList();
+    }
 }
+
