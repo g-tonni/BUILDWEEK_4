@@ -2,9 +2,12 @@ package giada_tonni;
 
 
 import giada_tonni.DAO.*;
+import giada_tonni.entities.Validita;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+
+import java.util.Scanner;
 
 public class Application {
 
@@ -14,7 +17,9 @@ public class Application {
 
         EntityManager entityManager = emf.createEntityManager();
 
-        System.out.println("Ciao");
+        Scanner scanner = new Scanner(System.in);
+
+        // System.out.println("Ciao");
 
         PuntiVenditaDAO puntoVenditaDAO = new PuntiVenditaDAO(entityManager);
         MezzoDAO mezzoDAO = new MezzoDAO(entityManager);
@@ -236,7 +241,142 @@ PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502
         System.out.println(numBigliettiPeriodo);*/
 
 
+        System.out.println("Seleziona 1 se sei un Utente o 2 se sei un Amministratore: ");
+        int num = Integer.parseInt(scanner.nextLine());
+        // PRIMA SCELTA
+        switch (num) {
+            case 1: {
+                while (true) {
+                    int num2 = Integer.parseInt(scanner.nextLine());
+                    if (num2 == 0) break;
+                    // SCELTA OPERAZIONI UTENTE
+                    switch (num2) {
+                        case 1: {
+                            // SCELTA PUNTO ACQUISTO, CON ACQUISTO BIGLETTO O ABBONAMENTO
+                            System.out.println("Scegli 1 per acquistare da un rivenditore, 2 da un distributore: ");
+                            int num3 = Integer.parseInt(scanner.nextLine());
+                            switch (num3) {
+                                case 1: {
+                                    // RECUPERA ELENCO RIVENDITORI
+
+                                    System.out.println("Scegli 1 per acquistare un biglietto, 2 un abbonamento: ");
+                                    int num4 = Integer.parseInt(scanner.nextLine());
+                                    switch (num4) {
+                                        case 1: {
+                                            // ACQUISTA BIGLIETTO (UTILIZZARE COSTRUTTORE SENZA DATA ACQUISTO)
+
+                                        }
+                                        case 2: {
+                                            // ACQUISTA ABBONAMENTO (UTILIZZARE COSTRUTTORE SENZA DATA ACQUISTO)
+                                            System.out.println("Inserisci numero tessera: ");
+                                            // FARE IL TESSERA.FINDBYID CON NUMERO TESSERA INSERITO
+                                            // SE ID NON VALIDO MESSAGGIO DI ERRORE ( TRY CATCH )
+                                            // SE ID E' VALIDO MA LA TESSERA E' SCADUTA ( CONFRONTO DATA SCADENZA TESSERA CON DATA DI OGGI )
+                                            // SE TUTTO VA BENE FACCIO SCEGLIERE SE ABBONAMENTO MENSILE O SETTIMANALE
+                                            System.out.println("Scegli 1 per un abbonamento settimanale, 2 un abbonamento mensile: ");
+                                            int num5 = Integer.parseInt(scanner.nextLine());
+                                            Validita validita;
+                                            switch (num5) {
+                                                case 1: {
+                                                    // ABBONAMENTO SETTIMANALE
+                                                    validita = Validita.SETTIMANALE;
+                                                }
+                                                case 2: {
+                                                    // ABBONAMENTO MENSILE
+                                                    validita = Validita.MENSILE;
+
+                                                }
+                                                default: {
+                                                    System.out.println("Valore inserito non valido");
+                                                }
+                                            }
+                                            // Abbonamento abbonamento = ecc....
+                                            // titoloViaggioDao.save(abbonamento)
+                                            // System.out.println("Abbonamento acquistato!");
+                                        }
+                                        default: {
+                                            System.out.println("Valore inserito non valido");
+                                        }
+                                    }
+
+
+                                }
+                                case 2: {
+                                    // RECUPERA ELENCO DISTRIBUTORI ( ACQUISTO UGUALE A ELENCO RIVENDITORI )
+
+                                }
+                                default: {
+                                    System.out.println("Valore inserito non valido");
+                                }
+
+                            }
+
+                        }
+                        case 2: {
+                            // RINNOVARE TESSERE ( CREARNE UNA NUOVA CON COSTRUTTORE SENZA DATA EMISSIONE )
+
+                        }
+                        case 3: {
+                            // VERIFICA VALIDITA' ABBONAMENTO TRAMITE TESSERA ( METODO PRONTO CHIAMATO  checkIfSubscriptionIsValid )
+
+                        }
+                        case 4: {
+                            // VIDIMARE BIGLIETTO ( METODO GIA' PRONTO CHIAMATO timbraBiglietto );
+
+                        }
+                        default: {
+                            System.out.println("Valore inserito non valido");
+                            continue;
+                        }
+                    }
+                }
+            }
+            case 2: {
+                while (true) {
+                    int num2 = Integer.parseInt(scanner.nextLine());
+                    if (num2 == 0) break;
+                    // SCELTA OPERAZIONI AMMINISTRATORE
+                    switch (num2) {
+                        case 1: {
+
+                        }
+                        case 2: {
+
+                        }
+                        case 3: {
+
+                        }
+                        case 4: {
+
+                        }
+                        case 5: {
+
+                        }
+                        case 6: {
+
+                        }
+                        case 7: {
+
+                        }
+                        case 8: {
+
+                        }
+                        default: {
+                            System.out.println("Valore inserito non valido");
+                            continue;
+                        }
+                    }
+                }
+            }
+            default: {
+                System.out.println("Valore inserito non valido");
+            }
+        }
+
+
         entityManager.close();
         emf.close();
     }
+
+
 }
