@@ -95,7 +95,7 @@ public class TitoloViaggioDAO {
 
 
     // VIDIMARE BIGLIETTO
-    public void timbraBiglietto(String mezzoId, String bigliettoId) {
+    public void timbraBiglietto(String mezzoId, String bigliettoId) throws NotFoundException {
         try {
             LocalDate oggi = LocalDate.now();
             EntityTransaction transaction = em.getTransaction();
@@ -113,15 +113,19 @@ public class TitoloViaggioDAO {
             System.out.println("Biglietto vidimato");
         } catch (NotFoundException ex) {
             throw new NotFoundException("Biglietto non timbrato");
+        } catch (IllegalArgumentException ex) {
+            throw new NotFoundException("Biglietto non timbrato");
         }
     }
 
     // NUMERO BILIETTI VIDIMATI DATO UN PERIODO
-    public long numeroBigliettiTimbratiPeriodo(LocalDate dataInizio, LocalDate dataFine) {
-        return em.createQuery("SELECT COUNT(b) FROM Biglietto b WHERE b.dataTimbratura IS NOT NULL AND b.dataTimbratura >= :dataInizio AND b.dataTimbratura <= :dataFine", Long.class)
+    public long numeroBigliettiTimbratiPeriodo(LocalDate dataInizio, LocalDate dataFine) throws NotFoundException {
+        long numero = em.createQuery("SELECT COUNT(b) FROM Biglietto b WHERE b.dataTimbratura IS NOT NULL AND b.dataTimbratura >= :dataInizio AND b.dataTimbratura <= :dataFine", Long.class)
                 .setParameter("dataInizio", dataInizio)
                 .setParameter("dataFine", dataFine)
                 .getSingleResult();
+        if (numero == 0) throw new NotFoundException("Non ci sono biglitti vidimati per il periodo selezionato");
+        else return numero;
     }
 
     // DELETE
