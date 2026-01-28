@@ -3,8 +3,6 @@ package giada_tonni;
 
 import giada_tonni.DAO.*;
 import giada_tonni.entities.*;
-import giada_tonni.exceptions.NotFoundException;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -104,7 +102,8 @@ public class Main2 {
 
         /*try {
 
-           */ Mezzo mezzoTrovato1 = mezzoDAO.findMezzoById("2996a4ad-e372-4195-b3a8-1cd4d7546c37");
+         */
+        Mezzo mezzoTrovato1 = mezzoDAO.findMezzoById("2996a4ad-e372-4195-b3a8-1cd4d7546c37");
         Mezzo mezzoTrovato2 = mezzoDAO.findMezzoById("5bf97559-e84b-4c23-b936-a38c142447ad");
         Mezzo mezzoTrovato3 = mezzoDAO.findMezzoById("73acbcdf-a753-4d0c-831e-83c2e5e6a79c");
         Mezzo mezzoTrovato4 = mezzoDAO.findMezzoById("9586c0e6-6ef0-4a1a-84cd-28c5baba14cc");
@@ -115,7 +114,8 @@ public class Main2 {
             TesseraUtente tesseraTrovata2 = tessereDAO.findTesseraById("2d593347-09a8-4cff-ba56-3139790b8483");
             TesseraUtente tesseraTrovata3 = tessereDAO.findTesseraById("5ad127b9-46e6-4e1f-982e-d805e034cb2c");
 
-            */PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("023d460a-6753-41d0-8fe0-36414f91b077");
+            */
+        PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("023d460a-6753-41d0-8fe0-36414f91b077");
         PuntiVendita puntiVenditaTrovato2 = puntoVenditaDAO.findPuntoVenditaById("18f1eb3c-f19b-4717-a46b-744ef3b75a44");
         PuntiVendita puntiVenditaTrovato3 = puntoVenditaDAO.findPuntoVenditaById("1d0a6b98-4fee-4d05-99dc-e557ae0d7237");
         PuntiVendita puntiVenditaTrovato4 = puntoVenditaDAO.findPuntoVenditaById("32503268-29f3-4485-9d82-0bf0ef3e5d43");
@@ -138,14 +138,14 @@ public class Main2 {
             Biglietto biglietto4 = new Biglietto(LocalDate.of(2023, 5, 2), puntiVenditaTrovato9, null, null);
             Biglietto biglietto5 = new Biglietto(LocalDate.of(2026, 1, 4), puntiVenditaTrovato10, mezzoTrovato3, LocalDate.now());
             */
-        Biglietto biglietto6 = new Biglietto(LocalDate.of(2026, 1, 1), puntiVenditaTrovato6, mezzoTrovato1, LocalDate.of(2026, 1, 2));
+/*        Biglietto biglietto6 = new Biglietto(LocalDate.of(2026, 1, 1), puntiVenditaTrovato6, mezzoTrovato1, LocalDate.of(2026, 1, 2));
         Biglietto biglietto7 = new Biglietto(LocalDate.of(2026, 1, 1), puntiVenditaTrovato3, mezzoTrovato1, LocalDate.of(2026, 1, 2));
         Biglietto biglietto8 = new Biglietto(LocalDate.of(2026, 1, 1), puntiVenditaTrovato2, mezzoTrovato1, LocalDate.of(2026, 1, 2));
         Biglietto biglietto9 = new Biglietto(LocalDate.of(2026, 1, 1), puntiVenditaTrovato2, mezzoTrovato1, LocalDate.of(2026, 1, 2));
         titoloViaggioDAO.save(biglietto6);
         titoloViaggioDAO.save(biglietto7);
         titoloViaggioDAO.save(biglietto8);
-        titoloViaggioDAO.save(biglietto9);
+        titoloViaggioDAO.save(biglietto9);*/
         /*
 
 
