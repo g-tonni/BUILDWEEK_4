@@ -2,9 +2,7 @@ package giada_tonni;
 
 
 import giada_tonni.DAO.*;
-import giada_tonni.entities.*;
 import giada_tonni.exceptions.NotFoundException;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -223,6 +221,22 @@ PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502
         } catch (NotFoundException ex) {
             System.out.println(ex.getMessage());
         }*/
+
+        try {
+            Double mediaPercorrenzaEffettiva = storicoPercorsiDAO.getMediaTrattaByMezzoId("b20bb331-58b9-471c-b080-ef5bdb4d48c3", "ca209083-7038-4243-a6ca-73b62ed1841e");
+            System.out.println(mediaPercorrenzaEffettiva);
+            boolean valid = titoloViaggioDAO.checkIfSubscriptionIsValid("5ad127b9-46e6-4e1f-982e-d805e034cb2c", "3962923b-2147-4fcd-bad6-1d03f871bab5");
+            System.out.println("VALIDITA " + valid);
+            long bigliettiVidimati = titoloViaggioDAO.bigliettiVidimatiMezzo("8fb0c1dc-513f-417e-b55a-500b508eeb4e");
+            System.out.println("BIGLIETTI TIMBRATI " + bigliettiVidimati);
+        } catch (NotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+
+        titoloViaggioDAO.timbraBiglietto("8fb0c1dc-513f-417e-b55a-500b508eeb4e", "8c9e86a5-0d72-48f5-b418-7322a5ed4708");
+        long numBigliettiPeriodo = titoloViaggioDAO.numeroBigliettiTimbratiPeriodo(LocalDate.of(2024, 1, 1), LocalDate.now());
+        System.out.println(numBigliettiPeriodo);
 
 
         entityManager.close();

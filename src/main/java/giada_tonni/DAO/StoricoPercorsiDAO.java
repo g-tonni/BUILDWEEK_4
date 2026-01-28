@@ -57,16 +57,18 @@ public class StoricoPercorsiDAO {
         return query.getResultList();
     }
 
-    public Double getMediaTrattaByMezzoId(String mezzoId,String trattaId) {
-        UUID mezzoUuid = UUID.fromString(mezzoId);
-        UUID trattaUuid = UUID.fromString(trattaId);
+    public Double getMediaTrattaByMezzoId(String mezzoId, String trattaId) throws NotFoundException {
+        try {
+            Double media = entityManager.createQuery("SELECT AVG(p.tempoEffettivo) FROM StoricoPercorsi p WHERE p.mezzo.id = :mezzoId AND p.tratta.trattaId = :trattaId", Double.class)
+                    .setParameter("mezzoId", UUID.fromString(mezzoId))
+                    .setParameter("trattaId", UUID.fromString(trattaId))
+                    .getSingleResult();
+            if (media == null) throw new NotFoundException("Id inserito non valido");
 
-        Double media = entityManager.createQuery("SELECT AVG(p.tempoEffettivo) FROM StoricoPercorsi p WHERE p.mezzo.id = :mezzoId AND p.tratta.trattaId = :trattaId",Double.class)
-                .setParameter("mezzoId",mezzoUuid)
-                .setParameter("trattaId", trattaUuid)
-                .getSingleResult();
-
-        return media;
+            return media;
+        } catch (IllegalArgumentException ex) {
+            throw new NotFoundException("Id non valido");
+        }
     }
 }
 
