@@ -144,7 +144,7 @@ public class MainA {
            // Biglietto biglietto5 = new Biglietto(LocalDate.of(2026, 1, 4), puntiVenditaTrovato10, mezzoTrovato3, LocalDate.now());
 
 
-//MANUTENZIONI        
+//MANUTENZIONI
             Manutenzione manutenzione1 = new Manutenzione(mezzoTrovato1, "Motore", LocalDate.of(2023, 2, 4), LocalDate.of(2023, 3, 3));
             Manutenzione manutenzione2 = new Manutenzione(mezzoTrovato2, "Freni", LocalDate.of(2023, 4, 10), LocalDate.of(2023, 4, 18));
             Manutenzione manutenzione3 = new Manutenzione(mezzoTrovato3, "Impianto elettrico", LocalDate.of(2023, 6, 1), LocalDate.of(2023, 6, 12));
@@ -162,12 +162,14 @@ public class MainA {
            // titoloViaggioDAO.save(biglietto3);
            // titoloViaggioDAO.save(biglietto4);
            // titoloViaggioDAO.save(biglietto5);
-//
-            manutenzioneDAO.save(manutenzione1);
-            manutenzioneDAO.save(manutenzione2);
-            manutenzioneDAO.save(manutenzione3);
-            manutenzioneDAO.save(manutenzione4);
-            manutenzioneDAO.save(manutenzione5);
+        
+// SAVE MANUTENZIONI
+
+           //  manutenzioneDAO.save(manutenzione1);
+          //  manutenzioneDAO.save(manutenzione2);
+          //  manutenzioneDAO.save(manutenzione3);
+          //  manutenzioneDAO.save(manutenzione4);
+          //  manutenzioneDAO.save(manutenzione5);
 
       // } catch (NotFoundException ex) {
       //     System.out.println(ex.getMessage());
