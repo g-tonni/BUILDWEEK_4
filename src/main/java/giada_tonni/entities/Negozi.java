@@ -40,4 +40,12 @@ public class Negozi extends PuntiVendita {
     public void setStatoNegozio(StatoNegozio statoNegozio) {
         this.statoNegozio = statoNegozio;
     }
+
+    @Override
+    public String toString() {
+        return "Negozi{" +
+                "titolo='" + titolo + '\'' +
+                ", statoNegozio=" + statoNegozio +
+                '}';
+    }
 }

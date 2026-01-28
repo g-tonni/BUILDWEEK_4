@@ -1,18 +1,15 @@
 package giada_tonni;
 
-
 import giada_tonni.DAO.*;
 import giada_tonni.entities.*;
-import giada_tonni.exceptions.NotFoundException;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
+import java.util.List;
 
-public class Application {
-
+public class Main1 {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("buildweek4pu");
 
     public static void main(String[] args) {
@@ -84,9 +81,9 @@ public class Application {
         // *********************************** TESSERE
 
        /* try {
-           Utenti utenteTrovato1 = utentiDAO.findUtenteById("01020d11-1af5-4843-8fce-08f45646b69e");
-            Utenti utenteTrovato2 = utentiDAO.findUtenteById("1f229ca4-1b7c-49b6-9950-d10106034476");
-            Utenti utenteTrovato3 = utentiDAO.findUtenteById("75015b8a-6216-4ff8-9cff-a1e5b1cd8c54");
+            Utenti utenteTrovato1 = utentiDAO.findUtenteById("0800dede-85d9-4ded-ad48-b43d0c16e173");
+            Utenti utenteTrovato2 = utentiDAO.findUtenteById("786e3404-9842-437f-89ae-5151f205ff38");
+            Utenti utenteTrovato3 = utentiDAO.findUtenteById("ae3878ef-c9a2-40fb-9e23-d15a0c3d39b7");
 
 
             TesseraUtente tessera1 = new TesseraUtente(LocalDate.of(2025, 4, 1), utenteTrovato1);
@@ -105,27 +102,28 @@ public class Application {
 
        /* try {
 
-           Mezzo mezzoTrovato1 = mezzoDAO.findMezzoById("8fb0c1dc-513f-417e-b55a-500b508eeb4e");
-            Mezzo mezzoTrovato2 = mezzoDAO.findMezzoById("b20bb331-58b9-471c-b080-ef5bdb4d48c3");
-            Mezzo mezzoTrovato3 = mezzoDAO.findMezzoById("d80a47f2-8b97-4d2d-a471-e492bb96095a");
-            Mezzo mezzoTrovato4 = mezzoDAO.findMezzoById("e3be4909-f576-4cc7-ace6-f150581369c8");
-            Mezzo mezzoTrovato5 = mezzoDAO.findMezzoById("f2fa7b13-86b1-43a3-87c6-e503e419197f");
+            Mezzo mezzoTrovato1 = mezzoDAO.findMezzoById("002235fa-4404-4a36-9e7e-22f688652a80");
+            Mezzo mezzoTrovato2 = mezzoDAO.findMezzoById("5d738645-44ec-4c51-ae3a-593083bf8b1c");
+            Mezzo mezzoTrovato3 = mezzoDAO.findMezzoById("746b25c8-7977-4ec4-8e53-6b0c51002177");
+            Mezzo mezzoTrovato4 = mezzoDAO.findMezzoById("af8c3e86-dd1c-47a1-b27f-f4a028029904");
+            Mezzo mezzoTrovato5 = mezzoDAO.findMezzoById("f4461536-00f1-4342-bd14-309218ec99a4");
 
 
-           TesseraUtente tesseraTrovata1 = tessereDAO.findTesseraById("12cd8164-2b97-4f24-8b38-8ea0689d612d");
-            TesseraUtente tesseraTrovata2 = tessereDAO.findTesseraById("2d593347-09a8-4cff-ba56-3139790b8483");
-            TesseraUtente tesseraTrovata3 = tessereDAO.findTesseraById("5ad127b9-46e6-4e1f-982e-d805e034cb2c");
+            TesseraUtente tesseraTrovata1 = tessereDAO.findTesseraById("2fc6f395-a71d-4f22-98ca-0322dbf9aff5");
+            TesseraUtente tesseraTrovata2 = tessereDAO.findTesseraById("495b8508-8dd9-4f26-93f8-113ec0363023");
+            TesseraUtente tesseraTrovata3 = tessereDAO.findTesseraById("dacc58e8-3579-4de4-8524-88df4447da0c");
 
-PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502b6-a3d8-4e7a-b283-d17da62766f9");
-            PuntiVendita puntiVenditaTrovato2 = puntoVenditaDAO.findPuntoVenditaById("3bf3a1a8-4931-4dc7-b4b7-96b051037f08");
-            PuntiVendita puntiVenditaTrovato3 = puntoVenditaDAO.findPuntoVenditaById("3d8c198f-a606-4e22-aced-79d60ac3ac74");
-            PuntiVendita puntiVenditaTrovato4 = puntoVenditaDAO.findPuntoVenditaById("57367e7f-60f2-4b5c-94ec-b8480fc35279");
-            PuntiVendita puntiVenditaTrovato5 = puntoVenditaDAO.findPuntoVenditaById("81fcec6d-00c9-4e9d-9f98-2e9bc0cb8213");
-            PuntiVendita puntiVenditaTrovato6 = puntoVenditaDAO.findPuntoVenditaById("9e34409f-4daa-4cf6-9973-1e4c2c155c0b");
-            PuntiVendita puntiVenditaTrovato7 = puntoVenditaDAO.findPuntoVenditaById("b3fa4e58-06a4-4fdc-a4a7-f976dde81d5a");
-            PuntiVendita puntiVenditaTrovato8 = puntoVenditaDAO.findPuntoVenditaById("cafb0c13-a8b2-4b12-b8bb-34c6ee542a1d");
-            PuntiVendita puntiVenditaTrovato9 = puntoVenditaDAO.findPuntoVenditaById("cd38d081-9369-44cf-aa19-c6959fe4c53f");
-            PuntiVendita puntiVenditaTrovato10 = puntoVenditaDAO.findPuntoVenditaById("fc893026-4536-4741-853f-e4aaa9890bb8");
+
+            PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("4e37fed0-3639-4c6f-964b-4848be862c83");
+            PuntiVendita puntiVenditaTrovato2 = puntoVenditaDAO.findPuntoVenditaById("5a5a121f-4e61-4361-a296-4333882fb44f");
+            PuntiVendita puntiVenditaTrovato3 = puntoVenditaDAO.findPuntoVenditaById("730db7ee-7e21-4641-8e99-692ac87ed489");
+            PuntiVendita puntiVenditaTrovato4 = puntoVenditaDAO.findPuntoVenditaById("7ba73ecd-cd02-4ce8-978e-3da26b1c92f2");
+            PuntiVendita puntiVenditaTrovato5 = puntoVenditaDAO.findPuntoVenditaById("94cf2121-777e-4d19-add3-485ea6c69461");
+            PuntiVendita puntiVenditaTrovato6 = puntoVenditaDAO.findPuntoVenditaById("aa6e11c8-580f-455d-82d8-a34042f31002");
+            PuntiVendita puntiVenditaTrovato7 = puntoVenditaDAO.findPuntoVenditaById("c0bc0294-3b66-4c77-a192-f9de9447e065");
+            PuntiVendita puntiVenditaTrovato8 = puntoVenditaDAO.findPuntoVenditaById("c237f2da-64e5-40ba-8797-bed89208f91f");
+            PuntiVendita puntiVenditaTrovato9 = puntoVenditaDAO.findPuntoVenditaById("ed898e3e-bece-4c7c-8583-ae8279ee4908");
+            PuntiVendita puntiVenditaTrovato10 = puntoVenditaDAO.findPuntoVenditaById("fe7334b4-b361-4811-b12d-2c6697228c89");
 
 
             Abbonamento abbonamento1 = new Abbonamento(LocalDate.of(2026, 1, 1), puntiVenditaTrovato1, tesseraTrovata1, Validita.SETTIMANALE);
@@ -134,7 +132,7 @@ PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502
             Abbonamento abbonamento4 = new Abbonamento(LocalDate.now(), puntiVenditaTrovato4, tesseraTrovata1, Validita.MENSILE);
             Abbonamento abbonamento5 = new Abbonamento(LocalDate.now(), puntiVenditaTrovato5, tesseraTrovata2, Validita.SETTIMANALE);
 
-            Biglietto biglietto1 = new Biglietto(LocalDate.of(2026, 1, 1), puntiVenditaTrovato6, mezzoTrovato1, LocalDate.of(2026, 1, 2));
+          /*  Biglietto biglietto1 = new Biglietto(LocalDate.of(2026, 1, 1), puntiVenditaTrovato6, mezzoTrovato1, LocalDate.of(2026, 1, 2));
             Biglietto biglietto2 = new Biglietto(LocalDate.of(2024, 1, 1), puntiVenditaTrovato7, mezzoTrovato2, LocalDate.of(2026, 1, 2));
             Biglietto biglietto3 = new Biglietto(LocalDate.of(2026, 2, 1), puntiVenditaTrovato8, null, null);
             Biglietto biglietto4 = new Biglietto(LocalDate.of(2023, 5, 2), puntiVenditaTrovato9, null, null);
@@ -184,18 +182,18 @@ PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502
 
        /* try {
 
-           Mezzo mezzoTrovato1 = mezzoDAO.findMezzoById("8fb0c1dc-513f-417e-b55a-500b508eeb4e");
-            Mezzo mezzoTrovato2 = mezzoDAO.findMezzoById("b20bb331-58b9-471c-b080-ef5bdb4d48c3");
-            Mezzo mezzoTrovato3 = mezzoDAO.findMezzoById("d80a47f2-8b97-4d2d-a471-e492bb96095a");
-            Mezzo mezzoTrovato4 = mezzoDAO.findMezzoById("e3be4909-f576-4cc7-ace6-f150581369c8");
-            Mezzo mezzoTrovato5 = mezzoDAO.findMezzoById("f2fa7b13-86b1-43a3-87c6-e503e419197f");
+            Mezzo mezzoTrovato1 = mezzoDAO.findMezzoById("002235fa-4404-4a36-9e7e-22f688652a80");
+            Mezzo mezzoTrovato2 = mezzoDAO.findMezzoById("5d738645-44ec-4c51-ae3a-593083bf8b1c");
+            Mezzo mezzoTrovato3 = mezzoDAO.findMezzoById("746b25c8-7977-4ec4-8e53-6b0c51002177");
+            Mezzo mezzoTrovato4 = mezzoDAO.findMezzoById("af8c3e86-dd1c-47a1-b27f-f4a028029904");
+            Mezzo mezzoTrovato5 = mezzoDAO.findMezzoById("f4461536-00f1-4342-bd14-309218ec99a4");
 
 
-   Tratta trattaTrovata1 = trattaDAO.findById("0aa26faf-97bf-4521-b0f4-962ed62294f1");
-            Tratta trattaTrovata2 = trattaDAO.findById("ca209083-7038-4243-a6ca-73b62ed1841e");
-            Tratta trattaTrovata3 = trattaDAO.findById("d6d0e58b-5027-4e71-9a02-57ba17662755");
-            Tratta trattaTrovata4 = trattaDAO.findById("d8e233dc-fb64-478f-8881-4b6266fb0005");
-            Tratta trattaTrovata5 = trattaDAO.findById("eb71739e-1bc4-4b94-a550-4e759acc9b1e");
+            Tratta trattaTrovata1 = trattaDAO.findById("24a724ab-e4ab-41e7-b17f-7d366effe9bb");
+            Tratta trattaTrovata2 = trattaDAO.findById("6c7c9f26-8d38-4d17-939f-d5c9020e463d");
+            Tratta trattaTrovata3 = trattaDAO.findById("6e1a5862-8238-48f1-bfe9-bf87638718b5");
+            Tratta trattaTrovata4 = trattaDAO.findById("deba4fdf-7bcf-475c-9589-7d12dc4c55c6");
+            Tratta trattaTrovata5 = trattaDAO.findById("fecb07ba-3813-43ae-a3d3-042093449f00");
 
 
             StoricoPercorsi storico1 = new StoricoPercorsi(40, trattaTrovata1, mezzoTrovato1);
@@ -224,6 +222,20 @@ PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502
             System.out.println(ex.getMessage());
         }*/
 
+        //checkIfSubscriptionIsValid
+
+        /*boolean isNotValid = titoloViaggioDAO.checkIfSubscriptionIsValid("dacc58e8-3579-4de4-8524-88df4447da0c", "b166d6df-b34c-4864-8ce7-a7a814a77fff");
+        System.out.println(isNotValid);
+        boolean isValid = titoloViaggioDAO.checkIfSubscriptionIsValid("2fc6f395-a71d-4f22-98ca-0322dbf9aff5", "2c9d3509-46cd-4201-9127-e278905c135f");
+        System.out.println(isValid);*/
+
+        //Niccolò esempio
+        //List<TitoloViaggio>titoliViaggiEmessi = titoloViaggioDAO.tracciaTitoliEmessi("023d460a-6753-41d0-8fe0-36414f91b077", LocalDate.of(2024,1,1),LocalDate.now());
+
+        //System.out.println(titoliViaggiEmessi);
+
+        long totBigliettiVidimati = titoloViaggioDAO.bigliettiVidimatiMezzo("9586c0e6-6ef0-4a1a-84cd-28c5baba14cc");
+        System.out.println(totBigliettiVidimati);
 
         entityManager.close();
         emf.close();

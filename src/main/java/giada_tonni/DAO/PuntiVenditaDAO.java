@@ -38,8 +38,8 @@ public class PuntiVenditaDAO {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 
-        Query query = entityManager.createQuery("DELETE FROM PuntiVendita p WHERE p.idPuntiVendita= :idPuntiVendita");
-        query.setParameter("idPuntiVendita", UUID.fromString(idPuntoVendita));
+        Query query = entityManager.createQuery("DELETE FROM PuntiVendita p WHERE p.idPuntoVendita= :idPuntiVendota");
+        query.setParameter("idPuntoVendita", UUID.fromString(idPuntoVendita));
 
         int deleted = query.executeUpdate();
         transaction.commit();

@@ -5,6 +5,9 @@ import giada_tonni.exceptions.NotFoundException;
 import jakarta.persistence.*;
 
 
+
+import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 public class TitoloViaggioDAO {
@@ -37,6 +40,59 @@ public class TitoloViaggioDAO {
 
         throw new NotFoundException(titoloId);
     }
+    //METODO per CONTROLLARE VALIDITA' ABBONAMENTO
+
+    public boolean checkIfSubscriptionIsValid(String idTessera, String idAbbonamento) {
+
+        try {
+            TypedQuery<Abbonamento> query = em.createQuery(
+                            "SELECT a " +
+                                    "FROM Abbonamento a " +
+                                    "WHERE a.idTessera.id = :idTessera " +
+                                    "AND a.codiceUnivoco= :idAbbonamento", Abbonamento.class)
+                    .setParameter("idTessera", UUID.fromString(idTessera))
+                    .setParameter("idAbbonamento", UUID.fromString(idAbbonamento));
+            Abbonamento abbTrovato = query.getSingleResult();
+            if (abbTrovato.getScadenza().isBefore(LocalDate.now())) return false;
+            else return true;
+
+        } catch (NoResultException exception) {
+            throw new NotFoundException("Abbonamento non trovato.");
+        }
+
+
+
+
+    }
+
+
+    // TRACCIA TITOLI EMESSI
+
+    public List<TitoloViaggio> tracciaTitoliEmessi(String idPuntoVendita, LocalDate dataInizio, LocalDate dataFine) {
+        return em.createQuery(
+                "SELECT t FROM TitoloViaggio t WHERE t.puntoVendita.idPuntoVendita = :idPuntoVendita AND t.dataAcquisto > :dataInizio AND t.dataAcquisto< :dataFine ORDER BY t.dataAcquisto ", TitoloViaggio.class
+        )
+
+                .setParameter("idPuntoVendita", UUID.fromString(idPuntoVendita))
+                .setParameter("dataInizio", dataInizio)
+                .setParameter("dataFine", dataFine)
+                .getResultList();
+    }
+
+
+     // NUMERO BIGLIETTI VIDIMATI DATO UN MEZZO
+
+    public long bigliettiVidimatiMezzo (String mezzoID )
+    {return em.createQuery(
+            "SELECT COUNT(b) FROM Biglietto b WHERE b.mezzoId.id = :mezzoId AND b.dataTimbratura IS NOT NULL", Long.class
+    )
+            .setParameter("mezzoId", UUID.fromString(mezzoID))
+            .getSingleResult();
+
+    }
+
+
+
 
     // DELETE
     public void findByIdAndDelete(String titoloId) {
