@@ -1,5 +1,6 @@
 package giada_tonni.entities;
 
+import giada_tonni.exceptions.TesseraScadutaException;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -27,7 +28,10 @@ public class Abbonamento extends TitoloViaggio {
     public Abbonamento(LocalDate dataAcquisto, PuntiVendita puntoVendita,
                        TesseraUtente idTessera, Validita validita) {
         super(dataAcquisto, puntoVendita);
-        this.idTessera = idTessera;
+//
+        if (idTessera.getDataScadenza().isBefore(LocalDate.now())) throw new TesseraScadutaException();
+        else this.idTessera = idTessera;
+
         this.validita = validita;
         if (validita.equals(Validita.SETTIMANALE)) this.scadenza = dataAcquisto.plusWeeks(1);
         else this.scadenza = dataAcquisto.plusMonths(1);
@@ -53,9 +57,6 @@ public class Abbonamento extends TitoloViaggio {
         return validita;
     }
 
-    public void setValidita(Validita validita) {
-        this.validita = validita;
-    }
 
     @Override
     public String toString() {

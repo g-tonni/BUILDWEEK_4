@@ -5,6 +5,7 @@ import giada_tonni.exceptions.NotFoundException;
 import jakarta.persistence.*;
 
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class TitoloViaggioDAO {
@@ -36,6 +37,27 @@ public class TitoloViaggioDAO {
         if (a != null) return a;
 
         throw new NotFoundException(titoloId);
+    }
+    //METODO per CONTROLLARE VALIDITA' ABBONAMENTO
+
+    public boolean checkIfSubscriptionIsValid(String idTessera, String idAbbonamento) {
+
+        try {
+            TypedQuery<Abbonamento> query = em.createQuery(
+                            "SELECT a " +
+                                    "FROM Abbonamento a " +
+                                    "WHERE a.idTessera.id = :idTessera " +
+                                    "AND a.codiceUnivoco= :idAbbonamento", Abbonamento.class)
+                    .setParameter("idTessera", UUID.fromString(idTessera))
+                    .setParameter("idAbbonamento", UUID.fromString(idAbbonamento));
+            Abbonamento abbTrovato = query.getSingleResult();
+            if (abbTrovato.getScadenza().isBefore(LocalDate.now())) return false;
+            else return true;
+
+        } catch (NoResultException exception) {
+            throw new NotFoundException("Abbonamento non trovato.");
+        }
+
     }
 
     // DELETE
