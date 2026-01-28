@@ -3,7 +3,9 @@ package giada_tonni.DAO;
 import giada_tonni.entities.Manutenzione;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 
+import java.util.List;
 import java.util.UUID;
 
 public class ManutenzioneDAO {
@@ -25,7 +27,7 @@ public class ManutenzioneDAO {
         System.out.println("Il mezzo in manutenzione è salvato: " + newManutenzione.getId());
     }
 
-    // FIND BY ID
+    // FIND BY ID (manutenzione)
     public Manutenzione findManutenzioneById(String manutenzioneId) {
         UUID id = UUID.fromString(manutenzioneId);
 
@@ -37,6 +39,25 @@ public class ManutenzioneDAO {
 
         return found;
     }
+
+    // lista manutenzioni con l'id del mezzo
+    public List<Manutenzione> findManutenzioniByMezzoId(String mezzoId) {
+        UUID mezzoUUID = UUID.fromString(mezzoId);
+//prendo l'id del mezzo tornandomi una lista; poi
+        //from prendo le manutnezioni, filtro con where la manutnezione per quel mezzo e poi ordino per data di inizio
+        TypedQuery<Manutenzione> query = entityManager.createQuery(
+                "SELECT m " +
+                        "FROM Manutenzione m " +
+                        "WHERE m.mezzo.id = :mezzoId " +
+                        "ORDER BY m.dataInizio",
+                Manutenzione.class
+        );
+
+        query.setParameter("mezzoId", mezzoUUID);
+        //ritorno lista vuota se non trova nulla sennò mi da tutti i record delle manutenzioni del mezzo
+        return query.getResultList();
+    }
+
 
     // DELETE
     public void findManutenzioneByIdAndDelete(String manutenzioneId) {
