@@ -225,7 +225,7 @@ public class MainK {
 
         storicoPercorsiDAO.findPercorsiByMezzoId("7e3d2c18-5f4a-4340-884b-536879d62fc").forEach(storicoPercorsi -> System.out.println(storicoPercorsi));
 
-        System.out.println(storicoPercorsiDAO.getMediaTrattaByMezzoId("7e3d2c18-5f4a-4340-884b-536879d62f8c","e7be991a-1298-4502-aa3b-0ddc16a8438b"));
+        System.out.println(storicoPercorsiDAO.getMediaTrattaByMezzoId("7e3d2c18-5f4a-4340-884b-536879d62f8c", "e7be991a-1298-4502-aa3b-0ddc16a8438b"));
 
         entityManager.close();
         emf.close();
