@@ -61,7 +61,8 @@ public class Abbonamento extends TitoloViaggio {
     @Override
     public String toString() {
         return "Abbonamento{" +
-                "idTessera=" + idTessera +
+                "idTessera=" + idTessera.getId() +
+                ", dataAcquisto=" + this.getDataAcquisto() +
                 ", validita=" + validita +
                 ", scadenza=" + scadenza +
                 '}';

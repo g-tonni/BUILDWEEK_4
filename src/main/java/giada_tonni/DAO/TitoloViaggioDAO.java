@@ -5,7 +5,9 @@ import giada_tonni.exceptions.NotFoundException;
 import jakarta.persistence.*;
 
 
+
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 public class TitoloViaggioDAO {
@@ -58,7 +60,27 @@ public class TitoloViaggioDAO {
             throw new NotFoundException("Abbonamento non trovato.");
         }
 
+
+
+
     }
+
+
+    // TRACCIA TITOLI EMESSI
+
+    public List<TitoloViaggio> tracciaTitoliEmessi(String idPuntoVendita, LocalDate dataInizio, LocalDate dataFine) {
+        return em.createQuery(
+                "SELECT t FROM TitoloViaggio t WHERE t.puntoVendita.idPuntoVendita = :idPuntoVendita AND t.dataAcquisto > :dataInizio AND t.dataAcquisto< :dataFine ORDER BY t.dataAcquisto ", TitoloViaggio.class
+        )
+
+                .setParameter("idPuntoVendita", UUID.fromString(idPuntoVendita))
+                .setParameter("dataInizio", dataInizio)
+                .setParameter("dataFine", dataFine)
+                .getResultList();
+    }
+
+
+
 
     // DELETE
     public void findByIdAndDelete(String titoloId) {

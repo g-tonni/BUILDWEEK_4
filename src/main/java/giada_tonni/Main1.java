@@ -7,6 +7,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main1 {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("buildweek4pu");
@@ -223,10 +224,15 @@ public class Main1 {
 
         //checkIfSubscriptionIsValid
 
-        boolean isNotValid = titoloViaggioDAO.checkIfSubscriptionIsValid("dacc58e8-3579-4de4-8524-88df4447da0c", "b166d6df-b34c-4864-8ce7-a7a814a77fff");
+        /*boolean isNotValid = titoloViaggioDAO.checkIfSubscriptionIsValid("dacc58e8-3579-4de4-8524-88df4447da0c", "b166d6df-b34c-4864-8ce7-a7a814a77fff");
         System.out.println(isNotValid);
         boolean isValid = titoloViaggioDAO.checkIfSubscriptionIsValid("2fc6f395-a71d-4f22-98ca-0322dbf9aff5", "2c9d3509-46cd-4201-9127-e278905c135f");
-        System.out.println(isValid);
+        System.out.println(isValid);*/
+
+        //Niccolò esempio
+        List<TitoloViaggio>titoliViaggiEmessi = titoloViaggioDAO.tracciaTitoliEmessi("023d460a-6753-41d0-8fe0-36414f91b077", LocalDate.of(2024,1,1),LocalDate.now());
+
+        System.out.println(titoliViaggiEmessi);
 
 
         entityManager.close();
