@@ -20,11 +20,10 @@ public class Biglietto extends TitoloViaggio {
     public Biglietto() {
     }
 
-    public Biglietto(LocalDate dataAcquisto, PuntiVendita rivenditoreId, Mezzo
-            mezzoId, LocalDate dataTimbratura) {
+    public Biglietto(LocalDate dataAcquisto, PuntiVendita rivenditoreId) {
         super(dataAcquisto, rivenditoreId);
-        this.mezzoId = mezzoId;
-        this.dataTimbratura = dataTimbratura;
+        this.mezzoId = null;
+        this.dataTimbratura = null;
     }
 
     public boolean isValido() {
