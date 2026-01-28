@@ -56,5 +56,17 @@ public class StoricoPercorsiDAO {
         query.setParameter("mezzoId", mezzoUuid);
         return query.getResultList();
     }
+
+    public Double getMediaTrattaByMezzoId(String mezzoId,String trattaId) {
+        UUID mezzoUuid = UUID.fromString(mezzoId);
+        UUID trattaUuid = UUID.fromString(trattaId);
+
+        Double media = entityManager.createQuery("SELECT AVG(p.tempoEffettivo) FROM StoricoPercorsi p WHERE p.mezzo.id = :mezzoId AND p.tratta.trattaId = :trattaId",Double.class)
+                .setParameter("mezzoId",mezzoUuid)
+                .setParameter("trattaId", trattaUuid)
+                .getSingleResult();
+
+        return media;
+    }
 }
 
