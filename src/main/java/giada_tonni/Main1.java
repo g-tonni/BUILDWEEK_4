@@ -167,6 +167,7 @@ public class Main1 {
 //            titoloViaggioDAO.save(biglietto8);
 //            titoloViaggioDAO.save(biglietto9);
 //            titoloViaggioDAO.save(biglietto10);
+            titoloViaggioDAO.save(biglietto11);
 
 //            manutenzioneDAO.save(manutenzione1);
 //            manutenzioneDAO.save(manutenzione2);
