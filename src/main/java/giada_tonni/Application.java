@@ -447,6 +447,7 @@ PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502
                         }
                     }
                 }
+                break;
             }
             case 2: {
                 while (true) {
@@ -523,8 +524,11 @@ PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502
                             continue;
                         }
                     }
+
                 }
+                break;
             }
+
             default: {
                 System.out.println("Valore inserito non valido");
             }

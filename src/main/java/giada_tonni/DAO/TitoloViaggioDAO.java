@@ -102,19 +102,22 @@ public class TitoloViaggioDAO {
             transaction.begin();
 
             Mezzo mezzoTrovato = em.find(Mezzo.class, UUID.fromString(mezzoId));
+            if (mezzoTrovato == null) throw new NotFoundException("id non valido");
 
-            Query query = em.createQuery("UPDATE Biglietto b SET b.dataTimbratura = :oggi, b.mezzoId = :mezzoId WHERE b.codiceUnivoco = :bigliettoId")
+            Query query = em.createQuery("UPDATE Biglietto b SET b.dataTimbratura = :oggi, b.mezzoId = :mezzoId WHERE b.codiceUnivoco = :bigliettoId AND b.dataTimbratura IS NULL")
                     .setParameter("mezzoId", mezzoTrovato)
                     .setParameter("oggi", oggi)
                     .setParameter("bigliettoId", UUID.fromString(bigliettoId));
-            query.executeUpdate();
+
+            int bigliettoAggiornato = query.executeUpdate();
+            if (bigliettoAggiornato == 0) throw new NotFoundException("nessun biglietto timbrato");
 
             transaction.commit();
             System.out.println("Biglietto vidimato");
         } catch (NotFoundException ex) {
             throw new NotFoundException("Biglietto non timbrato");
         } catch (IllegalArgumentException ex) {
-            throw new NotFoundException("Biglietto non timbrato");
+            throw new NotFoundException("Uno degli id non è valido.");
         }
     }
 
