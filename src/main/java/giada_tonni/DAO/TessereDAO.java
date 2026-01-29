@@ -9,15 +9,15 @@ import jakarta.persistence.EntityTransaction;
 import java.util.UUID;
 
 public class TessereDAO {
-   private EntityManager em;
+    private EntityManager em;
 
-   public TessereDAO(EntityManager em) {
-       this.em = em;
-   }
+    public TessereDAO(EntityManager em) {
+        this.em = em;
+    }
 
     //    save
 
-    public void saveTessera (TesseraUtente newTessera) {
+    public void saveTessera(TesseraUtente newTessera) {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
@@ -31,10 +31,15 @@ public class TessereDAO {
 // findById
 
     public TesseraUtente findTesseraById(String tesseraId) {
-        TesseraUtente found = em.find(TesseraUtente.class,UUID.fromString(tesseraId));
-        if (found == null)
-            throw new NotFoundException("Tessera con id : " + tesseraId + " non trovata!");
-        return found;
+        try {
+            TesseraUtente found = em.find(TesseraUtente.class, UUID.fromString(tesseraId));
+            if (found == null)
+                throw new NotFoundException("Tessera con id : " + tesseraId + " non trovata!");
+            return found;
+        } catch (IllegalArgumentException ex) {
+            throw new NotFoundException("Numero tessera non valido");
+        }
+
     }
 
 
