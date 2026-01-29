@@ -2,15 +2,15 @@ package giada_tonni;
 
 
 import giada_tonni.DAO.*;
-<<<<<<< HEAD
+
 import giada_tonni.entities.TipoMezzo;
 import giada_tonni.entities.Validita;
 import giada_tonni.entities.TesseraUtente;
 import giada_tonni.entities.Utenti;
-=======
+
 import giada_tonni.entities.*;
 import giada_tonni.exceptions.NotFoundException;
->>>>>>> dev
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
