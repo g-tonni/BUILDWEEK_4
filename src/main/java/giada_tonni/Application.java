@@ -417,10 +417,6 @@ PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502
                             String mezzoID = scanner.nextLine();
 
                             try {
-                                // validazione
-//                                UUID.fromString(bigliettoID);
-//                                UUID.fromString(mezzoID);
-
                                 titoloViaggioDAO.timbraBiglietto(mezzoID, bigliettoID);
 
                             } catch (NotFoundException e) {
