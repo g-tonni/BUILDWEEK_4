@@ -4,9 +4,13 @@ package giada_tonni;
 import giada_tonni.DAO.*;
 import giada_tonni.entities.TipoMezzo;
 import giada_tonni.entities.Validita;
+import giada_tonni.entities.TesseraUtente;
+import giada_tonni.entities.Utenti;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import giada_tonni.exceptions.NotFoundException;
+import java.time.LocalDate;
 
 import java.util.Scanner;
 
@@ -315,6 +319,35 @@ PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502
                         }
                         case 2: {
                             // RINNOVARE TESSERE ( CREARNE UNA NUOVA CON COSTRUTTORE SENZA DATA EMISSIONE )
+
+                            {
+
+
+                                try {
+                                    System.out.println("Inserisci il numero della tessera da rinnovare:");
+                                    String tesseraId = scanner.nextLine();
+
+                                    TesseraUtente vecchiaTessera = tessereDAO.findTesseraById(tesseraId);
+
+                                    Utenti utente = vecchiaTessera.getUtente();
+
+                                    TesseraUtente nuovaTessera = new TesseraUtente(LocalDate.now(), utente);
+
+                                    tessereDAO.saveTessera(nuovaTessera);
+
+                                    System.out.println(
+                                            "Tessera rinnovata con successo!" +
+                                                    "Nuovo numero tessera: " + nuovaTessera.getId() +
+                                                    "Data scadenza: " + nuovaTessera.getDataScadenza()
+                                    );
+
+                                } catch (NotFoundException ex) {
+                                    System.out.println(ex.getMessage());
+                                } 
+
+                                break;
+                            }
+
 
                         }
                         case 3: {
