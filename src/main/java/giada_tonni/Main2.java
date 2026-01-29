@@ -6,6 +6,10 @@ import giada_tonni.entities.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import java.util.List;
+import java.util.Scanner;
+import giada_tonni.exceptions.NotFoundException;
+
 
 import java.time.LocalDate;
 
@@ -27,6 +31,109 @@ public class Main2 {
         ManutenzioneDAO manutenzioneDAO = new ManutenzioneDAO(entityManager);
         TrattaDAO trattaDAO = new TrattaDAO(entityManager);
         StoricoPercorsiDAO storicoPercorsiDAO = new StoricoPercorsiDAO(entityManager);
+
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+
+
+            System.out.println("5 - Settare lo stato di un distributore");
+            System.out.println("6 - Ottenere risultati del numero di biglietti e abbonamenti acquistati");
+
+
+            int num2;
+            try {
+                num2 = Integer.parseInt(scanner.nextLine());
+            } catch (Exception ex) {
+                System.out.println("Inserisci un numero valido.");
+                continue;
+            }
+
+            if (num2 == 0) break;
+
+            switch (num2) {
+
+                case 5: {
+                    try {
+                        System.out.println("Inserisci ID del distributore automatico:");
+                        String idDistributore = scanner.nextLine();
+
+                        PuntiVendita pv = puntoVenditaDAO.findPuntoVenditaById(idDistributore);
+
+                        if (!(pv instanceof DistributoriAutomatici)) {
+                            System.out.println("L'ID inserito non appartiene a un distributore automatico.");
+                            break;
+                        }
+
+                        DistributoriAutomatici distributore = (DistributoriAutomatici) pv;
+
+                        System.out.println("Stato attuale: " + distributore.getStatoDistributori());
+                        System.out.println("Scegli nuovo stato: 1 = ATTIVO, 2 = FUORI_SERVIZIO");
+                        int scelta = Integer.parseInt(scanner.nextLine());
+
+                        StatoDistributori nuovoStato;
+                        if (scelta == 1) nuovoStato = StatoDistributori.ATTIVO;
+                        else if (scelta == 2) nuovoStato = StatoDistributori.FUORI_SERVIZIO;
+                        else {
+                            System.out.println("Valore inserito non valido.");
+                            break;
+                        }
+
+                        entityManager.getTransaction().begin();
+                        distributore.setStatoDistributori(nuovoStato);
+                        entityManager.getTransaction().commit();
+
+                        System.out.println("Stato distributore aggiornato a: " + nuovoStato);
+
+                    } catch (NotFoundException ex) {
+                        System.out.println(ex.getMessage());
+                    } catch (IllegalArgumentException ex) {
+                        System.out.println("Valore inserito non valido.");
+                    }
+
+                    break;
+                }
+
+
+                case 6: {
+                    // Ottenere risultati del numero di biglietti e abbonamenti acquistati
+                    try {
+                        System.out.println("Inserisci ID del punto vendita:");
+                        String idPuntoVendita = scanner.nextLine();
+
+                        System.out.println("Inserisci data inizio (YYYY-MM-DD):");
+                        LocalDate dataInizio = LocalDate.parse(scanner.nextLine());
+
+                        System.out.println("Inserisci data fine (YYYY-MM-DD):");
+                        LocalDate dataFine = LocalDate.parse(scanner.nextLine());
+
+                        List<TitoloViaggio> titoli = titoloViaggioDAO.tracciaTitoliEmessi(idPuntoVendita, dataInizio, dataFine);
+
+                        long biglietti = titoli.stream().filter(t -> t instanceof Biglietto).count();
+                        long abbonamenti = titoli.stream().filter(t -> t instanceof Abbonamento).count();
+
+                        System.out.println("RISULTATI:");
+                        System.out.println("Biglietti acquistati: " + biglietti);
+                        System.out.println("Abbonamenti acquistati: " + abbonamenti);
+                        System.out.println("Totale titoli emessi: " + (biglietti + abbonamenti));
+
+                    } catch (NotFoundException ex) {
+                        System.out.println(ex.getMessage());
+                    } catch (IllegalArgumentException ex) {
+                        System.out.println("Errore: controlla UUID e formato date (YYYY-MM-DD).");
+                    }
+
+                    break;
+                }
+
+                default: {
+                    System.out.println("Scelta non valida.");
+                    break;
+                }
+            }
+        }
+
+        scanner.close();
+
 
         // *********************************** PUNTI VENDITA
         Negozi negozio1 = new Negozi("Tabaccheria", "Piazza Garibaldi 10");
