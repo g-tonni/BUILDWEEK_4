@@ -50,11 +50,15 @@ public class StoricoPercorsiDAO {
         }
     }
 
-    public List<StoricoPercorsi> findPercorsiByMezzoId(String mezzoId) {
-        UUID mezzoUuid = UUID.fromString(mezzoId);
-        TypedQuery<StoricoPercorsi> query = entityManager.createQuery("SELECT p FROM StoricoPercorsi p WHERE p.mezzo.id = :mezzoId", StoricoPercorsi.class);
-        query.setParameter("mezzoId", mezzoUuid);
-        return query.getResultList();
+    public List<StoricoPercorsi> findPercorsiByMezzoId(String mezzoId) throws NotFoundException {
+        try {
+            UUID mezzoUuid = UUID.fromString(mezzoId);
+            TypedQuery<StoricoPercorsi> query = entityManager.createQuery("SELECT p FROM StoricoPercorsi p WHERE p.mezzo.id = :mezzoId", StoricoPercorsi.class);
+            query.setParameter("mezzoId", mezzoUuid);
+            return query.getResultList();
+        } catch (IllegalArgumentException ex) {
+            throw new NotFoundException("Id mezzo inserito non valido");
+        }
     }
 
     public Double getMediaTrattaByMezzoId(String mezzoId, String trattaId) throws NotFoundException {

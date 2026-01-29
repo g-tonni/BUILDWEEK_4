@@ -2,26 +2,16 @@ package giada_tonni;
 
 
 import giada_tonni.DAO.*;
-
-import giada_tonni.entities.TipoMezzo;
-import giada_tonni.entities.Validita;
-import giada_tonni.entities.TesseraUtente;
-import giada_tonni.entities.Utenti;
-
 import giada_tonni.entities.*;
 import giada_tonni.exceptions.NotFoundException;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import giada_tonni.exceptions.NotFoundException;
 
 import java.time.LocalDate;
-
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.UUID;
 
 public class Application {
 
@@ -515,9 +505,46 @@ PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502
                         }
                         case 9: {
                             //Ottenere numero di volte in cui un mezzo percorre una tratta e tempo effettivo di percorrenza
+                            System.out.println("Inserisci l'id di un mezzo: ");
+                            String mezzoId = scanner.nextLine();
+
+                            List<StoricoPercorsi> storicoPercorsiDaMezzo = new ArrayList<>();
+                            try {
+                                storicoPercorsiDaMezzo = storicoPercorsiDAO.findPercorsiByMezzoId(mezzoId);
+                            } catch (NotFoundException ex) {
+                                System.out.println(ex.getMessage());
+                            }
+
+                            if (storicoPercorsiDaMezzo.size() == 0) {
+                                System.out.println("Non sono stati trovati risultati relativi al mezzo inserito");
+                            } else {
+                                System.out.println("Risultati della ricerca: ");
+                                storicoPercorsiDaMezzo.forEach(percorso -> {
+                                    System.out.println("Id mezzo: " + percorso.getMezzo().getId() +
+                                            " | Id tratta: " + percorso.getTratta().getTrattaId() +
+                                            " | Partenza: " + percorso.getTratta().getPartenza() +
+                                            " | Capolinea: " + percorso.getTratta().getCapolinea() +
+                                            " | Tempo stimato di percorrenza: " + percorso.getTratta().getTempoPrevisto() +
+                                            " | Tempo effettivo: " + percorso.getTempoEffettivo()
+                                    );
+                                });
+                            }
+                            continue;
                         }
                         case 10: {
                             //Calcolare media del tempo effettivo di percorrenza di una tratta
+                            System.out.println("Inserisci l'id di un mezzo: ");
+                            String mezzoId = scanner.nextLine();
+                            System.out.println("Inserisci l'id di una tratta: ");
+                            String trattaId = scanner.nextLine();
+                            try {
+                                Double tempoMedio = storicoPercorsiDAO.getMediaTrattaByMezzoId(mezzoId, trattaId);
+                                System.out.println("Il tempo medio di percorrenza della tratta è di " + tempoMedio);
+                            } catch (NotFoundException ex) {
+                                System.out.println(ex.getMessage());
+                            }
+                            continue;
+                            // "b20bb331-58b9-471c-b080-ef5bdb4d48c3"	"ca209083-7038-4243-a6ca-73b62ed1841e"
                         }
                         default: {
                             System.out.println("Valore inserito non valido");
