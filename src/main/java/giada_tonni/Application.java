@@ -15,11 +15,13 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import giada_tonni.exceptions.NotFoundException;
+
 import java.time.LocalDate;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class Application {
 
@@ -316,8 +318,8 @@ PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502
                                     }
                                     // SE ID NON VALIDO MESSAGGIO DI ERRORE ( TRY CATCH )
                                     // SE ID E' VALIDO MA LA TESSERA E' SCADUTA ( CONFRONTO DATA SCADENZA TESSERA CON DATA DI OGGI )
-                                    //"2fc6f395-a71d-4f22-98ca-0322dbf9aff5" scaduta
-                                    //"495b8508-8dd9-4f26-93f8-113ec0363023" valida
+                                    //TESSERA VALIDA 2ac0d88c-5be0-4216-9c5e-1a054ca3c9ae
+                                    //
 
                                     // SE TUTTO VA BENE FACCIO SCEGLIERE SE ABBONAMENTO MENSILE O SETTIMANALE
                                     System.out.println("Scegli 1 per un abbonamento settimanale, 2 un abbonamento mensile: ");
@@ -360,40 +362,84 @@ PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502
                             {
 
 
+                                System.out.println("Inserisci il numero della tessera da rinnovare:");
+                                String tesseraId = scanner.nextLine();
+                                Utenti utente;
                                 try {
-                                    System.out.println("Inserisci il numero della tessera da rinnovare:");
-                                    String tesseraId = scanner.nextLine();
-
                                     TesseraUtente vecchiaTessera = tessereDAO.findTesseraById(tesseraId);
-
-                                    Utenti utente = vecchiaTessera.getUtente();
-
-                                    TesseraUtente nuovaTessera = new TesseraUtente(LocalDate.now(), utente);
-
-                                    tessereDAO.saveTessera(nuovaTessera);
-
-                                    System.out.println(
-                                            "Tessera rinnovata con successo!" +
-                                                    "Nuovo numero tessera: " + nuovaTessera.getId() +
-                                                    "Data scadenza: " + nuovaTessera.getDataScadenza()
-                                    );
+                                    if (vecchiaTessera.getDataScadenza().isAfter(LocalDate.now())) {
+                                        System.out.println("La tessera è ancora valida, non è possibile generarne una nuova.");
+                                        continue;
+                                    } else utente = vecchiaTessera.getUtente();
 
                                 } catch (NotFoundException ex) {
                                     System.out.println(ex.getMessage());
-                                } 
+                                    continue;
+                                }
 
-                                break;
+
+                                TesseraUtente nuovaTessera = new TesseraUtente(LocalDate.now(), utente);
+
+                                tessereDAO.saveTessera(nuovaTessera);
+
+                                System.out.println(
+                                        "Tessera rinnovata con successo!" +
+                                                "Nuovo numero tessera: " + nuovaTessera.getId() +
+                                                " Data scadenza: " + nuovaTessera.getDataScadenza()
+                                );
+
+
+                                continue;
                             }
 
 
                         }
                         case 3: {
                             // VERIFICA VALIDITA' ABBONAMENTO TRAMITE TESSERA ( METODO PRONTO CHIAMATO  checkIfSubscriptionIsValid )
+                            System.out.println("Inserire ID tessera: ");
+                            String tesseraID = scanner.nextLine();
 
+                            System.out.println("Inserire ID abbonamento: ");
+                            String abbonamentoID = scanner.nextLine();
+
+                            try {
+                                boolean validitaAbbonamento = titoloViaggioDAO.checkIfSubscriptionIsValid(tesseraID, abbonamentoID);
+
+                                if (validitaAbbonamento) {
+                                    System.out.println("L'abbonamento inserito è valido.");
+                                } else {
+                                    System.out.println("L'abbonamento inserito non è valido");
+                                }
+                            } catch (NotFoundException ex) {
+
+                                System.out.println("Abbonamento non trovato,ricontrollare ID inseriti");
+                            }
+                            continue;
                         }
                         case 4: {
                             // VIDIMARE BIGLIETTO ( METODO GIA' PRONTO CHIAMATO timbraBiglietto );
+                            System.out.println("Vidimare il biglietto");
 
+                            System.out.print("ID  biglietto: ");
+                            String bigliettoID = scanner.nextLine();
+
+                            System.out.print("ID mezzo: ");
+                            String mezzoID = scanner.nextLine();
+
+                            try {
+                                // validazione
+//                                UUID.fromString(bigliettoID);
+//                                UUID.fromString(mezzoID);
+
+                                titoloViaggioDAO.timbraBiglietto(mezzoID, bigliettoID);
+
+                            } catch (NotFoundException e) {
+                                System.out.println(e.getMessage());
+
+                            }
+                            continue;
+                            //biglietto  2e8e3102-8bf1-4a26-9e58-cea3ba78dc32
+                            //mezzo 002235fa-4404-4a36-9e7e-22f688652a80
                         }
                         default: {
                             System.out.println("Valore inserito non valido");
