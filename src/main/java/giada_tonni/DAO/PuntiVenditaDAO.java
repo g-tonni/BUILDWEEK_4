@@ -1,12 +1,11 @@
 package giada_tonni.DAO;
 
+import giada_tonni.entities.Negozi;
 import giada_tonni.entities.PuntiVendita;
 import giada_tonni.exceptions.NotFoundException;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.Query;
+import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 public class PuntiVenditaDAO {
@@ -32,6 +31,11 @@ public class PuntiVenditaDAO {
         } catch (NoResultException exception) {
             throw new NotFoundException("Punto vendita non trovato.");
         }
+    }
+
+    public List<PuntiVendita> getPuntiVenditaList() {
+        TypedQuery<PuntiVendita> query = entityManager.createQuery("SELECT p FROM PuntiVendita p", PuntiVendita.class);
+        return query.getResultList();
     }
 
     public void deletePuntoVenditaById(String idPuntoVendita) {

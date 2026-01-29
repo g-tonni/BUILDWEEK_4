@@ -26,6 +26,13 @@ public class Biglietto extends TitoloViaggio {
         this.dataTimbratura = null;
     }
 
+
+    public Biglietto(PuntiVendita rivenditoreId) {
+        super(rivenditoreId);
+        this.mezzoId = null;
+        this.dataTimbratura = null;
+    }
+
     public boolean isValido() {
         return dataTimbratura == null;
     }
