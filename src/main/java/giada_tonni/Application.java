@@ -2,6 +2,7 @@ package giada_tonni;
 
 
 import giada_tonni.DAO.*;
+import giada_tonni.entities.TipoMezzo;
 import giada_tonni.entities.Validita;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -333,33 +334,73 @@ PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502
             }
             case 2: {
                 while (true) {
+                    System.out.println("Scegli quale operazione vuoi effettuare: ");
+                    System.out.println("1-Aggiungere un nuovo mezzo.");
+                    System.out.println("2-Inserire un veicolo in manutenzione.");
+                    System.out.println("3-Aggiungere un nuovo punto vendita.");
+                    System.out.println("4-Aggiungere una nuova tratta");
+                    System.out.println("5-Settare lo stato di un distributore.");
+                    System.out.println("6-Ottenere risultati del numero di biglietti e abbonamenti acquistati.");
+                    System.out.println("7-Verificare i periodi di manutenzione e servizio di un mezzo.");
+                    System.out.println("8-Ottenere il numero di biglietti vidimati (in base a periodo e mezzo).");
+                    System.out.println("9-Ottenere numero di volte in cui un mezzo percorre una tratta e tempo effettivo di percorrenza.");
+                    System.out.println("10-Calcolare media del tempo effettivo di percorrenza di una tratta.");
+
                     int num2 = Integer.parseInt(scanner.nextLine());
                     if (num2 == 0) break;
                     // SCELTA OPERAZIONI AMMINISTRATORE
                     switch (num2) {
+
                         case 1: {
 
+                            //TRAM O BUS?
+                            System.out.println("Premi 1 se il veicolo è un TRAM, 2 se è un AUTOBUS.");
+                            int num3 = Integer.parseInt(scanner.nextLine());
+                            TipoMezzo tipoMezzo;
+                            switch (num3) {
+                                case 1: {
+                                    // TRAM
+                                    tipoMezzo = TipoMezzo.TRAM;
+                                }
+                                case 2: {
+                                    // AUTOBUS
+                                    tipoMezzo = TipoMezzo.AUTOBUS;
+                                }
+
+                                default: {
+                                    System.out.println("Valore inserito non valido");
+
+                                }
+                            }
+                            //Qui si crea il mezzo
                         }
                         case 2: {
+                            //Inserire un veicolo in manutenzione
 
                         }
                         case 3: {
-
+                            //Aggiungere un nuovo punto vendita
                         }
                         case 4: {
-
+                            //Aggiungere una nuova tratta
                         }
                         case 5: {
-
+                            //Settare lo stato di un distributore
                         }
                         case 6: {
-
+                            //Ottenere risultati del numero di biglietti e abbonamenti acquistati
                         }
                         case 7: {
-
+                            //Verificare i periodi di manutenzione e servizio di un mezzo
                         }
                         case 8: {
-
+                            //Ottenere il numero di biglietti vidimati (in base a periodo e mezzo)
+                        }
+                        case 9: {
+                            //Ottenere numero di volte in cui un mezzo percorre una tratta e tempo effettivo di percorrenza
+                        }
+                        case 10: {
+                            //Calcolare media del tempo effettivo di percorrenza di una tratta
                         }
                         default: {
                             System.out.println("Valore inserito non valido");
