@@ -2,16 +2,23 @@ package giada_tonni;
 
 
 import giada_tonni.DAO.*;
+<<<<<<< HEAD
 import giada_tonni.entities.TipoMezzo;
 import giada_tonni.entities.Validita;
 import giada_tonni.entities.TesseraUtente;
 import giada_tonni.entities.Utenti;
+=======
+import giada_tonni.entities.*;
+import giada_tonni.exceptions.NotFoundException;
+>>>>>>> dev
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import giada_tonni.exceptions.NotFoundException;
 import java.time.LocalDate;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 public class Application {
@@ -252,69 +259,99 @@ PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502
         switch (num) {
             case 1: {
                 while (true) {
+                    System.out.println("Che operazione vuoi svolgere?");
+                    System.out.println("1-Acquistare un biglietto o un abbonamento.");
+                    System.out.println("2-Rinnovare una tessera.");
+                    System.out.println("3-Verificare la validità dell'abbonamento.");
+                    System.out.println("4-Vidimare un biglietto.");
                     int num2 = Integer.parseInt(scanner.nextLine());
                     if (num2 == 0) break;
                     // SCELTA OPERAZIONI UTENTE
                     switch (num2) {
                         case 1: {
-                            // SCELTA PUNTO ACQUISTO, CON ACQUISTO BIGLETTO O ABBONAMENTO
-                            System.out.println("Scegli 1 per acquistare da un rivenditore, 2 da un distributore: ");
+                            //RECUPERARE I PUNTI VENDITA
+
+                            List<PuntiVendita> listaPuntiVendita = puntoVenditaDAO.getPuntiVenditaList();
+                            System.out.println("Scegli il punto vendita: ");
+                            for (int i = 1; i < listaPuntiVendita.size(); i++) {
+                                System.out.println(i + " - " + listaPuntiVendita.get(i - 1).getLocazione());
+                            }
                             int num3 = Integer.parseInt(scanner.nextLine());
-                            switch (num3) {
+                            PuntiVendita puntoVenditaSelezionato = listaPuntiVendita.get(num3);
+
+                            System.out.println("Scegli 1 per acquistare un biglietto, 2 un abbonamento: ");
+                            int num4 = Integer.parseInt(scanner.nextLine());
+                            switch (num4) {
                                 case 1: {
-                                    // RECUPERA ELENCO RIVENDITORI
+                                    // ACQUISTA BIGLIETTO (UTILIZZARE COSTRUTTORE SENZA DATA ACQUISTO)
+                                    Biglietto bigliettoCreato = new Biglietto(puntoVenditaSelezionato);
+                                    titoloViaggioDAO.save(bigliettoCreato);
+                                    System.out.println("Biglietto acquistato.");
 
-                                    System.out.println("Scegli 1 per acquistare un biglietto, 2 un abbonamento: ");
-                                    int num4 = Integer.parseInt(scanner.nextLine());
-                                    switch (num4) {
+
+                                    continue;
+                                }
+                                case 2: {
+                                    // ACQUISTA ABBONAMENTO (UTILIZZARE COSTRUTTORE SENZA DATA ACQUISTO)
+
+                                    System.out.println("Inserisci numero tessera: ");
+                                    String tesseraUtente = scanner.nextLine();
+
+                                    // FARE IL TESSERA.FINDBYID CON NUMERO TESSERA INSERITO
+                                    TesseraUtente tesseraDefinitiva;
+                                    try {
+                                        TesseraUtente tesseraTrovata = tessereDAO.findTesseraById(tesseraUtente);
+                                        if (tesseraTrovata.getDataScadenza().isBefore(LocalDate.now())) {
+                                            System.out.println("Tessera scaduta");
+                                            continue;
+                                        } else {
+                                            tesseraDefinitiva = tesseraTrovata;
+                                        }
+
+
+                                    } catch (NotFoundException ex) {
+                                        System.out.println(ex.getMessage());
+                                        continue;
+
+                                    }
+                                    // SE ID NON VALIDO MESSAGGIO DI ERRORE ( TRY CATCH )
+                                    // SE ID E' VALIDO MA LA TESSERA E' SCADUTA ( CONFRONTO DATA SCADENZA TESSERA CON DATA DI OGGI )
+                                    //"2fc6f395-a71d-4f22-98ca-0322dbf9aff5" scaduta
+                                    //"495b8508-8dd9-4f26-93f8-113ec0363023" valida
+
+                                    // SE TUTTO VA BENE FACCIO SCEGLIERE SE ABBONAMENTO MENSILE O SETTIMANALE
+                                    System.out.println("Scegli 1 per un abbonamento settimanale, 2 un abbonamento mensile: ");
+                                    int num5 = Integer.parseInt(scanner.nextLine());
+                                    Validita validita = Validita.SETTIMANALE;
+                                    switch (num5) {
                                         case 1: {
-                                            // ACQUISTA BIGLIETTO (UTILIZZARE COSTRUTTORE SENZA DATA ACQUISTO)
-
+                                            // ABBONAMENTO SETTIMANALE
+                                            validita = Validita.SETTIMANALE;
+                                            break;
                                         }
                                         case 2: {
-                                            // ACQUISTA ABBONAMENTO (UTILIZZARE COSTRUTTORE SENZA DATA ACQUISTO)
-                                            System.out.println("Inserisci numero tessera: ");
-                                            // FARE IL TESSERA.FINDBYID CON NUMERO TESSERA INSERITO
-                                            // SE ID NON VALIDO MESSAGGIO DI ERRORE ( TRY CATCH )
-                                            // SE ID E' VALIDO MA LA TESSERA E' SCADUTA ( CONFRONTO DATA SCADENZA TESSERA CON DATA DI OGGI )
-                                            // SE TUTTO VA BENE FACCIO SCEGLIERE SE ABBONAMENTO MENSILE O SETTIMANALE
-                                            System.out.println("Scegli 1 per un abbonamento settimanale, 2 un abbonamento mensile: ");
-                                            int num5 = Integer.parseInt(scanner.nextLine());
-                                            Validita validita;
-                                            switch (num5) {
-                                                case 1: {
-                                                    // ABBONAMENTO SETTIMANALE
-                                                    validita = Validita.SETTIMANALE;
-                                                }
-                                                case 2: {
-                                                    // ABBONAMENTO MENSILE
-                                                    validita = Validita.MENSILE;
-
-                                                }
-                                                default: {
-                                                    System.out.println("Valore inserito non valido");
-                                                }
-                                            }
-                                            // Abbonamento abbonamento = ecc....
-                                            // titoloViaggioDao.save(abbonamento)
-                                            // System.out.println("Abbonamento acquistato!");
+                                            // ABBONAMENTO MENSILE
+                                            validita = Validita.MENSILE;
+                                            break;
                                         }
                                         default: {
                                             System.out.println("Valore inserito non valido");
                                         }
                                     }
+                                    // Abbonamento abbonamento = ecc....
+                                    System.out.println("La variabile validità: " + validita);
+                                    Abbonamento abbonamentoCreato = new Abbonamento(puntoVenditaSelezionato, tesseraDefinitiva, validita);
 
-
-                                }
-                                case 2: {
-                                    // RECUPERA ELENCO DISTRIBUTORI ( ACQUISTO UGUALE A ELENCO RIVENDITORI )
-
+                                    // titoloViaggioDao.save(abbonamento)
+                                    titoloViaggioDAO.save(abbonamentoCreato);
+                                    System.out.println("Abbonamento acquistato!");
+                                    continue;
                                 }
                                 default: {
                                     System.out.println("Valore inserito non valido");
                                 }
-
                             }
+
 
                         }
                         case 2: {

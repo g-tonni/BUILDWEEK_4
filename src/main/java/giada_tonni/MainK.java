@@ -10,6 +10,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class MainK {
 
@@ -18,6 +19,8 @@ public class MainK {
     public static void main(String[] args) {
 
         EntityManager entityManager = emf.createEntityManager();
+
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Ciao");
 
@@ -126,17 +129,17 @@ public class MainK {
             PuntiVendita puntiVenditaTrovato10 = puntoVenditaDAO.findPuntoVenditaById("e341bc7d-5907-4416-9b78-0ef886e48983");
 
 
-            Abbonamento abbonamento1 = new Abbonamento(LocalDate.of(2026, 1, 1), puntiVenditaTrovato1, tesseraTrovata1, Validita.SETTIMANALE);
-            Abbonamento abbonamento2 = new Abbonamento(LocalDate.of(2025, 1, 1), puntiVenditaTrovato2, tesseraTrovata2, Validita.SETTIMANALE);
-            Abbonamento abbonamento3 = new Abbonamento(LocalDate.of(2024, 2, 1), puntiVenditaTrovato3, tesseraTrovata3, Validita.MENSILE);
-            Abbonamento abbonamento4 = new Abbonamento(LocalDate.now(), puntiVenditaTrovato4, tesseraTrovata1, Validita.MENSILE);
-            Abbonamento abbonamento5 = new Abbonamento(LocalDate.now(), puntiVenditaTrovato5, tesseraTrovata2, Validita.SETTIMANALE);
+//            Abbonamento abbonamento1 = new Abbonamento(LocalDate.of(2026, 1, 1), puntiVenditaTrovato1, tesseraTrovata1, Validita.SETTIMANALE);
+//            Abbonamento abbonamento2 = new Abbonamento(LocalDate.of(2025, 1, 1), puntiVenditaTrovato2, tesseraTrovata2, Validita.SETTIMANALE);
+//            Abbonamento abbonamento3 = new Abbonamento(LocalDate.of(2024, 2, 1), puntiVenditaTrovato3, tesseraTrovata3, Validita.MENSILE);
+//            Abbonamento abbonamento4 = new Abbonamento(LocalDate.now(), puntiVenditaTrovato4, tesseraTrovata1, Validita.MENSILE);
+//            Abbonamento abbonamento5 = new Abbonamento(LocalDate.now(), puntiVenditaTrovato5, tesseraTrovata2, Validita.SETTIMANALE);
 
-//            Biglietto biglietto1 = new Biglietto(LocalDate.of(2026, 1, 1), puntiVenditaTrovato6, mezzoTrovato1, LocalDate.of(2026, 1, 2));
-//            Biglietto biglietto2 = new Biglietto(LocalDate.of(2024, 1, 1), puntiVenditaTrovato7, mezzoTrovato2, LocalDate.of(2026, 1, 2));
-//            Biglietto biglietto3 = new Biglietto(LocalDate.of(2026, 2, 1), puntiVenditaTrovato8, null, null);
-//            Biglietto biglietto4 = new Biglietto(LocalDate.of(2023, 5, 2), puntiVenditaTrovato9, null, null);
-//            Biglietto biglietto5 = new Biglietto(LocalDate.of(2026, 1, 4), puntiVenditaTrovato10, mezzoTrovato3, LocalDate.now());
+            /*Biglietto biglietto1 = new Biglietto(LocalDate.of(2026, 1, 1), puntiVenditaTrovato6, mezzoTrovato1, LocalDate.of(2026, 1, 2));
+            Biglietto biglietto2 = new Biglietto(LocalDate.of(2024, 1, 1), puntiVenditaTrovato7, mezzoTrovato2, LocalDate.of(2026, 1, 2));
+            Biglietto biglietto3 = new Biglietto(LocalDate.of(2026, 2, 1), puntiVenditaTrovato8, null, null);
+            Biglietto biglietto4 = new Biglietto(LocalDate.of(2023, 5, 2), puntiVenditaTrovato9, null, null);
+            Biglietto biglietto5 = new Biglietto(LocalDate.of(2026, 1, 4), puntiVenditaTrovato10, mezzoTrovato3, LocalDate.now());*/
 
             Manutenzione manutenzione1 = new Manutenzione(mezzoTrovato1, "Motore", LocalDate.of(2023, 2, 4), LocalDate.of(2023, 3, 3));
             Manutenzione manutenzione2 = new Manutenzione(mezzoTrovato2, "Freni", LocalDate.of(2023, 4, 10), LocalDate.of(2023, 4, 18));
@@ -223,11 +226,200 @@ public class MainK {
         }
 
 
-        storicoPercorsiDAO.findPercorsiByMezzoId("7e3d2c18-5f4a-4340-884b-536879d62fc").forEach(storicoPercorsi -> System.out.println(storicoPercorsi));
+        System.out.println("Seleziona 1 se sei un Utente o 2 se sei un Amministratore: ");
+        int num = Integer.parseInt(scanner.nextLine());
+        // PRIMA SCELTA
+        switch (num) {
+            case 1: {
+                while (true) {
+                    int num2 = Integer.parseInt(scanner.nextLine());
+                    if (num2 == 0) break;
+                    // SCELTA OPERAZIONI UTENTE
+                    switch (num2) {
+                        case 1: {
+                            // SCELTA PUNTO ACQUISTO, CON ACQUISTO BIGLETTO O ABBONAMENTO
+                            System.out.println("Scegli 1 per acquistare da un rivenditore, 2 da un distributore: ");
+                            int num3 = Integer.parseInt(scanner.nextLine());
+                            switch (num3) {
+                                case 1: {
+                                    // RECUPERA ELENCO RIVENDITORI
 
-        System.out.println(storicoPercorsiDAO.getMediaTrattaByMezzoId("7e3d2c18-5f4a-4340-884b-536879d62f8c", "e7be991a-1298-4502-aa3b-0ddc16a8438b"));
+                                    System.out.println("Scegli 1 per acquistare un biglietto, 2 un abbonamento: ");
+                                    int num4 = Integer.parseInt(scanner.nextLine());
+                                    switch (num4) {
+                                        case 1: {
+                                            // ACQUISTA BIGLIETTO (UTILIZZARE COSTRUTTORE SENZA DATA ACQUISTO)
+
+                                        }
+                                        case 2: {
+                                            // ACQUISTA ABBONAMENTO (UTILIZZARE COSTRUTTORE SENZA DATA ACQUISTO)
+                                            System.out.println("Inserisci numero tessera: ");
+                                            // FARE IL TESSERA.FINDBYID CON NUMERO TESSERA INSERITO
+                                            // SE ID NON VALIDO MESSAGGIO DI ERRORE ( TRY CATCH )
+                                            // SE ID E' VALIDO MA LA TESSERA E' SCADUTA ( CONFRONTO DATA SCADENZA TESSERA CON DATA DI OGGI )
+                                            // SE TUTTO VA BENE FACCIO SCEGLIERE SE ABBONAMENTO MENSILE O SETTIMANALE
+                                            System.out.println("Scegli 1 per un abbonamento settimanale, 2 un abbonamento mensile: ");
+                                            int num5 = Integer.parseInt(scanner.nextLine());
+                                            Validita validita;
+                                            switch (num5) {
+                                                case 1: {
+                                                    // ABBONAMENTO SETTIMANALE
+                                                    validita = Validita.SETTIMANALE;
+                                                }
+                                                case 2: {
+                                                    // ABBONAMENTO MENSILE
+                                                    validita = Validita.MENSILE;
+
+                                                }
+                                                default: {
+                                                    System.out.println("Valore inserito non valido");
+                                                }
+                                            }
+                                            // Abbonamento abbonamento = ecc....
+                                            // titoloViaggioDao.save(abbonamento)
+                                            // System.out.println("Abbonamento acquistato!");
+                                        }
+                                        default: {
+                                            System.out.println("Valore inserito non valido");
+                                        }
+                                    }
+
+
+                                }
+                                case 2: {
+                                    // RECUPERA ELENCO DISTRIBUTORI ( ACQUISTO UGUALE A ELENCO RIVENDITORI )
+
+                                }
+                                default: {
+                                    System.out.println("Valore inserito non valido");
+                                }
+
+                            }
+
+                        }
+                        case 2: {
+                            // RINNOVARE TESSERE ( CREARNE UNA NUOVA CON COSTRUTTORE SENZA DATA EMISSIONE )
+
+                        }
+                        case 3: {
+                            // VERIFICA VALIDITA' ABBONAMENTO TRAMITE TESSERA ( METODO PRONTO CHIAMATO  checkIfSubscriptionIsValid )
+                            System.out.println("Inserire ID tessera: ");
+                            String tesseraID = scanner.nextLine();
+
+                            System.out.println("Inserire ID abbonamento: ");
+                            String abbonamentoID = scanner.nextLine();
+
+                            try{
+                                boolean validitaAbbonamento = titoloViaggioDAO.checkIfSubscriptionIsValid(tesseraID, abbonamentoID);
+
+                                if (validitaAbbonamento){
+                                    System.out.println("L'abbonamento inserito è valido");
+                                } else {
+                                    System.out.println("L'abbonamento inserito non è valido");
+                                }
+                            }catch (NotFoundException ex){
+
+                                System.out.println("Abbonamento non trovato,ricontrollare ID inseriti");
+                            }
+
+                        }
+                        case 4: {
+                            // VIDIMARE BIGLIETTO ( METODO GIA' PRONTO CHIAMATO timbraBiglietto );
+
+                        }
+                        default: {
+                            System.out.println("Valore inserito non valido");
+                            continue;
+                        }
+                    }
+                }
+            }
+            case 2: {
+                while (true) {
+                    System.out.println("Scegli quale operazione vuoi effettuare: ");
+                    System.out.println("1-Aggiungere un nuovo mezzo.");
+                    System.out.println("2-Inserire un veicolo in manutenzione.");
+                    System.out.println("3-Aggiungere un nuovo punto vendita.");
+                    System.out.println("4-Aggiungere una nuova tratta");
+                    System.out.println("5-Settare lo stato di un distributore.");
+                    System.out.println("6-Ottenere risultati del numero di biglietti e abbonamenti acquistati.");
+                    System.out.println("7-Verificare i periodi di manutenzione e servizio di un mezzo.");
+                    System.out.println("8-Ottenere il numero di biglietti vidimati (in base a periodo e mezzo).");
+                    System.out.println("9-Ottenere numero di volte in cui un mezzo percorre una tratta e tempo effettivo di percorrenza.");
+                    System.out.println("10-Calcolare media del tempo effettivo di percorrenza di una tratta.");
+
+                    int num2 = Integer.parseInt(scanner.nextLine());
+                    if (num2 == 0) break;
+                    // SCELTA OPERAZIONI AMMINISTRATORE
+                    switch (num2) {
+
+                        case 1: {
+
+                            //TRAM O BUS?
+                            System.out.println("Premi 1 se il veicolo è un TRAM, 2 se è un AUTOBUS.");
+                            int num3 = Integer.parseInt(scanner.nextLine());
+                            TipoMezzo tipoMezzo;
+                            switch (num3) {
+                                case 1: {
+                                    // TRAM
+                                    tipoMezzo = TipoMezzo.TRAM;
+                                }
+                                case 2: {
+                                    // AUTOBUS
+                                    tipoMezzo = TipoMezzo.AUTOBUS;
+                                }
+
+                                default: {
+                                    System.out.println("Valore inserito non valido");
+
+                                }
+                            }
+                            //Qui si crea il mezzo
+                        }
+                        case 2: {
+                            //Inserire un veicolo in manutenzione
+
+                        }
+                        case 3: {
+                            //Aggiungere un nuovo punto vendita
+                        }
+                        case 4: {
+                            //Aggiungere una nuova tratta
+                        }
+                        case 5: {
+                            //Settare lo stato di un distributore
+                        }
+                        case 6: {
+                            //Ottenere risultati del numero di biglietti e abbonamenti acquistati
+                        }
+                        case 7: {
+                            //Verificare i periodi di manutenzione e servizio di un mezzo
+                        }
+                        case 8: {
+                            //Ottenere il numero di biglietti vidimati (in base a periodo e mezzo)
+                        }
+                        case 9: {
+                            //Ottenere numero di volte in cui un mezzo percorre una tratta e tempo effettivo di percorrenza
+                        }
+                        case 10: {
+                            //Calcolare media del tempo effettivo di percorrenza di una tratta
+                        }
+                        default: {
+                            System.out.println("Valore inserito non valido");
+                            continue;
+                        }
+                    }
+                }
+            }
+            default: {
+                System.out.println("Valore inserito non valido");
+            }
+        }
+
 
         entityManager.close();
         emf.close();
     }
+
+
 }
