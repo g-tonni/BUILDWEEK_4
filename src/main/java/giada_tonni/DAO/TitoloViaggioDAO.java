@@ -86,7 +86,7 @@ public class TitoloViaggioDAO {
                     )
                     .setParameter("mezzoId", UUID.fromString(mezzoID))
                     .getSingleResult();
-            if (numero == 0) throw new NotFoundException("Id inserito non valido");
+            if (numero == 0) throw new NotFoundException("Non sono stati trovati biglietti vidimati per questo mezzo");
             return numero;
         } catch (IllegalArgumentException ex) {
             throw new NotFoundException("Id mezzo non valido");
