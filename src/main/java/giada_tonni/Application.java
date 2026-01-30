@@ -578,8 +578,3 @@ public class Application {
 
 
 }
-//05405475-53de-4698-be17-93c533616e91 biglietto acquistato
-//c6203843-5798-4dfb-9756-f4d3e0fa19aa abbonamento acquistato
-//00fc3e3d-a222-4714-8454-40d781b7d2ec tessera rinnovata
-// 0fdb9253-e99a-44b8-9d15-ab7f933825e3 mezzo inserito
-//e1be7e9d-6e04-42a5-a696-6443a246e8fe distributore creato
