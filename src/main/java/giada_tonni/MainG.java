@@ -1,26 +1,19 @@
-package giada_tonni.spazioDiLavoro;
+package giada_tonni;
 
 
 import giada_tonni.DAO.*;
-
-import giada_tonni.entities.TipoMezzo;
-import giada_tonni.entities.Validita;
-import giada_tonni.entities.TesseraUtente;
-import giada_tonni.entities.Utenti;
-
 import giada_tonni.entities.*;
 import giada_tonni.exceptions.NotFoundException;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class MainA {
+public class MainG {
 
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("buildweek4pu");
 
@@ -424,10 +417,6 @@ PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502
                             String mezzoID = scanner.nextLine();
 
                             try {
-                                // validazione
-//                                UUID.fromString(bigliettoID);
-//                                UUID.fromString(mezzoID);
-
                                 titoloViaggioDAO.timbraBiglietto(mezzoID, bigliettoID);
 
                             } catch (NotFoundException e) {
@@ -470,71 +459,26 @@ PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502
                             //TRAM O BUS?
                             System.out.println("Premi 1 se il veicolo è un TRAM, 2 se è un AUTOBUS.");
                             int num3 = Integer.parseInt(scanner.nextLine());
-
-                            //QUA CAPIENZA
-                            System.out.println("Inserisci la capienza del mezzo: ");
-                            int capienza = Integer.parseInt(scanner.nextLine());
-
-                            TipoMezzo tipoMezzo = null;
+                            TipoMezzo tipoMezzo;
                             switch (num3) {
                                 case 1: {
                                     // TRAM
                                     tipoMezzo = TipoMezzo.TRAM;
-                                    break;
                                 }
                                 case 2: {
                                     // AUTOBUS
                                     tipoMezzo = TipoMezzo.AUTOBUS;
-                                    break;
                                 }
 
                                 default: {
-                                    System.out.println("devi scegliere 1 o 2");
-                                    break;
+                                    System.out.println("Valore inserito non valido");
+
                                 }
                             }
-
-                            if (tipoMezzo == null) break;
-
-                            try {
-                                //creazione oggetto mezzo
-                                Mezzo nuovoMezzo = new Mezzo(capienza, tipoMezzo);
-                                mezzoDAO.save(nuovoMezzo);
-                            } catch (Exception e) {
-                                System.out.println("dati errati" + e.getMessage());
-                            }
-
-                            break;
+                            //Qui si crea il mezzo
                         }
-
-
-                        //INSERIMENTO MEZZO IN MANUTENZIONE
                         case 2: {
                             //Inserire un veicolo in manutenzione
-                            System.out.println("inserisci mezzo in manutenzione");
-                            System.out.println("ID MEZZO");
-                            String mezzoiD = scanner.nextLine();
-
-                            System.out.println("perchè è in manutenzione? es motore scoppiato");
-                            String causa = scanner.nextLine();
-                            System.out.println("data manutenzione prima però anno - mese - giorno con i cazzo di trattiti del cazzo");
-                            LocalDate dataInizio = LocalDate.parse(scanner.nextLine());
-                            System.out.println("qua metti se il mezzo non è più da riparare (quindi sistemato e in funzione). Se è ancora rotto, premi invio per continuare");
-                            String fineStr = scanner.nextLine();
-                            LocalDate dataFine = fineStr.isEmpty() ? null : LocalDate.parse(fineStr);
-
-                            try {
-                                Mezzo mezzo = mezzoDAO.findMezzoById(mezzoiD);
-                                Manutenzione manutenzione = new Manutenzione(mezzo, causa, dataInizio, dataFine);
-                                manutenzioneDAO.save(manutenzione);
-                            } catch (IllegalArgumentException e) {
-                                System.out.println("id errato");
-                            } catch (RuntimeException e) {
-                                System.out.println(e.getMessage());
-                            } catch (Exception e) {
-                                System.out.println("errore nell'isnerimento dati" + e.getMessage());
-                            }
-                            break;
 
                         }
                         case 3: {
@@ -557,9 +501,46 @@ PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502
                         }
                         case 9: {
                             //Ottenere numero di volte in cui un mezzo percorre una tratta e tempo effettivo di percorrenza
+                            System.out.println("Inserisci l'id di un mezzo: ");
+                            String mezzoId = scanner.nextLine();
+
+                            List<StoricoPercorsi> storicoPercorsiDaMezzo = new ArrayList<>();
+                            try {
+                                storicoPercorsiDaMezzo = storicoPercorsiDAO.findPercorsiByMezzoId(mezzoId);
+                            } catch (NotFoundException ex) {
+                                System.out.println(ex.getMessage());
+                            }
+
+                            if (storicoPercorsiDaMezzo.size() == 0) {
+                                System.out.println("Non sono stati trovati risultati relativi al mezzo inserito");
+                            } else {
+                                System.out.println("Risultati della ricerca: ");
+                                storicoPercorsiDaMezzo.forEach(percorso -> {
+                                    System.out.println("Id mezzo: " + percorso.getMezzo().getId() +
+                                            " | Id tratta: " + percorso.getTratta().getTrattaId() +
+                                            " | Partenza: " + percorso.getTratta().getPartenza() +
+                                            " | Capolinea: " + percorso.getTratta().getCapolinea() +
+                                            " | Tempo stimato di percorrenza: " + percorso.getTratta().getTempoPrevisto() +
+                                            " | Tempo effettivo: " + percorso.getTempoEffettivo()
+                                    );
+                                });
+                            }
+                            continue;
                         }
                         case 10: {
                             //Calcolare media del tempo effettivo di percorrenza di una tratta
+                            System.out.println("Inserisci l'id di un mezzo: ");
+                            String mezzoId = scanner.nextLine();
+                            System.out.println("Inserisci l'id di una tratta: ");
+                            String trattaId = scanner.nextLine();
+                            try {
+                                Double tempoMedio = storicoPercorsiDAO.getMediaTrattaByMezzoId(mezzoId, trattaId);
+                                System.out.println("Il tempo medio di percorrenza della tratta è di " + tempoMedio);
+                            } catch (NotFoundException ex) {
+                                System.out.println(ex.getMessage());
+                            }
+                            continue;
+                            // "b20bb331-58b9-471c-b080-ef5bdb4d48c3"	"ca209083-7038-4243-a6ca-73b62ed1841e"
                         }
                         default: {
                             System.out.println("Valore inserito non valido");
@@ -583,3 +564,4 @@ PuntiVendita puntiVenditaTrovato1 = puntoVenditaDAO.findPuntoVenditaById("3b1502
 
 
 }
+

@@ -1,4 +1,4 @@
-package giada_tonni;
+package giada_tonni.spazioDiLavoro;
 
 import giada_tonni.DAO.*;
 import giada_tonni.entities.*;

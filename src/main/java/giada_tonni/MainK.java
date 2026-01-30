@@ -1,4 +1,4 @@
-package giada_tonni;
+package giada_tonni.spazioDiLavoro;
 
 
 import giada_tonni.DAO.*;
@@ -10,8 +10,6 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -485,15 +483,15 @@ public class MainK {
                             //Verificare i periodi di manutenzione e servizio di un mezzo
                             System.out.println("Inserisci l'ID del mezzo: ");
                             String mezzoID = scanner.nextLine();
-                            try{
-                                List<Manutenzione> listaManutenzioniMezzo=manutenzioneDAO.findManutenzioniByMezzoId(mezzoID);
-                                if(listaManutenzioniMezzo.isEmpty()){
+                            try {
+                                List<Manutenzione> listaManutenzioniMezzo = manutenzioneDAO.findManutenzioniByMezzoId(mezzoID);
+                                if (listaManutenzioniMezzo.isEmpty()) {
                                     System.out.println("Questo mezzo non ha subito nessuna manutenzione ");
                                 } else {
                                     System.out.println("La lista di manutenzioni per questo mezzo è: ");
                                     listaManutenzioniMezzo.forEach(System.out::println);
                                 }
-                            }catch(IllegalArgumentException e){
+                            } catch (IllegalArgumentException e) {
                                 System.out.println("Id mezzo inserito non valido");
                             }
                             continue;
@@ -509,9 +507,9 @@ public class MainK {
                                 long numeroBiglietti = titoloViaggioDAO.numeroBigliettiTimbratiPeriodo(dataInizio, dataFine);
 
                                 System.out.println("Il numero di biglietti vidimati da " + dataInizio + " al " + dataFine + " è di " + numeroBiglietti);
-                            }catch(NotFoundException e){
+                            } catch (NotFoundException e) {
                                 System.out.println(e.getMessage());
-                            }catch(IllegalArgumentException e){
+                            } catch (IllegalArgumentException e) {
                                 System.out.println("Date inserite non valide");
                             }
                             continue;
@@ -524,9 +522,9 @@ public class MainK {
                                 long numeroBiglietti = titoloViaggioDAO.bigliettiVidimatiMezzo(mezzoID);
 
                                 System.out.println("Il numero di biglietti vidimati sul mezzo con id:  " + mezzoID + " è di  " + numeroBiglietti);
-                            }catch(NotFoundException e){
+                            } catch (NotFoundException e) {
                                 System.out.println(e.getMessage());
-                            }catch(IllegalArgumentException e){
+                            } catch (IllegalArgumentException e) {
                                 System.out.println(e.getMessage());
                             }
                             continue;

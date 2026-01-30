@@ -1,4 +1,4 @@
-package giada_tonni;
+package giada_tonni.spazioDiLavoro;
 
 
 import giada_tonni.DAO.*;
@@ -6,8 +6,10 @@ import giada_tonni.entities.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+
 import java.util.List;
 import java.util.Scanner;
+
 import giada_tonni.exceptions.NotFoundException;
 
 
