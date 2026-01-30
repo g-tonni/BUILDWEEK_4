@@ -43,10 +43,11 @@ public class Application {
             case 1: {
                 while (true) {
                     System.out.println("Che operazione vuoi svolgere?");
-                    System.out.println("1-Acquistare un biglietto o un abbonamento.");
-                    System.out.println("2-Rinnovare una tessera.");
-                    System.out.println("3-Verificare la validità dell'abbonamento.");
-                    System.out.println("4-Vidimare un biglietto.");
+                    System.out.println("1- Acquistare un biglietto o un abbonamento.");
+                    System.out.println("2- Rinnovare una tessera.");
+                    System.out.println("3- Verificare la validità dell'abbonamento.");
+                    System.out.println("4- Vidimare un biglietto.");
+                    System.out.println("0- Per annullare l'operazione.");
                     int num2 = Integer.parseInt(scanner.nextLine());
                     if (num2 == 0) break;
                     // SCELTA OPERAZIONI UTENTE
@@ -59,8 +60,18 @@ public class Application {
                             for (int i = 1; i < listaPuntiVendita.size(); i++) {
                                 System.out.println(i + " - " + listaPuntiVendita.get(i - 1).getLocazione());
                             }
-                            int num3 = Integer.parseInt(scanner.nextLine());
-                            PuntiVendita puntoVenditaSelezionato = listaPuntiVendita.get(num3);
+
+                            int num3 = 0;
+                            PuntiVendita puntoVenditaSelezionato = null;
+
+                            num3 = Integer.parseInt(scanner.nextLine());
+                            if (num3 >= listaPuntiVendita.size()) {
+                                System.out.println("Numero inserito non valido.");
+                                continue;
+                            } else {
+                                puntoVenditaSelezionato = listaPuntiVendita.get(num3);
+                            }
+
 
                             System.out.println("Scegli 1 per acquistare un biglietto, 2 un abbonamento: ");
                             int num4 = Integer.parseInt(scanner.nextLine());
@@ -90,7 +101,6 @@ public class Application {
                                         } else {
                                             tesseraDefinitiva = tesseraTrovata;
                                         }
-
 
                                     } catch (NotFoundException ex) {
                                         System.out.println(ex.getMessage());
@@ -132,8 +142,8 @@ public class Application {
                             }
                         }
                         case 2: {
-                            // RINNOVARE TESSERE
 
+                            // RINNOVARE TESSERE
                             {
                                 System.out.println("Inserisci il numero della tessera da rinnovare:");
                                 String tesseraId = scanner.nextLine();
@@ -160,11 +170,10 @@ public class Application {
                                 );
                                 continue;
                             }
-
-
                         }
                         case 3: {
-                            // VERIFICA VALIDITA' ABBONAMENTO TRAMITE TESSERA ( METODO PRONTO CHIAMATO  checkIfSubscriptionIsValid )
+
+                            // VERIFICA VALIDITA' ABBONAMENTO TRAMITE TESSERA
                             System.out.println("Inserire ID tessera: ");
                             String tesseraID = scanner.nextLine();
 
@@ -203,7 +212,6 @@ public class Application {
 
                             }
                             continue;
-
                         }
                         default: {
                             System.out.println("Valore inserito non valido");
@@ -216,17 +224,18 @@ public class Application {
             case 2: {
                 while (true) {
                     System.out.println("Scegli quale operazione vuoi effettuare: ");
-                    System.out.println("1-Aggiungere un nuovo mezzo.");
-                    System.out.println("2-Inserire un veicolo in manutenzione.");
-                    System.out.println("3-Aggiungere un nuovo punto vendita.");
-                    System.out.println("4-Aggiungere una nuova tratta");
-                    System.out.println("5-Settare lo stato di un distributore.");
-                    System.out.println("6-Ottenere risultati del numero di biglietti e abbonamenti acquistati.");
-                    System.out.println("7-Verificare i periodi di manutenzione e servizio di un mezzo.");
-                    System.out.println("8-Ottenere il numero di biglietti vidimati in base al periodo.");
-                    System.out.println("9-Ottenere il numero di biglietti vidimati in base al mezzo.");
-                    System.out.println("10-Ottenere numero di volte in cui un mezzo percorre una tratta e tempo effettivo di percorrenza.");
-                    System.out.println("11-Calcolare media del tempo effettivo di percorrenza di una tratta.");
+                    System.out.println("1- Aggiungere un nuovo mezzo.");
+                    System.out.println("2- Inserire un veicolo in manutenzione.");
+                    System.out.println("3- Aggiungere un nuovo punto vendita.");
+                    System.out.println("4- Aggiungere una nuova tratta");
+                    System.out.println("5- Settare lo stato di un distributore.");
+                    System.out.println("6- Ottenere risultati del numero di biglietti e abbonamenti acquistati.");
+                    System.out.println("7- Verificare i periodi di manutenzione e servizio di un mezzo.");
+                    System.out.println("8- Ottenere il numero di biglietti vidimati in base al periodo.");
+                    System.out.println("9- Ottenere il numero di biglietti vidimati in base al mezzo.");
+                    System.out.println("10- Ottenere numero di volte in cui un mezzo percorre una tratta e tempo effettivo di percorrenza.");
+                    System.out.println("11- Calcolare media del tempo effettivo di percorrenza di una tratta.");
+                    System.out.println("0- Per annullare l'operazione.");
 
                     int num2 = Integer.parseInt(scanner.nextLine());
                     if (num2 == 0) break;
@@ -279,7 +288,7 @@ public class Application {
                         case 2: {
                             //Inserire un veicolo in manutenzione
                             System.out.println("inserisci mezzo in manutenzione");
-                            String mezzoiD = "ciao";
+                            String mezzoiD = "stringa";
                             try {
                                 System.out.println("ID MEZZO");
                                 mezzoiD = scanner.nextLine();
@@ -303,7 +312,7 @@ public class Application {
                                 System.out.println(ex.getMessage());
                                 continue;
                             }
-                            // "7b341436-2d39-4bb3-87de-c758e6006a0b"
+
 
                             try {
                                 Mezzo mezzo = mezzoDAO.findMezzoById(mezzoiD);
@@ -423,7 +432,6 @@ public class Application {
 
                         case 6: {
                             // Ottenere risultati del numero di biglietti e abbonamenti acquistati
-                            // !!!!!!! RICORDA !!!!!!! NON USARE UN ID CHE NON SIA DI UN PUNTO VENDITAAAAAAAAA
                             try {
                                 System.out.println("Inserisci ID del punto vendita:");
                                 String idPuntoVendita = scanner.nextLine();
@@ -547,11 +555,11 @@ public class Application {
                                 System.out.println(ex.getMessage());
                             }
                             continue;
-                            // "b20bb331-58b9-471c-b080-ef5bdb4d48c3"	"ca209083-7038-4243-a6ca-73b62ed1841e"
+
                         }
                         default: {
                             System.out.println("Valore inserito non valido");
-                            continue;
+
                         }
                     }
                 }
@@ -570,3 +578,8 @@ public class Application {
 
 
 }
+//05405475-53de-4698-be17-93c533616e91 biglietto acquistato
+//c6203843-5798-4dfb-9756-f4d3e0fa19aa abbonamento acquistato
+//00fc3e3d-a222-4714-8454-40d781b7d2ec tessera rinnovata
+// 0fdb9253-e99a-44b8-9d15-ab7f933825e3 mezzo inserito
+//e1be7e9d-6e04-42a5-a696-6443a246e8fe distributore creato
