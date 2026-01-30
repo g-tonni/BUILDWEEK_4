@@ -115,8 +115,13 @@ public class TitoloViaggioDAO {
             transaction.commit();
             System.out.println("Biglietto vidimato");
         } catch (NotFoundException ex) {
+            em.getTransaction().rollback();
             throw new NotFoundException("Biglietto non timbrato");
         } catch (IllegalArgumentException ex) {
+            em.getTransaction().rollback();
+            throw new NotFoundException("Uno degli id non è valido.");
+        } catch (IllegalStateException ex) {
+            em.getTransaction().rollback();
             throw new NotFoundException("Uno degli id non è valido.");
         }
     }
