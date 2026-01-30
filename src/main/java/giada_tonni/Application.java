@@ -559,7 +559,6 @@ public class Application {
                         }
                         default: {
                             System.out.println("Valore inserito non valido");
-
                         }
                     }
                 }
